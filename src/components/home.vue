@@ -1,26 +1,23 @@
 <style >
 * {
   font-family: Microsoft JhengHei;
-  
 }
-.home{
+.home {
   position: relative;
   height: 100%;
 }
-.contentroute{
-  height:100%;
+.contentroute {
+  height: 100%;
 }
 </style>
 
 <template>
   <div class="home">
-
     <v-header></v-header>
     <div class="contentroute">
       <router-view></router-view>
     </div>
-    <v-footer></v-footer>
-    
+    <!-- <v-footer></v-footer> -->
   </div>
 </template>
 
@@ -28,42 +25,45 @@
 <script>
 import axios from "axios";
 import global_ from "@/components/Global/global";
-import header from "@/components/header.vue"
-import footer from "@/components/footer.vue"
+import header from "@/components/header.vue";
+import footer from "@/components/footer.vue";
 export default {
-  components:{
-      'v-header' : header,
-      'v-footer' : footer,
+  components: {
+    "v-header": header,
+    "v-footer": footer
   },
-  data() {
 
+  data() {
     return {
       getRes: [],
       isLogin: true
     };
   },
-  mounted: function() {
+  updated: function() {
     this.getData();
   },
   methods: {
     getData() {
-      console.log(global_.login_token);
+      
       const self = this;
       axios
-        .get(`http://localhost/api/getMyData`, {
+        .get(`http://oldcity.southeastasia.cloudapp.azure.com/api/getMyData`, {
           headers: { authorization: `Bearer ${global_.login_token}` }
+          // headers: { "authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vb2xkY2l0eS5zb3V0aGVhc3Rhc2lhLmNsb3VkYXBwLmF6dXJlLmNvbS9hcGkvbG9naW4iLCJpYXQiOjE1NTk3MDU1NjAsIm5iZiI6MTU1OTcwNTU2MCwianRpIjoiY0dtUkxRUGZLMHdaSHJBRiIsInN1YiI6InJvb3QxMjMiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.CrSlBMA6l2CUa2pYk9SdgGqLKShtyTeZdN6zu7XQ37M` }
         })
         .then(function(response) {
           if (status == 200) {
             self.getRes = response.data;
+            self.status = response.data.status;
+            console.log(self.status);
+            console.log(typeof(self.status));
+            if(self.status == 4){
+              global_.isShow = true;
+              console.log("是管理員");
+            }
             global_.isLogin = false;
             self.isLogin = global_.isLogin;
-            console.log(global_.isLogin);
-            alert("yess");
-          } else {
-            global_.isLogin = true;
-            self.isLogin = global_.isLogin;
-            alert("dddd");
+            alert("已登入");
           }
         })
         .catch(function(error) {

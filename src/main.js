@@ -5,15 +5,17 @@ import App from './App'
 import router from './router'
 import VueRouter from 'vue-router'
 import axios from 'axios'
-import global_ from '@/components/Global/global'
+import VueAxios from 'vue-axios'
+import global_ from './components/Global/global'
 import BootstrapVue from 'bootstrap-vue'
-
+import 'bootstrap/scss/bootstrap.scss'
+import 'bootstrap'
+import VueQuillEditor from 'vue-quill-editor'
 Vue.use(BootstrapVue);
 Vue.use(axios, VueRouter);
-
-Vue.prototype.$axios = axios
-
-Vue.prototype.$GLOBAL = global_
+Vue.use(VueQuillEditor);
+Vue.prototype.$axios = axios;
+Vue.prototype.$GLOBAL = global_;
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'

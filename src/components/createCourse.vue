@@ -75,11 +75,11 @@ export default {
   },
   methods: {
     addCourse() {
-      const header = `authorization: Bearer ${global_.login_token}`;
-
+     
+      alert(global_.login_token);
       axios
         .post(
-          `http://localhost/api/addCourse`,
+          `http://oldcity.southeastasia.cloudapp.azure.com/api/addCourse`,
           {
             c_name: this.courses.c_name,
             c_duration: this.courses.c_duration,
@@ -95,6 +95,7 @@ export default {
         .then(function(response) {
           if ((status = 200)) {
             alert('建立成功');
+
           }
         })
         .catch(function(error) {

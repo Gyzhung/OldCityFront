@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 import register from '@/components/register'
 import login from '@/components/login'
 import Home from '@/components/home'
@@ -8,7 +10,12 @@ import searchCourse from '@/components/search'
 import index from '@/components/index'
 import user from '@/components/user'
 import news from '@/components/news'
-
+import addAnnounce from '@/components/addAnnounce'
+import searchAnnounce from '@/components/searchAnnounce'
+import Announce from '@/components/announce'
+import editAnnounce from '@/components/editAnnounce'
+// use
+Vue.use(mavonEditor)
 Vue.use(Router)
 
 export default new Router({
@@ -49,8 +56,28 @@ export default new Router({
                 },
                 {
                     path: '/news',
-                    name: news,
+                    name: 'news',
                     component: news
+                },
+                {
+                    path: '/addAnnounce',
+                    name: 'addAnnounce',
+                    component: addAnnounce
+                },
+                {
+                    path: '/searchAnnounce',
+                    name: 'searchAnnounce',
+                    component: searchAnnounce
+                },
+                {
+                    path: '/announce/:announce_id',
+                    name: 'Announce',
+                    component: Announce
+                },
+                {
+                    path: '/editannounce/:announce_id',
+                    name: 'editAnnounce',
+                    component: editAnnounce
                 }
             ]
 

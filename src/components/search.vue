@@ -57,7 +57,7 @@ export default {
         console.log(global_.login_token);
       const self = this;
       axios
-        .post(`http://localhost/api/searchCourse`, {
+        .post(`http://oldcity.southeastasia.cloudapp.azure.com/api/searchCourse`, {
           keyword: `${this.keyword.keystr}`
         })
         .then(function(response) {

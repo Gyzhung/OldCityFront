@@ -41,14 +41,18 @@
       <tr>
         <router-link to="/register">註冊</router-link>
         <span>|</span>
-        <router-link to="/login">登入</router-link>
+        <router-link  to="/login">登入</router-link>
         <span>|</span>
         <router-link to="/searchCourse">搜尋</router-link>
         <span>|</span>
-        <router-link to="/user">會員</router-link>
+        <router-link v-if="show" to="/addAnnounce">新增公告</router-link>
+        <span>|</span>
+        <router-link to="/searchAnnounce">搜尋公告</router-link>
+        <span>|</span>
+        <router-link to="/announce">公告</router-link>
       </tr>
     </table>
-    <router-link to="/index">
+    <router-link to="/">
       <img id="logo" src="../image/LOGO.png" width="156px" height="116px">
     </router-link>
     <table class="routelink">
@@ -76,3 +80,13 @@
     </table>
   </div>
 </template>
+<script>
+import global_ from "@/components/Global/global";
+export default{
+  data(){
+    return{
+      show:global_.isShow
+    };
+  }
+}
+</script>

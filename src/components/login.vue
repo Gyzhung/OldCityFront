@@ -12,6 +12,7 @@
       <td>
         <button @click="login">登入</button>
       </td>
+ 
     </tr>
   </table>
 </template>
@@ -29,40 +30,30 @@ export default {
         password: ""
       }
     };
-  },
+  }, 
+  // updated() {
+  //     this.getData();
+  // },
   methods: {
     login() {
       const self = this;
       axios
-        .post(`http://localhost/api/login`, {
+        .post("http://oldcity.southeastasia.cloudapp.azure.com/api/login", {
           account: this.users.account,
           password: this.users.password
         })
         .then(function(response) {
           if ((status = 200)) {
             global_.login_token = response.data;
-            alert("登入成功");
-            axios
-              .get(`http://localhost/api/getMyData`, {
-                headers: { authorization: `Bearer ${global_.login_token}` }
-              })
-              .then(function(response) {
-                if (status == 200) {
-                  global_.isLogin = false;
-                } else {
-                  global_.isLogin = true;
-                  alert("dddd");
-                }
-              })
-              .catch(function(error) {
-                console.log(error);
-              });
+            console.log(typeof global_.login_token);
+            console.log(global_.login_token);
           }
         })
         .catch(function(error) {
           console.log(error);
         });
-    }
+    },
+   
   }
 };
 </script>
