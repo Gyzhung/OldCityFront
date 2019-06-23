@@ -15,7 +15,7 @@
   <div class="home">
     <v-header></v-header>
     <div class="contentroute">
-      <router-view></router-view>
+    <router-view></router-view>
     </div>
     <!-- <v-footer></v-footer> -->
   </div>

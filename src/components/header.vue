@@ -84,9 +84,8 @@
 import global_ from "@/components/Global/global";
 export default{
   data(){
-    return{
+  
       show:global_.isShow
-    };
   }
 }
 </script>
