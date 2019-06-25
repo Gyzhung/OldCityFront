@@ -7,13 +7,17 @@ import VueRouter from 'vue-router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import global_ from './components/Global/global'
+import Header from '@/components/header'
+import Index from '@/components/index'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/scss/bootstrap.scss'
 import 'bootstrap'
 import VueQuillEditor from 'vue-quill-editor'
+
 Vue.use(BootstrapVue);
-Vue.use(axios, VueRouter);
+Vue.use(axios);
 Vue.use(VueQuillEditor);
+
 Vue.prototype.$axios = axios;
 Vue.prototype.$GLOBAL = global_;
 
@@ -21,7 +25,8 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false
-
+Vue.component('Header', Header)
+Vue.component('Index', Index)
 /* eslint-disable no-new */
 new Vue({
     el: '#app',

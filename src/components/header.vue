@@ -45,11 +45,13 @@
         <span>|</span>
         <router-link to="/searchCourse">搜尋</router-link>
         <span>|</span>
-        <router-link v-if="show" to="/addAnnounce">新增公告</router-link>
+        <router-link  to="/addAnnounce">新增公告</router-link>
         <span>|</span>
         <router-link to="/searchAnnounce">搜尋公告</router-link>
         <span>|</span>
         <router-link to="/announce">公告</router-link>
+        <span>|</span>
+        <router-link to="/createCourse">建立</router-link>
       </tr>
     </table>
     <router-link to="/">
@@ -85,7 +87,7 @@ import global_ from "@/components/Global/global";
 export default{
   data(){
   
-      show:global_.isShow
+      // show:global_.isShow
   }
 }
 </script>
