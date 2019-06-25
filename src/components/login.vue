@@ -38,7 +38,7 @@ export default {
     login() {
       const self = this;
       axios
-        .post("http://oldcity.southeastasia.cloudapp.azure.com/api/login", {
+        .post("http://163.17.145.142/api/login", {
           account: this.users.account,
           password: this.users.password
         })
@@ -47,6 +47,7 @@ export default {
             global_.login_token = response.data;
             console.log(typeof global_.login_token);
             console.log(global_.login_token);
+            alert('已登入');
           }
         })
         .catch(function(error) {

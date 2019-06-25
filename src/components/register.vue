@@ -1,4 +1,10 @@
 
+<style scoped>
+textarea{
+  overflow-y: scroll;
+  width:600px ;
+}
+</style>
 
 
 <template>
@@ -30,7 +36,11 @@
       </td>
       <td>
         性別:
-        <input type="text" :gender="users.gender" v-model="users.gender">
+        <select name="select_option" :gender="users.gender" v-model="users.gender">
+            <option :gender="users.gender" value="0">男</option>
+            <option :gender="users.gender" value="1">女</option>
+            <option :gender="users.gender" value="2">不顯示</option>
+          </select>
       </td>
     </tr>
     <tr>
@@ -48,11 +58,32 @@
         生日:
         <input type="datetime" :birthday="users.birthday" v-model="users.birthday">
       </td>
+      <td>
+        <p>簡單自介:</p>
+        <textarea type="text" :status="users.selfIntroduction" v-model="users.selfIntroduction"></textarea>
+      </td>
     </tr>
     <tr>
       <td>
-        status:
-        <input type="datetime" :status="users.status" v-model="users.status">
+        <h2>有無以下志工經驗?</h2>
+        <br>第二市場
+        <input
+          type="checkbox"
+          :is_secondMarket="users.is_secondMarket"
+          v-model="users.is_secondMarket"
+          value="true"
+        >
+        <br>台灣文學館
+        <input
+          type="checkbox"
+          :is_NMoTL="users.is_NMoTL"
+          v-model="users.is_NMoTL"
+          value="true"
+        >
+        <br>文資園區
+        <input type="checkbox" :is_MoC="users.is_MoC" v-model="users.is_MoC" value="true">
+        <br>
+        <br>
       </td>
     </tr>
 
@@ -76,15 +107,22 @@ export default {
         gender: "",
         tel: "",
         email: "",
+        // profile_pic:"",
         birthday: "",
         tokenStr: "",
-        status:""
+        status: "",
+        selfIntroduction: "",
+        is_secondMarket: false,
+        is_NMoTL: false,
+        is_MoC: false
+        // other:""
       }
     };
   },
   methods: {
     sendPost() {
-      axios.post(`http://localhost/api/register`, {
+      axios
+        .post(`http://163.17.145.142/api/register`, {
           account: this.users.account,
           password: this.users.password,
           identity_num: this.users.identity_num,
@@ -94,10 +132,16 @@ export default {
           tel: this.users.tel,
           email: this.users.email,
           birthday: this.users.birthday,
-          status:this.users.status
+          status: this.users.status,
+          selfIntroduction: this.users.selfIntroduction,
+          is_secondMarket: this.users.is_secondMarket,
+          is_NMoTL: this.users.is_NMoTL,
+          is_MoC: this.users.is_MoC
         })
         .then(function(response) {
-          alert("okok")
+          if ((status = 200)) {
+            alert("成功註冊");
+          }
         })
         .catch(function(error) {
           console.log(error);
@@ -108,6 +152,3 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>
