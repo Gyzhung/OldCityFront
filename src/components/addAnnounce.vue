@@ -52,11 +52,11 @@ button.onclk {
             <br>3:課程消息
             4:媒合消息
           </p>
-          <select name="select_option" v-model="announce.ann_type">
-            <option :ann_type="announce.ann_type">1</option>
-            <option :ann_type="announce.ann_type">2</option>
-            <option :ann_type="announce.ann_type">3</option>
-            <option :ann_type="announce.ann_type">4</option>
+          <select name="select_option" :ann_type="announce.ann_type" v-model="announce.ann_type">
+            <option :ann_type="announce.ann_type" value="1">景點消息</option>
+            <option :ann_type="announce.ann_type" value="2">活動消息</option>
+            <option :ann_type="announce.ann_type" value="3">課程消息</option>
+            <option :ann_type="announce.ann_type" value="4">媒合消息</option>
           </select>
           <p>公告內文:</p>
           <div class="onlineEdit">
@@ -93,7 +93,7 @@ export default {
       let html = this.$refs.editer.d_render;
       axios
         .post(
-          `http://oldcity.southeastasia.cloudapp.azure.com/api/addAnnounce`,
+          `http://163.17.145.142/api/addAnnounce`,
           {
             ann_title: this.announce.ann_title,
             ann_content: html,

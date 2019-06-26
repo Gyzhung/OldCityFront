@@ -40,7 +40,7 @@ export default {
     login() {
       const self = this;
       axios
-        .post("http://oldcity.southeastasia.cloudapp.azure.com/api/login", {
+        .post("http://163.17.145.142/api/login", {
           account: this.users.account,
           password: this.users.password
         })
@@ -50,7 +50,7 @@ export default {
 
             axios
               .get(
-                `http://oldcity.southeastasia.cloudapp.azure.com/api/getMyData`,
+                `http://163.17.145.142/api/getMyData`,
                 {
                   headers: { authorization: `Bearer ${global_.login_token}` }
                 }
