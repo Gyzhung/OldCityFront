@@ -36,7 +36,8 @@ export default {
         keystr: "",
         time: ""
       },
-      getRes: []
+      getRes: [],
+      userStatus:''
       //   getRes: {
       //     c_id: "",
       //     c_name: "",

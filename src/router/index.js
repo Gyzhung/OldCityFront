@@ -5,7 +5,7 @@ import 'mavon-editor/dist/css/index.css'
 import register from '@/components/register'
 import login from '@/components/login'
 import Home from '@/components/home'
-import Index from '@/components/Index'
+import Index from '@/components/index'
 import createCourse from '@/components/createCourse'
 import searchCourse from '@/components/search'
 import user from '@/components/user'
@@ -15,8 +15,9 @@ import searchAnnounce from '@/components/searchAnnounce'
 import Announce from '@/components/announce'
 import editAnnounce from '@/components/editAnnounce'
 // use
-Vue.use(mavonEditor)
 Vue.use(Router)
+Vue.use(mavonEditor)
+
 
 export default new Router({
   mode: 'history',
@@ -27,7 +28,7 @@ export default new Router({
     component: Home,
     redirect:Index,
     children: [{
-      path: '/Index',
+      path: '/index',
       name: 'Index',
       component: Index,
     }, {
@@ -46,7 +47,25 @@ export default new Router({
       path: '/news',
       name: 'news',
       component: news,
-    }, ]
+    },{
+      path: '/announce',
+      name: 'Announce',
+      component: Announce,
+    },  {
+      path: '/addAnnounce',
+      name: 'addAnnounce',
+      component: addAnnounce
+  },
+  {
+      path: '/searchAnnounce',
+      name: 'searchAnnounce',
+      component: searchAnnounce
+  },
+  {
+      path: '/announce/:announce_id',
+      name: 'Announce',
+      component: Announce
+  }, ]
   }]
   // mode: 'history',
   // routes: [{
@@ -88,21 +107,7 @@ export default new Router({
   //                 name: 'news',
   //                 component: news
   //             },
-  //             {
-  //                 path: '/addAnnounce',
-  //                 name: 'addAnnounce',
-  //                 component: addAnnounce
-  //             },
-  //             {
-  //                 path: '/searchAnnounce',
-  //                 name: 'searchAnnounce',
-  //                 component: searchAnnounce
-  //             },
-  //             {
-  //                 path: '/announce/:announce_id',
-  //                 name: 'Announce',
-  //                 component: Announce
-  //             },
+            
   //             {
   //                 path: '/editannounce/:announce_id',
   //                 name: 'editAnnounce',

@@ -15,7 +15,7 @@ import 'bootstrap'
 import VueQuillEditor from 'vue-quill-editor'
 
 Vue.use(BootstrapVue);
-Vue.use(axios);
+Vue.use(VueAxios,axios);
 Vue.use(VueQuillEditor);
 
 Vue.prototype.$axios = axios;

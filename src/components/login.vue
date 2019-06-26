@@ -12,7 +12,6 @@
       <td>
         <button @click="login">登入</button>
       </td>
- 
     </tr>
   </table>
 </template>
@@ -28,9 +27,12 @@ export default {
       users: {
         account: "",
         password: ""
-      }
+      },
+
+      getRes: []
     };
-  }, 
+  },
+  computed: {},
   // updated() {
   //     this.getData();
   // },
@@ -45,15 +47,36 @@ export default {
         .then(function(response) {
           if ((status = 200)) {
             global_.login_token = response.data;
-            console.log(typeof global_.login_token);
-            console.log(global_.login_token);
+
+            axios
+              .get(
+                `http://oldcity.southeastasia.cloudapp.azure.com/api/getMyData`,
+                {
+                  headers: { authorization: `Bearer ${global_.login_token}` }
+                }
+              )
+              .then(function(response) {
+                if (status == 200) {
+                  self.getRes = response.data;
+                  global_.isLogin = true;
+                  global_.status = response.data.status;
+
+                  console.log(global_.isLogin);
+                  console.log(global_.status);
+                  alert("已登入");
+                  self.$emit("login");//使用外層方法
+                  self.$router.push({ path: `/index` });
+                }
+              })
+              .catch(function(error) {
+                console.log(error);
+              });
           }
         })
         .catch(function(error) {
           console.log(error);
         });
-    },
-   
+    }
   }
 };
 </script>

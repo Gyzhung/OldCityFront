@@ -70,7 +70,6 @@ tr {
 
 <template>
   <div id="index">
-   
     <!-- 輪播 -->
     <div class="slideshow">
       <b-carousel
@@ -212,20 +211,29 @@ tr {
   </div>
 </template>
 <script>
+import axios from "axios";
+import global_ from "@/components/Global/global";
+
 export default {
   data() {
     return {
       slide: 0,
-      sliding: null
+      sliding: null,
+      getRes: [],
+     
     };
   },
+  mounted(){},
+  
   methods: {
     onSlideStart(slide) {
       this.sliding = true;
     },
     onSlideEnd(slide) {
       this.sliding = false;
-    }
+    },
+    
+    
   }
 };
 </script>

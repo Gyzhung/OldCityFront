@@ -35,7 +35,7 @@ table.search {
         </tr>
       </table>
       <!--eslint-disable-next-line-->
-      <table class="search" :key="item" v-for="item in getRes">
+      <table class="search" :key="item.ann_id" v-for="item in getRes">
         <tr>
           <td>公告id:{{ item.ann_id }}</td>
           <td>公告標題:{{ item.ann_title }}</td>

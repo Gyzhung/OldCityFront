@@ -3,7 +3,8 @@ export default {
     // url,
     // api_url : `${url}/api`,
     login_token:'',
-    isLogin:true,
+    isLogin:false,
+    userStatus:'',
     isShow:false
 }
 </script>

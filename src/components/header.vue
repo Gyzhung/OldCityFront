@@ -39,13 +39,16 @@
   <div class="header">
     <table class="right" border="0">
       <tr>
-        <router-link to="/register">註冊</router-link>
-        <span>|</span>
-        <router-link  to="/login">登入</router-link>
-        <span>|</span>
+        {{islogin}}
+        <router-link to="/login" v-if="islogin">登出</router-link>
+        <span v-if="islogin">|</span>
+        <router-link to="/register" v-if="!islogin">註冊</router-link>
+        <span v-if="!islogin">|</span>
+        <router-link to="/login" v-if="!islogin">登入</router-link>
+        <span v-if="!islogin">|</span>
         <router-link to="/searchCourse">搜尋</router-link>
         <span>|</span>
-        <router-link  to="/addAnnounce">新增公告</router-link>
+        <router-link to="/addAnnounce">新增公告</router-link>
         <span>|</span>
         <router-link to="/searchAnnounce">搜尋公告</router-link>
         <span>|</span>
@@ -84,10 +87,29 @@
 </template>
 <script>
 import global_ from "@/components/Global/global";
-export default{
-  data(){
+export default {
+  props:["islogin"],//從home傳進來
+  data() {
+    return {
+      isShow: true,
+      a:[{id:1,name:"123"},{id:2,name:"asd"}]
+    };
+    // show:global_.isShow
+  },
+  watch:{
   
-      // show:global_.isShow
+  },
+  mounted: function() {
+    this.isLogin();
+  },
+  methods: {
+    isLogin() {
+      if (global_.isLogin == true) {
+        this.isShow = false;
+        console.log(this.isShow);
+        // const b = a.filter(a =>a.id = 1)篩選資料;
+      }
+    }
   }
-}
+};
 </script>
