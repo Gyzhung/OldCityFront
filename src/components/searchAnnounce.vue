@@ -38,7 +38,7 @@ table.search {
       <table class="search" :key="item.ann_id" v-for="item in getRes">
         <tr>
           <td>公告id:{{ item.ann_id }}</td>
-          <td>公告標題:{{ item.ann_title }}</td>
+          <td>公告標題:{{ item.title }}</td>
           <td><router-link :to="{name:'Announce',params:{announce_id:item.ann_id}}">詳細公告</router-link></td>
         </tr>
       </table>
@@ -62,7 +62,7 @@ export default {
     const self = this;
     axios
       .post(
-        `http://oldcity.southeastasia.cloudapp.azure.com/api/searchAnnounce`,
+        `http://163.17.145.142/api/searchAnnounce`,
         {
           keyword: `all:`
         }
@@ -85,7 +85,7 @@ export default {
       const self = this;
       axios
         .post(
-          `http://oldcity.southeastasia.cloudapp.azure.com/api/searchAnnounce`,
+          `http://163.17.145.142/api/searchAnnounce`,
           {
             keyword: `${this.keystr.keyword}`
           }

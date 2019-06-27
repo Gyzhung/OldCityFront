@@ -38,6 +38,7 @@ button.onclk {
       <div class="col-lg-12">
         <div class="anousAdd" align="center">
           <label>新增公告</label>
+          <p>{{errorMsg}}</p>
           <p>公告標題:</p>
           <input
             type="text"
@@ -46,12 +47,6 @@ button.onclk {
             autocomplete="on"
           >
           <p>公告分類:</p>
-          <p>
-            1:景點消息
-            2:活動消息
-            <br>3:課程消息
-            4:媒合消息
-          </p>
           <select name="select_option" :ann_type="announce.ann_type" v-model="announce.ann_type">
             <option :ann_type="announce.ann_type" value="1">景點消息</option>
             <option :ann_type="announce.ann_type" value="2">活動消息</option>
@@ -62,7 +57,7 @@ button.onclk {
           <div class="onlineEdit">
             <mavon-editor ref="editer" v-model="doc"/>
           </div>
-          <button class="onclk" @click="addCourse">建立公告</button>
+          <button class="onclk" @click="addann">建立公告</button>
         </div>
       </div>
     </div>
@@ -85,18 +80,18 @@ export default {
       },
       annRes: [],
       doc: "",
-     
+      errorMsg:""
     };
   },
   methods: {
-    addCourse() {
+    addann() {
       let html = this.$refs.editer.d_render;
       axios
         .post(
           `http://163.17.145.142/api/addAnnounce`,
           {
-            ann_title: this.announce.ann_title,
-            ann_content: html,
+            title: this.announce.ann_title,
+            content: html,
             ann_type: this.announce.ann_type
           },
           {
@@ -112,7 +107,7 @@ export default {
         })
         .catch(function(error) {
           console.log(error);
-          alert(response);
+          this.errorMsg = error.data;
           alert("新增公告失敗");
         });
     }

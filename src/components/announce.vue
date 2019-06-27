@@ -33,7 +33,7 @@ input#search::-webkit-input-placeholder {
 <template>
   <div class="annDetail" align="center">
     <label>公告詳細</label>
-    <table class="newsText" :key="annRes" border="1">
+    <table class="newsText" :annRes="annRes" border="1">
       <tr>
         <td width="150">標題</td>
         <td width="500" v-html="ann_title"></td>
@@ -44,7 +44,7 @@ input#search::-webkit-input-placeholder {
       </tr>
       <tr>
         <td width="150">分類</td>
-        <td width="500" v-html="ann_type"></td>
+        <td width="500" v-html="typename"></td>
       </tr>
       <tr>
         <td width="150">公告內容</td>
@@ -57,7 +57,7 @@ input#search::-webkit-input-placeholder {
         <td>
           <router-link
             tag="button"
-            v-if="show"
+            v-if="isShow"
             :to="{name:'editAnnounce',params:{announce_id:ann_id}}"
           >修改</router-link>
         </td>
@@ -72,35 +72,51 @@ input#search::-webkit-input-placeholder {
 import axios from "axios";
 import global_ from "@/components/Global/global";
 export default {
+  props:["isShow"],
   data() {
     return {
       annRes: [],
       ann_id: this.$route.params.announce_id,
-      show: global_.isShow
+      typename:"",
+      ann_title:"",
+      ann_content:"",
+      created_at:""
     };
   },
   mounted: function() {
     this.getann();
-    console(this.show);
-    console(this.ann_id);
-
+ 
   },
   methods: {
     getann() {
       const self = this;
       axios
         .get(
-          `http://oldcity.southeastasia.cloudapp.azure.com/api/getAnnounceData?ann_id=${
+          `http://163.17.145.142/api/getAnnounceData?ann_id=${
             this.ann_id
           }`
         )
         .then(function(response) {
           self.annRes = response.data;
           self.ann_id = response.data.ann_id;
-          self.ann_title = response.data.ann_title;
-          self.ann_content = response.data.ann_content;
+          self.ann_title = response.data.title;
+          self.ann_content = response.data.content;
           self.created_at = response.data.created_at;
           self.ann_type = response.data.ann_type;
+          switch(self.ann_type){
+            case 1:
+              self.typename = "景點消息";
+              break;
+            case 2:
+              self.typename = "活動消息";
+              break;
+            case 3:
+              self.typename = "課程消息";
+              break;
+            case 4:
+              self.typename = "媒合消息";
+              break;
+          }
         })
         .catch(function(error) {
           console.log(error);
@@ -110,7 +126,7 @@ export default {
       const self = this;
       axios
         .post(
-          `http://oldcity.southeastasia.cloudapp.azure.com/api/deleteAnnounce?ann_id=${
+          `http://163.17.145.142/api/deleteAnnounce?ann_id=${
             this.ann_id
           }`,
           {},
