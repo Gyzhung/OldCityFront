@@ -6,10 +6,16 @@ import register from '@/components/register'
 import login from '@/components/login'
 import Home from '@/components/home'
 import Index from '@/components/index'
-import createCourse from '@/components/createCourse'
-import searchCourse from '@/components/search'
 import user from '@/components/user'
 import news from '@/components/news'
+
+//課程場次
+import createCourse from '@/components/createCourse'
+import searchCourse from '@/components/search'
+import ShowSession from '@/components/showSession'
+import Session from '@/components/Session'
+
+//公告
 import addAnnounce from '@/components/addAnnounce'
 import searchAnnounce from '@/components/searchAnnounce'
 import Announce from '@/components/announce'
@@ -43,10 +49,6 @@ export default new Router({
         name: 'login',
         component: login,
       }, {
-        path: '/createCourse',
-        name: 'createCourse',
-        component: createCourse,
-      }, {
         path: '/searchCourse',
         name: 'searchCourse',
         component: searchCourse,
@@ -69,6 +71,10 @@ export default new Router({
         name: 'news',
         component: news,
       }, {
+        path: '/announce',
+        name: 'Announce',
+        component: Announce,
+      }, {
         path: '/addAnnounce',
         name: 'addAnnounce',
         component: addAnnounce
@@ -79,10 +85,24 @@ export default new Router({
         component: searchAnnounce
       },
       {
+        path: '/editannounce/:announce_id',
+        name: 'editAnnounce',
+        component: editAnnounce
+      },
+      {
         path: '/announce/:announce_id',
         name: 'Announce',
         component: Announce
-      },
+      }, {
+        path: '/ShowSession/:c_id',
+        name: 'ShowSession',
+        component: ShowSession,
+
+      }, {
+        path: '/Session/:s_id',
+        name: 'Session',
+        component: Session
+      }
     ]
   }]
   // mode: 'history',
@@ -126,11 +146,6 @@ export default new Router({
   //                 component: news
   //             },
 
-  //             {
-  //                 path: '/editannounce/:announce_id',
-  //                 name: 'editAnnounce',
-  //                 component: editAnnounce
-  //             }
   //         ]
 
   //         ]

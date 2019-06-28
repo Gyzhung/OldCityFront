@@ -34,14 +34,25 @@
 .btn:before {
   background-color: rgba(182, 102, 12, 0.87);
 }
+.el-dropdown {
+  position: absolute;
+  right: 0;
+ 
+}
+.el-dropdown-link {
+  cursor: pointer;
+  color: Black;
+  font-size:24pt;
+}
+.el-icon-arrow-down {
+  font-size: 20px;
+}
 </style>
 <template>
   <div class="header">
     <table class="right" border="0">
       <tr>
         {{islogin}}
-        <router-link  @click.native="logout" to="/" v-if="islogin">登出</router-link>
-        <span v-if="islogin">|</span>
         <router-link to="/register" v-if="!islogin">註冊</router-link>
         <span v-if="!islogin">|</span>
         <router-link to="/login" v-if="!islogin">登入</router-link>
@@ -60,6 +71,7 @@
     <router-link to="/">
       <img id="logo" src="../image/LOGO.png" width="156px" height="116px">
     </router-link>
+
     <table class="routelink">
       <tr>
         <router-link to="/news" tag="button" class="btn" id="btnnews">
@@ -83,14 +95,25 @@
         </button>
       </tr>
     </table>
+    <el-dropdown v-if="islogin" :hide-on-click="false">
+      <span class="el-dropdown-link">
+        {{userName}}
+        <i class="el-icon-arrow-down el-icon--right"></i>
+      </span>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item>個人資訊</el-dropdown-item>
+        <el-dropdown-item>活動管理</el-dropdown-item>
+        <el-dropdown-item ><router-link @click.native="logout" to="/" v-if="islogin">登出</router-link></el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
   </div>
 </template>
 <script>
 import axios from "axios";
 import global_ from "@/components/Global/global";
-import router from '@/router'
+import router from "@/router";
 export default {
-  props: ["islogin"], //從home傳進來
+  props: ["islogin","userName"], //從home傳進來
   data() {
     return {
       isShow: true,
@@ -112,15 +135,19 @@ export default {
     },
     logout() {
       axios
-        .post(`http://163.17.145.142/api/logout`, {
-          headers: { authorization: `Bearer ${global_.login_token}` }
-        },{
-          headers: { authorization: `Bearer ${global_.login_token}` }
-        })
+        .post(
+          `http://163.17.145.142/api/logout`,
+          {
+            headers: { authorization: `Bearer ${global_.login_token}` }
+          },
+          {
+            headers: { authorization: `Bearer ${global_.login_token}` }
+          }
+        )
         .then(function(response) {
           if ((status = 200)) {
             alert("已登出");
-            router.go('/index');
+            router.go("/index");
           }
         })
         .catch(function(error) {

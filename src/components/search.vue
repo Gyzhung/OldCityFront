@@ -1,26 +1,62 @@
-<style>
+<style scoped>
+table.search {
+  margin: 5% auto 5%;
+  width: 70%;
+  border: solid;
+  border-width: 5px;
+  padding: 15px;
+}
+.bar {
+  text-align: center;
+  margin: 5% auto 5%;
+}
+.search th {
+  background-color: gray;
+  color: white;
+}
+.search tr {
+  border: solid;
+  border-width: 3px;
+}
+td {
+  padding:10px;
+  border-right: solid;
+  border-width: 1px;
+}
 </style>
 
 <template>
   <div>
-    <table border="0" align="center">
+    <table class="bar" border="0" align="center">
       <tr>
-        <td>
+       
           搜尋:
           <input type="text" :keystr="keyword.keystr" v-model="keyword.keystr" autocomplete="on">
-        </td>
+       
         <button @click="search">搜尋</button>
       </tr>
     </table>
     <!--eslint-disable-next-line-->
-    <div class="search" :key="item.c_id" v-for="item in getRes">
-      <router-link :to="{name:'getSessionListByc_id',params:{c_id:item.c_id}}">查詢場次 {{ item.c_id }}</router-link>
-      <p>課程名稱:{{ item.c_name }}</p>
-      <p>課程時間:{{ item.duration}}</p>
-      <p>課程人數上限:{{ item.maxNum}}人</p>
-      <p>課程簡介:{{ item.introduce }}</p>
-      <router-link :to="{name:'getCourse',params:{c_id:item.c_id}}">更多資訊</router-link>
-    </div>
+    <table class="search">
+      <tr>
+        <th>課程名稱</th>
+        <th>課程時長(小時)</th>
+        <th>課程人數上限(人)</th>
+        <th>課程簡介</th>
+        <th>課程種類</th>
+        <th>查看場次</th>
+      </tr>
+      <tr  :key="item" v-for="item in getRes">
+        <td>{{ item.c_name }}</td>
+        <td>{{ item.duration}}</td>
+        <td>{{ item.maxNum}}</td>
+        <td>{{ item.introduce }}</td>
+        <td>{{ item.type }}</td>
+        <td>
+          <router-link :to="{name:'ShowSession',params:{c_id:item.c_id}}">查看場次</router-link>
+        </td>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -35,24 +71,14 @@ export default {
         time: ""
       },
       getRes: [],
-      userStatus: ""
-      //   getRes: {
-      //     c_id: "",
-      //     c_name: "",
-      //     c_duration: "",
-      //     c_signUpTime_start: "",
-      //     c_signUpTime_end: "",
-      //     c_maxNum: "",
-      //     c_introduce: "",
-      //     c_content: "",
-      //     c_type: "",
-      //     c_pic: "",
-      //     created_at: ""
-      //   }
+      userStatus: "",
+      typename: "",
+     
     };
   },
   mounted: function() {
     const self = this;
+   
     axios
       .post(`http://163.17.145.142/api/searchCourse`, {
         keyword: `all:`
@@ -70,7 +96,6 @@ export default {
   },
   methods: {
     search() {
-      console.log(global_.login_token);
       const self = this;
 
       axios
