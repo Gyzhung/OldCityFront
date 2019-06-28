@@ -13,9 +13,9 @@
 
 <template>
   <div class="home">
-    <Header :islogin="isLogin"></Header>
+    <Header :islogin="isLogin" :userName="userName"></Header>
     
-    <router-view @login="login" :isShow="isShow"></router-view>
+    <router-view @login="login" :isShow="isShow" :islogin="isLogin"></router-view>
     <!-- <div class="contentroute">
     
     </div> -->
@@ -35,7 +35,8 @@ export default {
     return {
       getRes: [],
       isLogin: false,
-      isShow:false
+      isShow:false,
+      userName:''
     };
   },
   updated: function() {
@@ -56,8 +57,10 @@ export default {
         .then(function(response) {
           if (status == 200) {
             self.getRes = response.data;
+            self.userName = response.data.name;
+
             self.status = response.data.status;
-       
+
             if(self.status == 4){
               self.isShow = true;
               console.log("是管理員");

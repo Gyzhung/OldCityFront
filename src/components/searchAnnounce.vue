@@ -1,18 +1,26 @@
-<style>
+<style scope>
 table.search {
-  text-align: center;
   margin: 5%  auto 5%;
- 
   width:70%;
+   border: solid;
+  border-width: 5px;
   
 }
 .bar{
     text-align: center;
   margin: 5%  auto 5%;
 }
-.search td {
-  text-align: center;
+.search th{
+  background-color:gray;
+  color:white;
+}
+.search tr{
   border: solid;
+  border-width: 3px;
+}
+.saerch tr td{
+  border-right: solid;
+  border-width: 1px;
 }
 
 </style>
@@ -35,10 +43,16 @@ table.search {
         </tr>
       </table>
       <!--eslint-disable-next-line-->
-      <table class="search" :key="item.ann_id" v-for="item in getRes">
+
+      <table class="search">
         <tr>
-          <td>公告id:{{ item.ann_id }}</td>
-          <td>公告標題:{{ item.title }}</td>
+          <th>公告id</th>
+          <th>公告標題</th>
+          <th>詳細</th>
+        </tr>
+        <tr  :key="item.ann_id" v-for="item in getRes">
+          <td>{{ item.ann_id }}</td>
+          <td>{{ item.title }}</td>
           <td><router-link :to="{name:'Announce',params:{announce_id:item.ann_id}}">詳細公告</router-link></td>
         </tr>
       </table>

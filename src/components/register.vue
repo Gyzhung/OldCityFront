@@ -48,6 +48,10 @@ textarea{
         手機電話:
         <input type="text" :tel="users.tel" v-model="users.tel">
       </td>
+          <td>
+        行動電話:
+        <input type="text" :tel="users.cel" v-model="users.cel">
+      </td>
       <td>
         電子信箱:
         <input type="text" :email="users.email" v-model="users.email">
@@ -106,6 +110,7 @@ export default {
         address: "",
         gender: "",
         tel: "",
+        cel:"",
         email: "",
         // profile_pic:"",
         birthday: "",
@@ -127,16 +132,13 @@ export default {
           password: this.users.password,
           identity_num: this.users.identity_num,
           name: this.users.name,
-          address: this.users.address,
           gender: this.users.gender,
           tel: this.users.tel,
+          cel:this.users.cel,
           email: this.users.email,
           birthday: this.users.birthday,
           status: this.users.status,
-          selfIntroduction: this.users.selfIntroduction,
-          is_secondMarket: this.users.is_secondMarket,
-          is_NMoTL: this.users.is_NMoTL,
-          is_MoC: this.users.is_MoC
+  
         })
         .then(function(response) {
           if ((status = 200)) {
