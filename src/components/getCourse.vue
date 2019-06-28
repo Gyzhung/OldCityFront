@@ -33,12 +33,12 @@ export default {
       getRes: [],
       getDataRes:[],
       userStatus:[],
-      c_content: "",
+      // c_content: "",
       isShow:false,
     };
   },
   mounted: function() {
-    this.getMyData();
+    this.isAdmin();
     this.getCourse();
   },
   methods: {
@@ -46,33 +46,22 @@ export default {
       const self = this;
       axios
         .get(
-          `http://oldcity.southeastasia.cloudapp.azure.com/api/getCourseData?c_id=${
+          `http://163.17.145.142/api/api/getCourseData?c_id=${
             this.c_id
           }`
         )
         .then(function(response) {
           self.getRes = response.data;
-          self.c_content = response.data.c_content;
+          // self.c_content = response.data.c_content;
           console.log(self.c_content);
         })
         .catch(function(error) {});
     },
-    getMyData() {
-      const self = this;
-      axios
-        .get(`http://oldcity.southeastasia.cloudapp.azure.com/api/getMyData`, {
-          headers: { authorization: `Bearer ${global_.login_token}` }
-        })
-        .then(function(response) {
-          self.getDataRes = response.data;
-          self.userStatus = response.data.status;
-          console.log(self.userStatus);
-          if (self.userStatus == 4||self.userStatus == 3) {
+    isAdmin() {
+      if (global_.userStatus == 4||global_.userStatus == 3) {
             self.isShow = true;
             console.log(self.isShow);
           }
-        })
-        .catch(function(error) {});
     },
     deleteCourse(){
         axios

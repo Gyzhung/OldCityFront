@@ -45,8 +45,12 @@ textarea{
     </tr>
     <tr>
       <td>
-        手機電話:
+        家用電話:
         <input type="text" :tel="users.tel" v-model="users.tel">
+      </td>
+      <td>
+        手機電話:
+        <input type="text" :tel="users.cel" v-model="users.cel">
       </td>
       <td>
         電子信箱:
@@ -58,12 +62,12 @@ textarea{
         生日:
         <input type="datetime" :birthday="users.birthday" v-model="users.birthday">
       </td>
-      <td>
+      <!-- <td>
         <p>簡單自介:</p>
         <textarea type="text" :status="users.selfIntroduction" v-model="users.selfIntroduction"></textarea>
-      </td>
+      </td> -->
     </tr>
-    <tr>
+    <!-- <tr>
       <td>
         <h2>有無以下志工經驗?</h2>
         <br>第二市場
@@ -85,7 +89,7 @@ textarea{
         <br>
         <br>
       </td>
-    </tr>
+    </tr> -->
 
     <button @click="sendPost">註冊</button>
   </table>

@@ -30,20 +30,8 @@
           課程種類:
           <input type="text" :c_type="courses.c_type" v-model="courses.c_type">
         </td>
-        <td>
-          修課種類:
-          <input type="text" :c_require="courses.c_require" v-model="courses.c_require">
-        </td>
       </tr>
-      <tr>
-        <td>
-          課程內容:
-          <div>
-            <mavon-editor ref="editor" v-model="value"/>
-           
-          </div>
-        </td>
-      </tr>
+
 
       <button @click="addCourse">建立課程</button>
     </table>
@@ -84,7 +72,6 @@ export default {
     },
     addCourse() {
       console.log(global_.login_token)
-      
       let html = this.$refs.editor.d_render;
       console.log(html);
       this.courses.c_content = html;
@@ -98,9 +85,7 @@ export default {
             c_duration: this.courses.c_duration,
             c_maxNum: this.courses.c_maxNum,
             c_introduce: this.courses.c_introduce,
-            c_content: this.courses.c_content,
             c_type: this.courses.c_type,
-            c_require: this.courses.c_require
           },
           { headers: { authorization: `Bearer ${global_.login_token}` } }
         )

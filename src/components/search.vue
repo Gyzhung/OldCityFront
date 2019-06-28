@@ -1,5 +1,4 @@
 <style>
-
 </style>
 
 <template>
@@ -14,14 +13,13 @@
       </tr>
     </table>
     <!--eslint-disable-next-line-->
-    <div class="search" :key="item" v-for="item in getRes">
+    <div class="search" :key="item.c_id" v-for="item in getRes">
+      <router-link :to="{name:'getSessionListByc_id',params:{c_id:item.c_id}}">查詢場次 {{ item.c_id }}</router-link>
       <p>課程名稱:{{ item.c_name }}</p>
-      <p>課程時間:{{ item.c_duration}}</p>
-      <p>開始報名日期:{{ item.c_signUpTime_start}}</p>
-      <p>結束報名日期:{{ item.c_signUpTime_end}}</p>
-      <p>課程人數上限:{{ item.c_maxNum}}</p>
-      <p>課程簡介:{{ item.c_introduce }}</p>
-      <p>課程內容:{{ item.c_content }}</p>
+      <p>課程時間:{{ item.duration}}</p>
+      <p>課程人數上限:{{ item.maxNum}}人</p>
+      <p>課程簡介:{{ item.introduce }}</p>
+      <router-link :to="{name:'getCourse',params:{c_id:item.c_id}}">更多資訊</router-link>
     </div>
   </div>
 </template>
@@ -37,7 +35,7 @@ export default {
         time: ""
       },
       getRes: [],
-      userStatus:''
+      userStatus: ""
       //   getRes: {
       //     c_id: "",
       //     c_name: "",
@@ -53,12 +51,30 @@ export default {
       //   }
     };
   },
+  mounted: function() {
+    const self = this;
+    axios
+      .post(`http://163.17.145.142/api/searchCourse`, {
+        keyword: `all:`
+      })
+
+      .then(function(response) {
+        if ((status = 200)) {
+          self.getRes = response.data;
+        }
+      })
+      .catch(function(error) {
+        console.log(error);
+        alert(response);
+      });
+  },
   methods: {
     search() {
-        console.log(global_.login_token);
+      console.log(global_.login_token);
       const self = this;
+
       axios
-        .post(`http://oldcity.southeastasia.cloudapp.azure.com/api/searchCourse`, {
+        .post(`http://163.17.145.142/api/searchCourse`, {
           keyword: `${this.keyword.keystr}`
         })
         .then(function(response) {
