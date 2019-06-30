@@ -8,14 +8,12 @@
 
 <template>
   <div>
-      
-    <router-link :to="{name:'getCheckSignUpListBys_id',params:{s_id:this.$route.params.s_id}}" >已核准名單 </router-link>
+  
     <div :key="item.su_id" v-for="item in getRes">
       <p>學生id:{{ item.su_id }}</p>
       <p>場次id:{{ item.s_id }}</p>
       <p>帳號:{{ item.account }}</p>
       <p>學生姓名:{{ item.name }}</p>
-      <button @click="reviewSignUp(item.su_id)">審核報名</button>
     </div>
     <!-- <div v-html="c_content"></div> -->
   </div>
@@ -39,45 +37,21 @@ export default {
   },
   mounted: function() {
     this.isAdmin();
-    this.getUncheckSignUp();
+    this.getcheckSignUp();
   },
   methods: {
-    reviewSignUp(su_id) {
-      axios
-        .post(
-          `http://163.17.145.142/api/reviewSignUp`,
-          {
-            su_id: su_id,
-            reviewResult: true
-          },
-          {
-            headers: {
-              authorization: `Bearer ${global_.login_token}`
-            }
-          }
-        )
-        .then(function(response) {
-          if ((status = 200)) {
-            alert("審核報名成功");
-          
-          }
-        })
-        .catch(function(error) {
-          console.log(error);
-          this.errorMsg = error.data;
-          alert("gg");
-        });
-    },
-    getUncheckSignUp() {
+    
+    getcheckSignUp() {
       const self = this;
       axios
         .get(
-          `http://163.17.145.142/api/getUncheckSignUpListBys_id?s_id=${
+          `http://163.17.145.142/api/getcheckSignUpListBys_id?s_id=${
             this.s_id
           }`,
           {
             headers: {
-              authorization: `Bearer ${global_.login_token}`
+              authorization: `Bearer ${global_.login_token}`,
+              'Content-Type': 'application/x-www-form-urlencoded'
             }
           }
         )
@@ -86,7 +60,7 @@ export default {
           if(self.getRes==""){
               console.log("空的")
               this.isEmpty=true
-              this.reload()
+              
           }
 
           // self.c_content = response.data.c_content;
@@ -96,6 +70,7 @@ export default {
     isAdmin() {
       if (global_.userStatus == 4 || global_.userStatus == 3) {
         self.isShow = true;
+        console.log("333");
         console.log(self.isShow);
       }
     }

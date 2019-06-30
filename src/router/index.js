@@ -22,7 +22,11 @@ import Announce from '@/components/announce'
 import getCourse from '@/components/getCourse'
 import editAnnounce from '@/components/editAnnounce'
 import getSessionListByc_id from '@/components/getSessionListByc_id'
+
+
 import getUncheckSignUpListBys_id from '@/components/getUncheckSignUpListBys_id'
+import getCheckSignUpListBys_id from '@/components/getCheckSignUpListBys_id'
+
 // use
 Vue.use(Router)
 Vue.use(mavonEditor)
@@ -59,6 +63,12 @@ export default new Router({
         component: getSessionListByc_id
       },
       {
+        path: '/getCheckSignUpListBys_id/:s_id',
+        name: 'getCheckSignUpListBys_id',
+        component: getCheckSignUpListBys_id
+      },
+      
+      {
         path: '/getUncheckSignUpListBys_id/:s_id',
         name: 'getUncheckSignUp',
         component: getUncheckSignUpListBys_id
@@ -70,10 +80,6 @@ export default new Router({
         path: '/news',
         name: 'news',
         component: news,
-      }, {
-        path: '/announce',
-        name: 'Announce',
-        component: Announce,
       }, {
         path: '/addAnnounce',
         name: 'addAnnounce',
