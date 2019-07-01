@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 .footer {
   position: relative;
   bottom:0%;

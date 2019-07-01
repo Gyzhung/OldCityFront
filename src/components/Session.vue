@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 .sesDetail {
   background-color: rgb(255, 238, 190);
   border: 2px burlywood;

@@ -29,128 +29,124 @@ Vue.use(mavonEditor)
 
 
 export default new Router({
-  mode: 'history',
+    mode: 'history',
 
-  routes: [{
-    path: '/',
-    name: 'Home',
-    component: Home,
-    redirect: Index,
-    children: [{
-        path: '/index',
-        name: 'Index',
-        component: Index,
-      }, {
-        path: '/register',
-        name: 'register',
-        component: register,
-      }, {
-        path: '/login',
-        name: 'login',
-        component: login,
-      }, {
-        path: '/searchCourse',
-        name: 'searchCourse',
-        component: searchCourse,
-      },
-      {
-        path: '/getSessionListByc_id/:c_id',
-        name: 'getSessionListByc_id',
-        component: getSessionListByc_id
-      },
-      {
-        path: '/getUncheckSignUpListBys_id/:s_id',
-        name: 'getUncheckSignUp',
-        component: getUncheckSignUpListBys_id
-      }, {
-        path: '/getCourse/:c_id',
-        name: 'getCourse',
-        component: getCourse,
-      }, {
-        path: '/news',
-        name: 'news',
-        component: news,
-      }, {
-        path: '/announce',
-        name: 'Announce',
-        component: Announce,
-      }, {
-        path: '/addAnnounce',
-        name: 'addAnnounce',
-        component: addAnnounce
-      },
-      {
-        path: '/searchAnnounce',
-        name: 'searchAnnounce',
-        component: searchAnnounce
-      },
-      {
-        path: '/editannounce/:announce_id',
-        name: 'editAnnounce',
-        component: editAnnounce
-      },
-      {
-        path: '/announce/:announce_id',
-        name: 'Announce',
-        component: Announce
-      }, {
-        path: '/ShowSession/:c_id',
-        name: 'ShowSession',
-        component: ShowSession,
+    routes: [{
+            path: '/',
+            name: 'Home',
+            component: Home,
+            redirect: Index,
+            children: [{
+                    path: '/index',
+                    name: 'Index',
+                    component: Index,
+                }, {
+                    path: '/register',
+                    name: 'register',
+                    component: register,
+                }, {
+                    path: '/login',
+                    name: 'login',
+                    component: login,
+                }, {
+                    path: '/searchCourse',
+                    name: 'searchCourse',
+                    component: searchCourse,
+                },
+                {
+                    path: '/getSessionListByc_id/:c_id',
+                    name: 'getSessionListByc_id',
+                    component: getSessionListByc_id
+                },
+                {
+                    path: '/getUncheckSignUpListBys_id/:s_id',
+                    name: 'getUncheckSignUp',
+                    component: getUncheckSignUpListBys_id
+                }, {
+                    path: '/getCourse/:c_id',
+                    name: 'getCourse',
+                    component: getCourse,
+                }, {
+                    path: '/news',
+                    name: 'news',
+                    component: news,
+                }, {
+                    path: '/addAnnounce',
+                    name: 'addAnnounce',
+                    component: addAnnounce
+                },
+                {
+                    path: '/searchAnnounce',
+                    name: 'searchAnnounce',
+                    component: searchAnnounce
+                },
+                {
+                    path: '/editannounce/:announce_id',
+                    name: 'editAnnounce',
+                    component: editAnnounce
+                },
+                {
+                    path: '/announce/:announce_id',
+                    name: 'Announce',
+                    component: Announce
+                }, {
+                    path: '/ShowSession/:c_id',
+                    name: 'ShowSession',
+                    component: ShowSession,
 
-      }, {
-        path: '/Session/:s_id',
-        name: 'Session',
-        component: Session
-      }
-    ]
-  }]
-  // mode: 'history',
-  // routes: [{
-  //         path: '/',
-  //         name: 'index',
-  //         component: index,
-  //         children: [{
-  //                 path: '/index',
-  //                 name: 'index',
-  //                 component: index
-  //             },
-  //             {
-  //                 path: '/register',
-  //                 name: 'register',
-  //                 component: register
-  //             },
-  //             {
-  //                 path: '/login',
-  //                 name: 'login',
-  //                 component: login
-  //             },
-  //             {
-  //                 path: '/createCourse',
-  //                 name: 'createCourse',
-  //                 component: createCourse
-  //             },
-  //             {
-  //                 path: '/searchCourse',
-  //                 name: 'searchCourse',
-  //                 component: searchCourse
-  //             },
-  //             {
-  //                 path: '/user',
-  //                 name: 'user',
-  //                 component: user
-  //             },
-  //             {
-  //                 path: '/news',
-  //                 name: 'news',
-  //                 component: news
-  //             },
+                }, {
+                    path: '/Session/:s_id',
+                    name: 'Session',
+                    component: Session
+                }
+            ]
+        }]
+        // mode: 'history',
+        // routes: [{
+        //         path: '/',
+        //         name: 'index',
+        //         component: index,
+        //         children: [{
+        //                 path: '/index',
+        //                 name: 'index',
+        //                 component: index
+        //             },
+        //             {
+        //                 path: '/register',
+        //                 name: 'register',
+        //                 component: register
+        //             },
+        //             {
+        //                 path: '/login',
+        //                 name: 'login',
+        //                 component: login
+        //             },
+        //             {
+        //                 path: '/createCourse',
+        //                 name: 'createCourse',
+        //                 component: createCourse
+        //             },
+        //             {
+        //                 path: '/searchCourse',
+        //                 name: 'searchCourse',
+        //                 component: searchCourse
+        //             },
+        //             {
+        //                 path: '/user',
+        //                 name: 'user',
+        //                 component: user
+        //             },
+        //             {
+        //                 path: '/news',
+        //                 name: 'news',
+        //                 component: news
+        //             },
 
-  //         ]
+    //         ]
 
-  //         ]
+    //         ]
 
-  //     },
+    //     },
 
-  // ]
+    // ]
 })

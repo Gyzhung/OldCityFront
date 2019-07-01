@@ -75,7 +75,7 @@ export default {
     return {
       sesRes: [],
       cc_id: this.$route.params.c_id,
-      sign: "",
+      sign: "報名",
       Is_signUp: ""
     };
   },
@@ -83,6 +83,7 @@ export default {
     alert(this.islogin);
 
     if (this.islogin) {
+      this.sign = ""
       this.getLses();
     } else {
       this.getses();
@@ -97,6 +98,7 @@ export default {
         )
         .then(function(response) {
           self.sesRes = response.data;
+          
         })
         .catch(function(error) {
           console.log(error);

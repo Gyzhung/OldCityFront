@@ -1,5 +1,5 @@
 
-<style>
+<style scoped>
 .course {
   border: solid #000000 3px;
 }

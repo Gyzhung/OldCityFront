@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 .right {
   position: absolute;
   right: 30%;
@@ -52,7 +52,6 @@
   <div class="header">
     <table class="right" border="0">
       <tr>
-        {{islogin}}
         <router-link to="/register" v-if="!islogin">註冊</router-link>
         <span v-if="!islogin">|</span>
         <router-link to="/login" v-if="!islogin">登入</router-link>
@@ -97,7 +96,7 @@
     </table>
     <el-dropdown v-if="islogin" :hide-on-click="false">
       <span class="el-dropdown-link">
-        {{userName}}
+        <!-- {{userName}} -->
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
@@ -113,47 +112,50 @@ import axios from "axios";
 import global_ from "@/components/Global/global";
 import router from "@/router";
 export default {
-  props: ["islogin","userName"], //從home傳進來
+  props: ["user"], //從home傳進來
   data() {
     return {
-      isShow: true,
-      a: [{ id: 1, name: "123" }, { id: 2, name: "asd" }]
+      //isShow: true,
     };
     // show:global_.isShow
   },
   watch: {},
   mounted: function() {
-    this.isLogin();
+    // this.isLogin();
   },
   methods: {
-    isLogin() {
-      if (global_.isLogin == true) {
-        this.isShow = false;
-        console.log(this.isShow);
-        // const b = a.filter(a =>a.id = 1)篩選資料;
-      }
-    },
+    // isLogin() {
+    //   if (global_.isLogin == true) {
+    //     this.isShow = false;
+    //     console.log(this.isShow);
+    //   }
+    // },
     logout() {
+      const self = this;
       axios
         .post(
           `http://163.17.145.142/api/logout`,
-          {
-            headers: { authorization: `Bearer ${global_.login_token}` }
-          },
+          '',
           {
             headers: { authorization: `Bearer ${global_.login_token}` }
           }
         )
         .then(function(response) {
           if ((status = 200)) {
+            self.$emit('logout');
             alert("已登出");
-            router.go("/index");
+            self.$router.push('/index');
           }
         })
         .catch(function(error) {
           console.log(error);
         });
     }
-  }
+  },
+  computed: {
+    islogin:function() {
+      return this.user != '';
+    }
+  },
 };
 </script>

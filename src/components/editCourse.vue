@@ -139,7 +139,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 #editor {
   margin: auto;
   width: 80%;

@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 .itemcontent {
   width: 500 dw;
   height: 500dh;

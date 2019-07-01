@@ -1,5 +1,5 @@
 
-<style>
+<style scoped>
 .annDetail {
   background-color: rgb(255, 238, 190);
   border: 2px burlywood;

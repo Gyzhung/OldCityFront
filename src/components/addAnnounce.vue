@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 label {
   font-size: 34px;
   color: #94693f;

@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 .news {
   float: right;
   background-color: rgb(255, 238, 190);
