@@ -22,7 +22,11 @@ import Announce from '@/components/announce'
 import getCourse from '@/components/getCourse'
 import editAnnounce from '@/components/editAnnounce'
 import getSessionListByc_id from '@/components/getSessionListByc_id'
+
+
 import getUncheckSignUpListBys_id from '@/components/getUncheckSignUpListBys_id'
+import getCheckSignUpListBys_id from '@/components/getCheckSignUpListBys_id'
+
 // use
 Vue.use(Router)
 Vue.use(mavonEditor)
@@ -30,7 +34,6 @@ Vue.use(mavonEditor)
 
 export default new Router({
     mode: 'history',
-
     routes: [{
             path: '/',
             name: 'Home',
@@ -58,6 +61,12 @@ export default new Router({
                     name: 'getSessionListByc_id',
                     component: getSessionListByc_id
                 },
+                {
+                    path: '/getCheckSignUpListBys_id/:s_id',
+                    name: 'getCheckSignUpListBys_id',
+                    component: getCheckSignUpListBys_id
+                },
+
                 {
                     path: '/getUncheckSignUpListBys_id/:s_id',
                     name: 'getUncheckSignUp',

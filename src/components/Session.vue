@@ -41,7 +41,7 @@ input#search::-webkit-input-placeholder {
         <th>課程結束</th>
 
       </tr>
-      <tr v-for="ses in sesDRes">
+      <tr  v-for="ses in sesDRes">
         <td>{{ses.session_name}}</td>
         <td>{{ses.signUpTime_start}}</td>
         <td>{{ses.signUpTime_end}}</td>

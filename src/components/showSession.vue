@@ -41,7 +41,8 @@ h1 {
     >{{ses.c_name}}</h1>
     <table class="search">
       <tr>
-        <th>場次名稱</th>
+        <th>場次名稱 </th>
+        <th>場次ID </th>
         <th>報名開始</th>
         <th>報名截止</th>
         <th>課程開始</th>
@@ -50,6 +51,7 @@ h1 {
       </tr>
       <tr :key="ses.s_id" v-for="ses in sesRes">
         <td>{{ses.session_name}}</td>
+        <td><router-link :to="{name:'getUncheckSignUp',params:{s_id:ses.s_id}}">查詢報名審核名單 {{ses.s_id}}</router-link></td>
         <td>{{ses.signUpTime_start}}</td>
         <td>{{ses.signUpTime_end}}</td>
         <td>{{ses.sessions_start}}</td>
@@ -76,10 +78,12 @@ export default {
       sesRes: [],
       cc_id: this.$route.params.c_id,
       sign: "報名",
-      Is_signUp: ""
+      Is_signUp: "",
+      isShow:false
     };
   },
   mounted() {
+    this.isAdmin();
     alert(this.islogin);
 
     if (this.islogin) {
@@ -90,6 +94,13 @@ export default {
     }
   },
   methods: {
+     isAdmin() {
+      if (global_.userStatus == 4 || global_.userStatus == 3) {
+        self.isShow = true;
+        console.log(2222222222);
+        console.log(self.isShow);
+      }
+    },
     getses() {
       const self = this;
       axios
