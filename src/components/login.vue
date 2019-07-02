@@ -56,7 +56,7 @@
           <input id="account"  v-model="users.account" type="text" >
           
           <p>會員密碼:</p>
-          <input id="password" v-model="users.password" type="password">
+          <input id="password" @keyup.enter="login" v-model="users.password" type="password">
           <br><br>
           <button type="button" class="btn btn-light" >註冊會員</button>
           <button type="button" @click="login" class="btn btn-primary">登入</button>
@@ -118,7 +118,7 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error);
+          console.log(error.response);
         });
     }
   }

@@ -33,7 +33,7 @@ h1 {
 <template>
   <div>
     <!--eslint-disable-next-line-->
-    <h1 width="100%">{{sessions?sessions[0].c_name:""}}</h1>
+    <h1 width="100%" v-if="!!sessions">{{sessions[0].c_name}}</h1>
     <table class="search">
       <tr>
         <th>場次名稱 </th>
@@ -52,10 +52,9 @@ h1 {
         <td>{{session.sessions_start}}</td>
         <td>{{session.sessions_end}}</td> -->
         <td>
-          <router-link
-            tag="button"
-            :to="{name:'Session',params:{s_id:session.s_id}}"
-          >{{sign}}{{session.Is_signUp}}</router-link>
+          <router-link tag="button" :to="{name:'Branch',params:{s_id:session.s_id}}" >
+            {{sign}}{{session.Is_signUp}}
+          </router-link>
         </td>
       </tr>
     </table>
@@ -70,7 +69,7 @@ export default {
   props: ["islogin"],
   data() {
     return {
-      sessions: [],
+      sessions: null,
       cc_id: this.$route.params.c_id,
       sign: "報名",
       Is_signUp: "",

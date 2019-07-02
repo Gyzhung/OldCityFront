@@ -1,13 +1,29 @@
-<style scoped>
+<style>
 * {
   font-family: Microsoft JhengHei;
 }
 .home {
   position: relative;
-  height: 100%;
 }
 .contentroute {
   height: 100%;
+}
+.content{
+  min-height: 60vh;
+}
+.btn-lightbrown {
+  background-color: #ab8a6b;
+  color: #ffffff;
+}
+.btn-lightbrown:hover {
+  background-color: #784a45;
+  color: #ffffff;
+}
+.btn-light {
+  border-color: #784a45;
+}
+.btn-light:hover{
+  background-color:rgba(171, 138, 107, .6)
 }
 </style>
 
@@ -19,7 +35,7 @@
     <!-- <div class="contentroute">
     
     </div> -->
-    <Footer></Footer>
+    <!-- <Footer></Footer> -->
   </div>
 </template>
 
@@ -46,15 +62,14 @@ export default {
       .then(function(response) {
          
         if (response.status == 200) {
-          
           self.user = response.data;
+          console.log(self.user)
           self.status = response.data.status;
 
           if(self.status == 4){
             self.isShow = true;
             console.log("是管理員");
           }
-    
       
         }
       })

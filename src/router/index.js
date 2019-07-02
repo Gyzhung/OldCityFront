@@ -15,6 +15,11 @@ import searchCourse from '@/components/search'
 import ShowSession from '@/components/showSession'
 import Session from '@/components/Session'
 
+import Branch from '@/components/Branch/Branch'
+import Branch_content from '@/components/Branch/content'
+import checkSignUp from '@/components/checkSignUp'
+
+
 //公告
 import addAnnounce from '@/components/addAnnounce'
 import searchAnnounce from '@/components/searchAnnounce'
@@ -26,6 +31,7 @@ import getSessionListByc_id from '@/components/getSessionListByc_id'
 
 import getUncheckSignUpListBys_id from '@/components/getUncheckSignUpListBys_id'
 import getCheckSignUpListBys_id from '@/components/getCheckSignUpListBys_id'
+
 
 // use
 Vue.use(Router)
@@ -107,7 +113,21 @@ export default new Router({
                     path: '/Session/:s_id',
                     name: 'Session',
                     component: Session
+                }, {
+                    path: '/Branch/:s_id',
+                    name: 'Branch',
+                    component: Branch
+                }, {
+                    path: '/Branch_content/:b_id',
+                    name: 'Branch_content',
+                    component: Branch_content
+                }, {
+                    path: '/checkSignUp/:b_id',
+                    name: 'checkSignUp',
+                    component: checkSignUp
                 }
+
+
             ]
         }]
         // mode: 'history',
