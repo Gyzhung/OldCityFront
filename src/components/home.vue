@@ -47,6 +47,11 @@ body {
 .btn-light:hover{
   background-color:rgba(171, 138, 107, .6)
 }
+
+
+@media (max-width: 480px) {
+}
+
 </style>
 
 <template>

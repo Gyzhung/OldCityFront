@@ -84,6 +84,7 @@
 }
 .menu-link {
   display: block;
+  white-space:nowrap;
   padding: 1rem 0rem 1rem 1.2rem;
   font-weight: 700;
   color: rgba(171, 138, 107, 1);
@@ -113,6 +114,73 @@
 .route_link:hover{
   text-decoration: none;
 }
+@media (max-width: 1308px) {
+  .menu-nav {
+    width: 75%;
+  }
+}
+@media (max-width: 1221px) {
+  .menu-nav {
+    width: 85%;
+  }
+  .menu-link{
+    padding: .5rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .menu-nav {
+    width: 85%;
+  }
+  .menu-link{
+    padding: .5rem;
+  }
+  .logo {
+    top: 0;
+  }
+  .logo img {
+    width: 50%;
+    height: 50%;
+  }
+}
+@media (max-width: 1078px) {
+  .menu-nav {
+    width: 90%;
+  }
+  .menu-link{
+    padding: .5rem;
+  }
+}
+@media (max-width: 1018px) {
+  .menu-nav {
+    width: 100%;
+  }
+  .menu-link{
+    padding: .5rem;
+  }
+}
+@media (max-width: 979px) {
+  .profile-right{
+    font-size: 12px;
+  }
+  .profile-name{
+    font-size: 12px;
+    letter-spacing: 5px;
+  }
+  
+  .menu-nav {
+    width: 100%;
+  }
+  .menu-link{
+    padding: 1rem;
+  }
+  .nav-item{
+    width: 100%;
+    background-image: none;
+  }
+}
+
+
 </style>
 <template>
     <div class="header">
