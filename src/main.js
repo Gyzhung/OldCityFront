@@ -7,6 +7,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import global_ from './components/Global/global'
 import Header from '@/components/header'
+import Footer from '@/components/footer'
 import Index from '@/components/index'
 
 import $ from 'jquery'
@@ -24,6 +25,7 @@ Vue.prototype.$GLOBAL = global_;
 
 Vue.config.productionTip = false
 Vue.component('Header', Header)
+Vue.component('Footer', Footer)
 Vue.component('Index', Index)
     /* eslint-disable no-new */
 new Vue({

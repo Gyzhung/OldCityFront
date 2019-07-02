@@ -1,110 +1,71 @@
 <style scoped>
-.right {
-  position: absolute;
-  right: 30%;
-  padding-top: 1%;
-}
 .header {
-  background: url("../image/headerBg.png");
+  background-image: url(../assets/headerBg.png);
+  background-color: #FFFFFF;
+  height: 273px;
   width: 100%;
-  height: 183px;
+  background-size: 100vw auto;
+  background-repeat: no-repeat;
 }
-#logo {
-  margin-top: 30px;
-  margin-left: 30px;
-}
-.routelink {
-  position: absolute;
-  right: 0%;
-  top: 100px;
-  height: 83px;
-  border: 0px;
-  background-color: #d6cab7;
-}
-.btn {
-  height: 83px;
-  padding: 0px;
-  background: none;
-  border: 0px;
-  outline: none;
-}
-.btn:hover {
-  background-color: #94693f; /* Green */
-}
-.btn:before {
-  background-color: rgba(182, 102, 12, 0.87);
-}
-.el-dropdown {
-  position: absolute;
-  right: 0;
- 
-}
-.el-dropdown-link {
-  cursor: pointer;
-  color: Black;
-  font-size:24pt;
-}
-.el-icon-arrow-down {
-  font-size: 20px;
+.route_link a:hover, a:visited, a:link, a:active{
+  text-decoration: none;
+  color: #000000;
 }
 </style>
 <template>
-  <div class="header">
-    <table class="right" border="0">
-      <tr>
-        <router-link to="/register" v-if="!islogin">註冊</router-link>
-        <span v-if="!islogin">|</span>
-        <router-link to="/login" v-if="!islogin">登入</router-link>
-        <span v-if="!islogin">|</span>
-        <router-link to="/searchCourse">搜尋</router-link>
-        <span>|</span>
-        <router-link to="/addAnnounce">新增公告</router-link>
-        <span>|</span>
-        <router-link to="/searchAnnounce">搜尋公告</router-link>
-        <span>|</span>
-        <router-link to="/announce">公告</router-link>
-        <span>|</span>
-        <router-link to="/createCourse">建立</router-link>
-      </tr>
-    </table>
-    <router-link to="/">
-      <img id="logo" src="../image/LOGO.png" width="156px" height="116px">
-    </router-link>
+  <div>
+    <div class="col-lg-12 col-xs-12">
+      <div class="header">
+        <div class="dropdown" align="right">
+          <button class="btn btn-warning dropdown-toggle btn-lg" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span v-if="islogin">{{user.name}} 您好!</span>
+            <span v-else>未登入</span>
+          </button>
+          <div class="dropdown-menu" v-if="islogin" aria-labelledby="dropdownMenu2">
+            <router-link to="/searchCourse" class="dropdown-item route_link">搜尋</router-link>
+            <router-link to="/addAnnounce" class="dropdown-item route_link">新增公告</router-link>
+            <router-link to="/searchAnnounce" class="dropdown-item route_link">搜尋公告</router-link>
+            <router-link to="/Announce" class="dropdown-item route_link">公告</router-link>
+            <router-link to="/createCourse" class="dropdown-item route_link">建立</router-link>
+            <router-link to="/addAnnounce" class="dropdown-item route_link">修改個人資訊</router-link>
+            <router-link to="/addAnnounce" class="dropdown-item route_link">會員專區</router-link>
+            <div @click="logout"  class="dropdown-item route_link" style="cursor: pointer;">登出</div>
+          </div>
+          <div class="dropdown-menu" v-else aria-labelledby="dropdownMenu2">
+            <router-link to="/login" class="dropdown-item route_link">登入</router-link>
+            <router-link to="/register" class="dropdown-item route_link">註冊</router-link>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <!-- <router-link to="/">
+        <img id="logo" src="../image/LOGO.png" width="156px" height="116px">
+      </router-link> -->
 
-    <table class="routelink">
-      <tr>
-        <router-link to="/news" tag="button" class="btn" id="btnnews">
-          <img src="../image/最新消息.png" height="83px">
-        </router-link>
+      <!-- <table class="routelink">
+        <tr>
+          <router-link to="/news" tag="button" class="btn" id="btnnews">
+            <img src="../image/最新消息.png" height="83px">
+          </router-link>
 
-        <button class="btn" id="btnparty">
-          <img src="../image/景點簡介.png" height="83px">
-        </button>
-        <button class="btn" id="btnview">
-          <img src="../image/活動簡介.png" height="83px">
-        </button>
-        <button class="btn" id="btnleader">
-          <img src="../image/嚮導簡介.png" height="83px">
-        </button>
-        <button class="btn" id="btntrain">
-          <img src="../image/嚮導課程訓練.png" height="83px">
-        </button>
-        <button class="btn" id="btntmach">
-          <img src="../image/導覽媒合.png" height="83px">
-        </button>
-      </tr>
-    </table>
-    <el-dropdown v-if="islogin" :hide-on-click="false">
-      <span class="el-dropdown-link">
-        <!-- {{userName}} -->
-        <i class="el-icon-arrow-down el-icon--right"></i>
-      </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item>個人資訊</el-dropdown-item>
-        <el-dropdown-item>活動管理</el-dropdown-item>
-        <el-dropdown-item ><router-link @click.native="logout" to="/" v-if="islogin">登出</router-link></el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+          <button class="btn" id="btnparty">
+            <img src="../image/景點簡介.png" height="83px">
+          </button>
+          <button class="btn" id="btnview">
+            <img src="../image/活動簡介.png" height="83px">
+          </button>
+          <button class="btn" id="btnleader">
+            <img src="../image/嚮導簡介.png" height="83px">
+          </button>
+          <button class="btn" id="btntrain">
+            <img src="../image/嚮導課程訓練.png" height="83px">
+          </button>
+          <button class="btn" id="btntmach">
+            <img src="../image/導覽媒合.png" height="83px">
+          </button>
+        </tr>
+      </table> -->
   </div>
 </template>
 <script>

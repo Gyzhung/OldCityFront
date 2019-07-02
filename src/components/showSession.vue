@@ -1,7 +1,7 @@
 <style scoped>
 table.search {
-  margin: auto 5%;
-  width: 90%;
+  margin: auto auto;
+  width: 20%;
   border: solid;
   border-width: 5px;
   padding: 15px;
@@ -33,34 +33,29 @@ h1 {
 <template>
   <div>
     <!--eslint-disable-next-line-->
-    <h1
-      v-if="index == 1"
-      v-for="(ses,index) in sesRes"
-      :key="ses.c_name"
-      width="100%"
-    >{{ses.c_name}}</h1>
+    <h1 width="100%">{{sessions?sessions[0].c_name:""}}</h1>
     <table class="search">
       <tr>
         <th>場次名稱 </th>
-        <th>場次ID </th>
+        <!-- <th>場次ID </th>
         <th>報名開始</th>
         <th>報名截止</th>
         <th>課程開始</th>
-        <th>課程結束</th>
+        <th>課程結束</th> -->
         <th></th>
       </tr>
-      <tr :key="ses.s_id" v-for="ses in sesRes">
-        <td>{{ses.session_name}}</td>
-        <td><router-link :to="{name:'getUncheckSignUp',params:{s_id:ses.s_id}}">查詢報名審核名單 {{ses.s_id}}</router-link></td>
-        <td>{{ses.signUpTime_start}}</td>
-        <td>{{ses.signUpTime_end}}</td>
-        <td>{{ses.sessions_start}}</td>
-        <td>{{ses.sessions_end}}</td>
+      <tr :key="session.s_id" v-for="session in sessions">
+        <td>{{session.session_name}}</td>
+        <!-- <td><router-link :to="{name:'getUncheckSignUp',params:{s_id:ses.s_id}}">查詢報名審核名單 {{ses.s_id}}</router-link></td>
+        <td>{{session.signUpTime_start}}</td>
+        <td>{{session.signUpTime_end}}</td>
+        <td>{{session.sessions_start}}</td>
+        <td>{{session.sessions_end}}</td> -->
         <td>
           <router-link
             tag="button"
-            :to="{name:'Session',params:{s_id:ses.s_id}}"
-          >{{sign}}{{ses.Is_signUp}}</router-link>
+            :to="{name:'Session',params:{s_id:session.s_id}}"
+          >{{sign}}{{session.Is_signUp}}</router-link>
         </td>
       </tr>
     </table>
@@ -75,7 +70,7 @@ export default {
   props: ["islogin"],
   data() {
     return {
-      sesRes: [],
+      sessions: [],
       cc_id: this.$route.params.c_id,
       sign: "報名",
       Is_signUp: "",
@@ -84,7 +79,7 @@ export default {
   },
   mounted() {
     this.isAdmin();
-    alert(this.islogin);
+    //alert(this.islogin);
 
     if (this.islogin) {
       this.sign = ""
@@ -108,7 +103,8 @@ export default {
           `http://163.17.145.142/api/getSessionListByc_id?c_id=${this.cc_id}`
         )
         .then(function(response) {
-          self.sesRes = response.data;
+          console.log(response.data)
+          self.sessions = response.data;
           
         })
         .catch(function(error) {
@@ -125,17 +121,17 @@ export default {
           { headers: { authorization: `Bearer ${global_.login_token}` } }
         )
         .then(function(response) {
-          self.sesRes = response.data;
+          self.sessions = response.data;
 
-          for (var i = 0; i <= response.data.length - 1; i++) {
-            const a = response.data[i].Is_signUp;
-            console.log(a);
-            if(a > 0 ){
-                response.data[i].Is_signUp = "已報名";
-            }else{
-                response.data[i].Is_signUp = "報名";
-            }
-          }
+          // for (var i = 0; i <= response.data.length - 1; i++) {
+          //   const a = response.data[i].Is_signUp;
+          //   console.log(a);
+          //   if(a > 0 ){
+          //       response.data[i].Is_signUp = "已報名";
+          //   }else{
+          //       response.data[i].Is_signUp = "報名";
+          //   }
+          // }
           
         })
         .catch(function(error) {

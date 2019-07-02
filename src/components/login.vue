@@ -63,7 +63,7 @@
           </div>
         </div><!-- 8 -->
       </div>
-      <div style="clear:both;"></div><!--這是用來清除上方的浮動效果-->
+    <div style="clear:both;"></div><!--這是用來清除上方的浮動效果-->
   </div>
 </template>
 

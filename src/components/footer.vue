@@ -1,38 +1,18 @@
 <style scoped>
 .footer {
-  position: relative;
-  bottom:0%;
-  background: url("../image/footerBg.png");
-  background-repeat:repeat-x;
+  background-image: url(../assets/footerBg.png);
+  background-color: #FFFFFF;
+  height: 273px;
   width: 100%;
-  Height: 183px;
-}
-td {
-  width: 74px;
-}
-.contact {
-  margin-left:40%;
-  margin-top:50px;
+  background-size: 100vw auto;
+  background-repeat: no-repeat;
 }
 </style>
 
 <template>
-  <div class="footer">
-      <table class="contact">
-        <tr>
-          <td>
-            <a href="mailto:taichungcity@gmail.com">
-              <img id="MAIL" src="../image/MAIL.png" width="72px" height="69px">
-            </a>
-          </td>
-          <td></td>
-          <td></td>
-          <td>
-            <a href="http://www.facbook.com">
-              <img id="FB" src="../image/FB.png" width="72px" height="69px">
-            </a>
-          </td>
-        </tr>
-      </table>
+  <div class="col-lg-12 col-xs-12">
+    <div class="footer">
+
     </div>
+  </div>
 </template>

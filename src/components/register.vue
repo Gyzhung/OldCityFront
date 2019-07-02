@@ -1,76 +1,111 @@
 
 <style scoped>
-textarea{
-  overflow-y: scroll;
-  width:600px ;
-}
+#profile{
+      float:right;
+      background-color: rgba(240, 231, 208, 0.938);
+      border:2px burlywood;
+      
+       
+        
+        
+    }
+    .profilebutton{
+      float:left;
+      background-color: rgb(255, 255, 255);
+      
+      padding: bottom 85px;
+    }
+    label{
+      font-size: 34px;
+      color: #94693F;
+      font-weight:bold;
+      font-family: Microsoft JhengHei;
+
+    }
+    .profilebutton label{
+      padding-bottom:  55px;
+      margin-left: 50px;
+      margin-top: 50px;
+    }
+    .profilebutton img{
+      padding-bottom:  55px;
+    }
+    .search{
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+    .newsText{
+      margin-top: 5px;
+      margin-left: 10px;
+      font-family: Microsoft JhengHei;
+      font-size: 15px;
+      border:3px burlywood;
+    }
+    p{
+      font-family: Microsoft JhengHei;
+      font-size: 18px;
+      color:#94693F;
+      font-weight:bold;
+      
+      
+    }
+    
+    .profileDetail input{
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+    .profileDetail select{
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
 </style>
 
 
 <template>
-  <table border="0" align="center">
-    <tr>
-      <td>
-        帳號:
-        <input type="text" :name="users.account" v-model="users.account" autocomplete="on">
-      </td>
-      <td>
-        密碼:
-        <input type="password" :password="users.password" v-model="users.password">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        身分證字號:
-        <input type="text" :identity_num="users.identity_num" v-model="users.identity_num">
-      </td>
-      <td>
-        名字:
-        <input type="text" :name="users.name" v-model="users.name">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        聯絡地址:
-        <input type="text" :address="users.address" v-model="users.address">
-      </td>
-      <td>
-        性別:
-        <select name="select_option" :gender="users.gender" v-model="users.gender">
-            <option :gender="users.gender" value="0">男</option>
-            <option :gender="users.gender" value="1">女</option>
-            <option :gender="users.gender" value="2">不顯示</option>
-          </select>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        家用電話:
-        <input type="text" :tel="users.tel" v-model="users.tel">
-      </td>
-          <td>
-        行動電話:
-        <input type="text" :tel="users.cel" v-model="users.cel">
-      </td>
-      <td>
-        手機電話:
-        <input type="text" :tel="users.cel" v-model="users.cel">
-      </td>
-      <td>
-        電子信箱:
-        <input type="text" :email="users.email" v-model="users.email">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        生日:
-        <input type="datetime" :birthday="users.birthday" v-model="users.birthday">
-      </td>
+  <div>
+    <div class="container">
+      <div id ="profile" class="col-lg-12 col-xs-12" align="center" >
+        <label >會員註冊</label>
+      <div class="profileDetail" >
+        <br>
+        <p>會員帳號:</p>
+        <input id="account" v-model="users.account"  type="text" >
+        <p>會員密碼:</p>
+        <input id="password" v-model="users.password" type="password">
+        <p>使用者名稱:</p>
+        <input id="name" v-model="users.name" type="text">
+        <p>身分證號碼:</p>
+        <input id="identity_num"  v-model="users.identity_num" type="text">
+        <p>性別:</p>
+        <select name="select_option" v-model="users.gender">
+          <option value="0">女</option>
+          <option value="1">男</option>
+          <option value="2">其他</option>
+        </select>
+        <p>通訊地址:</p>
+        <input id="address" v-model="users.address" type="text">
+        <p>家用電話:</p>
+        <input id="tel" v-model="users.tel" type="tel">
+        <p>行動電話:</p>
+        <input id="cel" v-model="users.cel" type="cel">
+        <p>Email:</p>
+        <input id="email" v-model="users.email" type="email">
+        <p>生日:</p>
+        <input id="birthday" v-model="users.birthday" type="date">
+        <br><br>
+        <button type="button" @click="register" class="btn btn-primary">確認註冊</button>
+        
+        </div>
+      </div><!-- 8 -->
+    </div>
+    <div style="clear:both;"></div><!--這是用來清除上方的浮動效果-->
+
+ 
       <!-- <td>
         <p>簡單自介:</p>
         <textarea type="text" :status="users.selfIntroduction" v-model="users.selfIntroduction"></textarea>
       </td> -->
-    </tr>
     <!-- <tr>
       <td>
         <h2>有無以下志工經驗?</h2>
@@ -94,13 +129,12 @@ textarea{
         <br>
       </td>
     </tr> -->
-
-    <button @click="sendPost">註冊</button>
-  </table>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
+import global_ from "@/components/Global/global";
 export default {
   name: "HelloWorld",
 
@@ -129,8 +163,9 @@ export default {
     };
   },
   methods: {
-    sendPost() {
-      axios
+    register() {
+      const self = this;
+      axios 
         .post(`http://163.17.145.142/api/register`, {
           account: this.users.account,
           password: this.users.password,
@@ -147,10 +182,11 @@ export default {
         .then(function(response) {
           if ((status = 200)) {
             alert("成功註冊");
+            self.$router.push({ path: `/index` });
           }
         })
         .catch(function(error) {
-          console.log(error);
+          console.log(error.response);
         });
     }
   }

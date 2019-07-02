@@ -29,10 +29,7 @@ td {
   <div>
     <table class="bar" border="0" align="center">
       <tr>
-       
-          搜尋:
-          <input type="text" :keystr="keyword.keystr" v-model="keyword.keystr" autocomplete="on">
-       
+        搜尋: <input type="text" v-model="keyword.keystr" autocomplete="on">
         <button @click="search">搜尋</button>
       </tr>
     </table>
@@ -40,20 +37,20 @@ td {
     <table class="search">
       <tr>
         <th>課程名稱</th>
-        <th>課程時長(小時)</th>
-        <th>課程人數上限(人)</th>
+        <!-- <th>課程時長(小時)</th>
+        <th>課程人數上限(人)</th> -->
         <th>課程簡介</th>
         <th>課程種類</th>
         <th>查看場次</th>
       </tr>
-      <tr  :key="item" v-for="item in getRes">
-        <td>{{ item.c_name }}</td>
-        <td>{{ item.duration}}</td>
-        <td>{{ item.maxNum}}</td>
-        <td>{{ item.introduce }}</td>
-        <td>{{ item.type }}</td>
+      <tr v-for="course in courses" :key="course.c_id">
+        <td>{{ course.c_name }}</td>
+        <!-- <td>{{ item.duration}}</td>
+        <td>{{ item.maxNum}}</td> -->
+        <td>{{ course.introduce }}</td>
+        <td>{{ course.type }}</td>
         <td>
-          <router-link :to="{name:'ShowSession',params:{c_id:item.c_id}}">查看場次</router-link>
+          <router-link :to="{name:'ShowSession',params:{c_id:course.c_id}}">查看場次</router-link>
         </td>
       </tr>
     </table>
@@ -64,12 +61,14 @@ td {
 import axios from "axios";
 import global_ from "@/components/Global/global";
 export default {
+  props:['user'],
   data() {
     return {
       keyword: {
         keystr: "",
         time: ""
       },
+      courses:[],
       getRes: [],
       userStatus: "",
       typename: "",
@@ -86,11 +85,11 @@ export default {
 
       .then(function(response) {
         if ((status = 200)) {
-          self.getRes = response.data;
+          console.log(response.data)
+          self.courses = response.data;
         }
       })
       .catch(function(error) {
-        console.log(error);
         alert(response);
       });
   },
@@ -104,11 +103,11 @@ export default {
         })
         .then(function(response) {
           if ((status = 200)) {
-            self.getRes = response.data;
+            self.courses = response.data;
           }
         })
         .catch(function(error) {
-          console.log(error);
+          alert(error.response.data[0]);
         });
     }
   }

@@ -19,7 +19,7 @@
     <!-- <div class="contentroute">
     
     </div> -->
-    <!-- <v-footer></v-footer> -->
+    <Footer></Footer>
   </div>
 </template>
 
@@ -39,11 +39,12 @@ export default {
   mounted() {
     global_.login_token = global_.getCookie("login_token");
     const self = this;
-    if (global_.login_toke != null) {
+    if (global_.login_token != null) {
       axios.get(`http://163.17.145.142/api/getMyData`, {
         headers: { authorization: `Bearer ${global_.login_token}` }
       })
       .then(function(response) {
+         
         if (response.status == 200) {
           
           self.user = response.data;
@@ -61,6 +62,7 @@ export default {
         console.log(error);
       });
     }
+    
     
   },
   updated: function() {
