@@ -26,7 +26,7 @@ td {
 </style>
 
 <template>
-  <div>
+  <div class="content">
     <table class="bar" border="0" align="center">
       <tr>
         搜尋: <input type="text" v-model="keyword.keystr" autocomplete="on">
@@ -40,8 +40,8 @@ td {
         <!-- <th>課程時長(小時)</th>
         <th>課程人數上限(人)</th> -->
         <th>課程簡介</th>
-        <th>課程種類</th>
-        <th>查看場次</th>
+        <th width="15%">課程種類</th>
+        <th width="15%">查看場次</th>
       </tr>
       <tr v-for="course in courses" :key="course.c_id">
         <td>{{ course.c_name }}</td>
@@ -50,7 +50,7 @@ td {
         <td>{{ course.introduce }}</td>
         <td>{{ course.type }}</td>
         <td>
-          <router-link :to="{name:'ShowSession',params:{c_id:course.c_id}}">查看場次</router-link>
+          <router-link tag="button" class="btn btn-primary" :to="{name:'ShowSession',params:{c_id:course.c_id}}">查看場次</router-link>
         </td>
       </tr>
     </table>

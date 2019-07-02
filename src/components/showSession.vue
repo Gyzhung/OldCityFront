@@ -31,33 +31,35 @@ h1 {
 </style>
 
 <template>
-  <div>
-    <!--eslint-disable-next-line-->
-    <h1 width="100%" v-if="!!sessions">{{sessions[0].c_name}}</h1>
-    <table class="search">
-      <tr>
-        <th>場次名稱 </th>
-        <!-- <th>場次ID </th>
-        <th>報名開始</th>
-        <th>報名截止</th>
-        <th>課程開始</th>
-        <th>課程結束</th> -->
-        <th></th>
-      </tr>
-      <tr :key="session.s_id" v-for="session in sessions">
-        <td>{{session.session_name}}</td>
-        <!-- <td><router-link :to="{name:'getUncheckSignUp',params:{s_id:ses.s_id}}">查詢報名審核名單 {{ses.s_id}}</router-link></td>
-        <td>{{session.signUpTime_start}}</td>
-        <td>{{session.signUpTime_end}}</td>
-        <td>{{session.sessions_start}}</td>
-        <td>{{session.sessions_end}}</td> -->
-        <td>
-          <router-link tag="button" :to="{name:'Branch',params:{s_id:session.s_id}}" >
-            {{sign}}{{session.Is_signUp}}
-          </router-link>
-        </td>
-      </tr>
-    </table>
+  <div class="content">
+    <div style="min-height: 70vh;">
+      <!--eslint-disable-next-line-->
+      <h1 width="100%" v-if="!!sessions">{{sessions[0].c_name}}</h1>
+      <table class="search">
+        <tr>
+          <th>場次名稱 </th>
+          <!-- <th>場次ID </th>
+          <th>報名開始</th>
+          <th>報名截止</th>
+          <th>課程開始</th>
+          <th>課程結束</th> -->
+          <th></th>
+        </tr>
+        <tr :key="session.s_id" v-for="session in sessions">
+          <td>{{session.session_name}}</td>
+          <!-- <td><router-link :to="{name:'getUncheckSignUp',params:{s_id:ses.s_id}}">查詢報名審核名單 {{ses.s_id}}</router-link></td>
+          <td>{{session.signUpTime_start}}</td>
+          <td>{{session.signUpTime_end}}</td>
+          <td>{{session.sessions_start}}</td>
+          <td>{{session.sessions_end}}</td> -->
+          <td>
+            <router-link tag="button"  class="btn btn-primary" :to="{name:'Branch',params:{s_id:session.s_id}}" >
+              查看
+            </router-link>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -71,7 +73,7 @@ export default {
     return {
       sessions: null,
       cc_id: this.$route.params.c_id,
-      sign: "報名",
+      sign: "",
       Is_signUp: "",
       isShow:false
     };

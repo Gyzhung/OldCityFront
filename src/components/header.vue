@@ -1,19 +1,189 @@
 <style scoped>
 .header {
-  background-image: url(../assets/headerBg.png);
-  background-color: #FFFFFF;
-  height: 273px;
   width: 100%;
-  background-size: 100vw auto;
-  background-repeat: no-repeat;
+  height: 22vh;
 }
-.route_link a:hover, a:visited, a:link, a:active{
+.head {
+  width: 100%;
+  height: 10vh;
+  background-image: url("../assets/header_bg.png");
+  background-repeat: no-repeat;
+  background-size: 100vw 100%;
+}
+.profile {
+  width: 100%;
+  height: 10vh;
+}
+.profile-right {
+  float: right;
+  width: 200px;
+  height: 10vh;
+}
+.right{
+  float: right;
+}
+.profile-name {
+  vertical-align: middle;
+  color: #fff;
+  font-weight: 700;
+  padding-left: 0.5rem;
+  letter-spacing: 10px;
+  text-shadow: 0.1em 0.1em 0.2em black;
+}
+.list {
+  float: right;
+  margin: 0;
+  padding: 1.5rem;
+}
+.list li {
+  display: inline;
+  color: #fff;
+  font-weight: 700;
+  padding-left: 0.5rem;
+  letter-spacing: 10px;
+  text-shadow: 0.1em 0.1em 0.2em black;
+}
+.b-right {
+  border-right: 1.5px solid #fff;
+}
+.mid{
+  padding: .5rem;
+}
+.btn:focus {
+  box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0);
+}
+.menu {
+  width: 100%;
+  height: 12vh;
+  background-color: #e7e6e1;
+}
+.logo {
+  z-index: 2;
+  position: absolute;
+  top: 1%;
+}
+.menu-nav {
+  background-color: #fff;
+  width: 70vw;
+  height: 12vh;
+  float: right;
+}
+.navbar-collapse {
+  z-index:5;
+}
+.navbar-nav {
+  width: 100%;
+  background-color: #fff;
+}
+.nav-item {
+  background-image: url("../assets/menu-item_bg.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 150px;
+  margin-right: 2%;  
+}
+.menu-link {
+  display: block;
+  padding: 1rem 0rem 1rem 1.2rem;
+  font-weight: 700;
+  color: rgba(171, 138, 107, 1);
+  letter-spacing: 5px;
   text-decoration: none;
-  color: #000000;
+}
+.menu-link:hover {
+  text-decoration: none;
+  color: #fff;
+}
+.nav-item:hover {
+  border-radius: 15px;
+  background-color: rgba(171, 138, 107, 1);
+}
+.dropdown-menu {
+  border: 1px solid rgba(171, 138, 107, 1);
+}
+.dropdown-item {
+  letter-spacing: 1px;
+  padding: 0.5rem 1.5rem;
+}
+.dropdown-item:hover {
+  color: #fff;
+  background-color: #ab8a6b;
+  border-bottom: 1px solid rgba(171, 138, 107, 1);
+}
+.route_link:hover{
+  text-decoration: none;
 }
 </style>
 <template>
-  <div>
+    <div class="header">
+      <div class="head">
+          <div class="profile">
+              <div class="profile-right">
+                  <!--未登入前-->
+                  <ul v-if="user == ''" class="list">
+                      <router-link to="/register" class="route_link" style="cursor: pointer;"><li class="b-right">註冊</li></router-link>
+                      <router-link to="/login" class="route_link" style="cursor: pointer;"><li>登入</li></router-link>
+                  </ul>
+                  <!--登入後-->
+                  <div v-else class="dropdown mid">
+                      <button class="btn dropdown-toggle btn-md" type="button" id="dropdownMenu2"
+                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <img src="../assets/user.png" width="32px"><span class="profile-name">{{user.name}}</span>
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                          <button class="dropdown-item" type="button">修改個人資訊</button>
+                          <button class="dropdown-item" type="button">會員專區</button>
+                          <div class="dropdown-divider"></div>
+                          <div @click="logout"  class="dropdown-item" style="cursor: pointer;">登出</div>
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="logo">
+        <router-link to="/index" style="cursor: pointer;"><img src="../assets/logo.png" height="120" /></router-link>
+      </div>
+      <div class="menu">
+          <nav class="menu-nav navbar navbar-expand-lg navbar-light ">
+              <!--響應式漢堡條-->
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05"
+                  aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarsExample05">
+                  <ul class="navbar-nav">
+                      <li class="nav-item">
+                          <a class="menu-link" href="#">最新消息</a>
+                      </li>
+                      <li class="nav-item dropdown">
+                          <a class="menu-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown"
+                              aria-haspopup="true" aria-expanded="false">景點簡介</a>
+                          <div class="dropdown-menu" aria-labelledby="dropdown05">
+                              <a class="dropdown-item" href="#">第二市場</a>
+                              <a class="dropdown-item" href="#">第三市場</a>
+                              <a class="dropdown-item" href="#">第五市場</a>
+                          </div>
+                      </li>
+                      <li class="nav-item">
+                          <a class="menu-link" href="#">活動簡介</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="menu-link" href="#">嚮導簡介</a>
+                      </li>
+                      <li class="nav-item">
+                          <router-link to="/searchCourse" class="menu-link">嚮導課程訓練</router-link>
+                      </li>
+                      <li class="nav-item">
+                          <a class="menu-link" href="#">導覽媒合</a>
+                      </li>
+                  </ul>
+              </div>
+          </nav>
+      </div>
+  </div>
+  <!-- <div>
     <div class="col-lg-12 col-xs-12">
       <div class="header">
         <div class="dropdown" align="right">
@@ -38,35 +208,7 @@
         </div>
       </div>
     </div>
-    
-      <!-- <router-link to="/">
-        <img id="logo" src="../image/LOGO.png" width="156px" height="116px">
-      </router-link> -->
-
-      <!-- <table class="routelink">
-        <tr>
-          <router-link to="/news" tag="button" class="btn" id="btnnews">
-            <img src="../image/最新消息.png" height="83px">
-          </router-link>
-
-          <button class="btn" id="btnparty">
-            <img src="../image/景點簡介.png" height="83px">
-          </button>
-          <button class="btn" id="btnview">
-            <img src="../image/活動簡介.png" height="83px">
-          </button>
-          <button class="btn" id="btnleader">
-            <img src="../image/嚮導簡介.png" height="83px">
-          </button>
-          <button class="btn" id="btntrain">
-            <img src="../image/嚮導課程訓練.png" height="83px">
-          </button>
-          <button class="btn" id="btntmach">
-            <img src="../image/導覽媒合.png" height="83px">
-          </button>
-        </tr>
-      </table> -->
-  </div>
+  </div> -->
 </template>
 <script>
 import axios from "axios";

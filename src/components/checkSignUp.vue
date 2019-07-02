@@ -30,36 +30,38 @@ h1 {
 }
 </style>
 <template>
-    <div>
+    <div class="content">
+      <div style="min-height: 80vh;margin-top:50px;">
         <!--eslint-disable-next-line-->
         <!-- <h1 width="100%">{{sessions?sessions[0].c_name:""}}</h1> -->
         <table class="search">
-        <tr>
-            <th>帳號</th>
-            <th>姓名</th>
-            <th>場次</th>
-            <th></th>
-        </tr>
-        <tr :key="su_user.su_id" v-for="su_user in su_users">
-            <td>{{su_user.account}}</td>
-            <td>{{su_user.name}}</td>
-            <td>{{su_user.title}}</td>
-            <!-- <td>{{Branch.signUpTime_start}}</td>
-            <td>{{Branch.signUpTime_end}}</td>
-            <td>
-              <router-link tag="button" :to="{name:'Branch_content',params:{b_id:Branch.b_id}}" >
-                查看
-              </router-link>
-            </td> -->
-            <td v-if="user.status == 4">
-              <button v-if="su_user.reviewResult != 1" class="btn btn-primary" @click="reviewSignUp(su_user.su_id,su_user.reviewResult)">
-                審核
-              </button>
-              <div v-else>已審核</div>
-            </td>
-            
-        </tr>
-        </table>
+          <tr>
+              <th>帳號</th>
+              <th>姓名</th>
+              <th>場次</th>
+              <th></th>
+          </tr>
+          <tr :key="su_user.su_id" v-for="su_user in su_users">
+              <td>{{su_user.account}}</td>
+              <td>{{su_user.name}}</td>
+              <td>{{su_user.title}}</td>
+              <!-- <td>{{Branch.signUpTime_start}}</td>
+              <td>{{Branch.signUpTime_end}}</td>
+              <td>
+                <router-link tag="button" :to="{name:'Branch_content',params:{b_id:Branch.b_id}}" >
+                  查看
+                </router-link>
+              </td> -->
+              <td v-if="user.status == 4">
+                <button v-if="su_user.reviewResult != 1" class="btn btn-primary" @click="reviewSignUp(su_user.su_id,su_user.reviewResult)">
+                  審核
+                </button>
+                <div v-else>已審核</div>
+              </td>
+              
+          </tr>
+          </table>
+        </div>
     </div>
 </template>
 <script>
@@ -120,7 +122,7 @@ export default {
         const self = this;
         const data ={
           su_id: su_id,
-          reviewResult :reviewResult
+          reviewResult : 1
         }
         this.$http.post(`http://163.17.145.142/api/reviewSignUp`,data,
           {

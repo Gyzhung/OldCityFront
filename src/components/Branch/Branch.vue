@@ -31,9 +31,10 @@ h1 {
 </style>
 
 <template>
-    <div>
+    <div class="content">
+      <div style="min-height: 70vh;margin-bottom:100px;">
         <!--eslint-disable-next-line-->
-        <!-- <h1 width="100%">{{sessions?sessions[0].c_name:""}}</h1> -->
+        <h1 width="100%" v-if="!!Branches">{{Branches?Branches[0].session_name:""}}</h1>
         <table class="search">
         <tr>
             <th>流程名稱 </th>
@@ -47,18 +48,19 @@ h1 {
             <td>{{Branch.signUpTime_start}}</td>
             <td>{{Branch.signUpTime_end}}</td>
             <td>
-              <router-link tag="button" :to="{name:'Branch_content',params:{b_id:Branch.b_id}}" >
+              <router-link tag="button"  class="btn btn-primary" :to="{name:'Branch_content',params:{b_id:Branch.b_id}}" >
                 查看
               </router-link>
             </td>
             <td v-if="user.status == 4">
-              <router-link tag="button" :to="{name:'checkSignUp',params:{b_id:Branch.b_id}}" >
+              <router-link tag="button"  class="btn btn-success" :to="{name:'checkSignUp',params:{b_id:Branch.b_id}}" >
                 審核
               </router-link>
             </td>
             
         </tr>
         </table>
+      </div>
     </div>
 </template>
 <script>
@@ -66,7 +68,7 @@ export default {
   props:['user'],
   data() {
     return {
-      Branches:[]
+      Branches:null
     }
   },
   mounted() {
