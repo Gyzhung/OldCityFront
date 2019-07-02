@@ -33,7 +33,8 @@
 .list {
   float: right;
   margin: 0;
-  padding: 1.5rem;
+  padding-left: 1.5rem;
+  padding-top: 3vh;
 }
 .list li {
   display: inline;
