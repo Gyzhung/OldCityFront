@@ -18,6 +18,8 @@ import Session from '@/components/Session'
 import Branch from '@/components/Branch/Branch'
 import Branch_content from '@/components/Branch/content'
 import checkSignUp from '@/components/checkSignUp'
+import completed from '@/components/admin/completed'
+
 
 
 //公告
@@ -125,6 +127,10 @@ export default new Router({
                     path: '/checkSignUp/:b_id',
                     name: 'checkSignUp',
                     component: checkSignUp
+                }, {
+                    path: '/completed/:b_id',
+                    name: 'completed',
+                    component: completed
                 }
 
 

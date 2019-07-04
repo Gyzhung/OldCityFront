@@ -43,6 +43,7 @@ h1 {
             <th></th>
             <th></th>
             <th v-if="user.status == 4"></th>
+            <th v-if="user.status == 4"></th>
         </tr>
         <tr :key="Branch.b_id" v-for="Branch in Branches">
             <td>{{Branch.title}}</td>
@@ -62,7 +63,11 @@ h1 {
                 審核
               </router-link>
             </td>
-            
+            <td v-if="user.status == 4">
+              <router-link tag="button"  class="btn btn-warning" :to="{name:'completed',params:{b_id:Branch.b_id}}" >
+                點名
+              </router-link>
+            </td>
         </tr>
         </table>
       </div>
@@ -119,7 +124,7 @@ export default {
       {
         headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
         params:{
-            b_id:this.$route.params.b_id
+           s_id:this.$route.params.s_id
         },
         
       }).then(function(response) {
