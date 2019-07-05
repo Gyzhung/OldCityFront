@@ -32,7 +32,7 @@ body {
   height: 100%;
 }
 .content{
-  min-height: 80vh;
+  min-height: 60vh;
 }
 .btn-lightbrown {
   background-color: #ab8a6b;
