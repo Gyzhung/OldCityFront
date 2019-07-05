@@ -93,8 +93,6 @@ export default {
      isAdmin() {
       if (global_.userStatus == 4 || global_.userStatus == 3) {
         self.isShow = true;
-        console.log(2222222222);
-        console.log(self.isShow);
       }
     },
     getses() {
@@ -104,12 +102,10 @@ export default {
           `http://163.17.145.142/api/getSessionListByc_id?c_id=${this.cc_id}`
         )
         .then(function(response) {
-          console.log(response.data)
           self.sessions = response.data;
           
         })
         .catch(function(error) {
-          console.log(error);
         });
     },
     getLses() {
@@ -126,7 +122,6 @@ export default {
 
           // for (var i = 0; i <= response.data.length - 1; i++) {
           //   const a = response.data[i].Is_signUp;
-          //   console.log(a);
           //   if(a > 0 ){
           //       response.data[i].Is_signUp = "已報名";
           //   }else{
@@ -136,7 +131,6 @@ export default {
           
         })
         .catch(function(error) {
-          console.log(error);
         });
     }
     // signUp() {

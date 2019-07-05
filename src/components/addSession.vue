@@ -70,7 +70,6 @@ export default {
   },
   methods: {
     addSession() {
-      console.log(this.c_id);
       const self = this;
       axios
         .post(
@@ -91,8 +90,6 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(self.s_session_name);
-          console.log(error.response.data);
         });
     }
   }

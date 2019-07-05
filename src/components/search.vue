@@ -85,7 +85,6 @@ export default {
 
       .then(function(response) {
         if ((status = 200)) {
-          console.log(response.data)
           self.courses = response.data;
         }
       })

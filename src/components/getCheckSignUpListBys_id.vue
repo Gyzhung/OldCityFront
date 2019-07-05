@@ -58,7 +58,6 @@ export default {
         .then(function(response) {
           self.getRes = response.data;
           if(self.getRes==""){
-              console.log("空的")
               this.isEmpty=true
               
           }
@@ -70,8 +69,6 @@ export default {
     isAdmin() {
       if (global_.userStatus == 4 || global_.userStatus == 3) {
         self.isShow = true;
-        console.log("333");
-        console.log(self.isShow);
       }
     }
   }

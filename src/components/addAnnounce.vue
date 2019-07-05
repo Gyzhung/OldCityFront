@@ -106,7 +106,6 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error);
           this.errorMsg = error.data;
           alert("新增公告失敗");
         });

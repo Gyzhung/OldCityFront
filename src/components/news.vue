@@ -3,15 +3,16 @@
   float: right;
   background-color: rgb(255, 238, 190);
   border: 2px burlywood;
-
-  height: 1400px;
+  min-height: 60vh;
+  max-height: 60vh;
   width: 70%;
   min-width: 600px;
 }
 .newsbutton {
   float: left;
   background-color: rgb(255, 255, 255);
-  height: 100%;
+  min-height: 60vh;
+  max-height: 60vh;
   width: 30%;
   min-width: 300px;
 }
@@ -27,7 +28,7 @@ label {
   margin-top: 50px;
 }
 .newsbutton img {
-  padding-bottom: 55px;
+  padding-bottom: 10px;
 }
 .search {
   padding-left: 50px;

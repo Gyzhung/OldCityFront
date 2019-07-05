@@ -50,14 +50,12 @@ export default {
         .then(function(response) {
           self.getRes = response.data;
           // self.c_content = response.data.c_content;
-          console.log(self.c_content);
         })
         .catch(function(error) {});
     },
     isAdmin() {
       if (global_.userStatus == 4 || global_.userStatus == 3) {
         self.isShow = true;
-        console.log(self.isShow);
       }
     }
   }

@@ -96,10 +96,8 @@ export default {
             )
             .then(function(response) {
                 self.Branches = response.data;
-                console.log(response)
             })
             .catch(function(error) {
-                console.log(error.response);
             });
         }
     }
@@ -114,10 +112,8 @@ export default {
       )
       .then(function(response) {
         self.Branches = response.data;
-        console.log(response)
       })
       .catch(function(error) {
-        console.log(error.response);
       });
     }else{
       this.$http.get(`http://163.17.145.142/api/get_L_BranchListBys_id`,
@@ -129,9 +125,7 @@ export default {
         
       }).then(function(response) {
         self.Branches = response.data;
-        console.log(response)
       }).catch(function(error) {
-        console.log(error.response);
       });
     }
     
@@ -159,15 +153,12 @@ export default {
           )
           .then(function(response) {
             self.Branches = response.data;
-            console.log(response)
           })
           .catch(function(error) {
-            console.log(error.response);
           });
       })
       .catch(function(error) {
           alert(error.response.data);
-          console.log(error.response);
       }); 
     }
   },

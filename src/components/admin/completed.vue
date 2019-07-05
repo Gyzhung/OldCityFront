@@ -118,7 +118,6 @@ export default {
                 )
                 .then(function(response) {
                     self.su_users = response.data;
-                    console.log(self.su_users)
                     self.su_users.forEach(user => {
                         if (user.completed.length ==0) {
                             self.completed_list_input[user.su_id] = -1;
@@ -132,7 +131,6 @@ export default {
                     });
                 })
                 .catch(function(error) {
-                    console.log(error.response);
                 });
             }
         }
@@ -165,7 +163,6 @@ export default {
             });
           })
           .catch(function(error) {
-              console.log(error.response);
           });
         }
     },
@@ -175,11 +172,9 @@ export default {
         },
         Completed_open:function(su_id) {
             this.completed_isopen[su_id] = true;
-            console.log( this.completed_isopen)
         },
         Completed:function(su_user) {
             const self = this;
-            console.log(su_user)
             if (su_user.completed.length == 0) {
                 if (this.completed_list[su_user.su_id] != -1) {
                 const data ={
@@ -191,10 +186,8 @@ export default {
                 .then(function(response) {
                     self.update_completed();
                     alert(response.data);
-                    console.log(response);
                 })
                 .catch(function(error) {
-                    console.log(error.response);
                 });
                 }
             }else{
@@ -211,7 +204,6 @@ export default {
             
         },
         // Completed_all:function() {
-        //     console.log("Completed_all")
         // },
         update_completed:function() {
             const self = this;
@@ -229,7 +221,6 @@ export default {
                         self.$set(self.completed_isopen, user.su_id, false);
                         self.$set(self.completed_list, user.su_id, -1)
                     }else{
-                        console.log(user.completed)
                         self.completed_list_input[user.su_id] = -1;
                         self.$set(self.completed_isopen, user.su_id, false);
                         self.$set(self.completed_list, user.su_id, -1)
@@ -238,7 +229,6 @@ export default {
                 });
             })
             .catch(function(error) {
-                console.log(error);
             });
         },
         completeExtent_tostring:function(completeExtent) {

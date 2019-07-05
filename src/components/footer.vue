@@ -4,27 +4,6 @@
   height: auto;
   background-color: #f3efe9;
 }
-
-.footer-mid {
-  width: 30vw;
-  margin: 0 auto;
-  height: 25.5vh;
-  padding-top: 5%;
-}
-.footer-item {
-  width: 50%;
-  float: left;
-  text-align: center;
-}
-.footer-item img {
-  display: block;
-  margin: auto;
-  margin-bottom: 3%;
-}
-.footer-item p {
-  font-weight: 700;
-  letter-spacing: 5px;
-}
 .bottom-bar {
   position: absolute; 
   bottom: 0;  
@@ -37,7 +16,17 @@
 </style>
 
 <template>
-  <div class="footer">
+  <div class="footer pt-5 pb-5">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-6 text-right pr-5">
+        <img src="../assets/mail.png" width="64">
+        <p class="mt-2 font-weight-bold">聯絡我們</p>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-6 pl-5">
+        <img src="../assets/fb.png" width="64">
+        <p class="mt-2 font-weight-bold">紛絲專頁</p>
+      </div>
+    </div>
     <div class="bottom-bar"></div>
   </div>
 </template>

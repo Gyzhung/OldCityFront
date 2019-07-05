@@ -1,4 +1,5 @@
 <style>
+
 * {
   font-family: "Microsoft JhengHei";
   text-decoration: none;
@@ -31,7 +32,7 @@ body {
   height: 100%;
 }
 .content{
-  min-height: 60vh;
+  min-height: 80vh;
 }
 .btn-lightbrown {
   background-color: #ab8a6b;
@@ -47,7 +48,10 @@ body {
 .btn-light:hover{
   background-color:rgba(171, 138, 107, .6)
 }
-
+a:hover, a:visited, a:link, a:active {
+  text-decoration: none;
+  color: black;
+}
 
 @media (max-width: 480px) {
 }
@@ -90,7 +94,6 @@ export default {
          
         if (response.status == 200) {
           self.user = response.data;
-          console.log(self.user)
           self.status = response.data.status;
 
           if(self.status == 4){
@@ -101,7 +104,6 @@ export default {
         }
       })
       .catch(function(error) {
-        console.log(error);
       });
     }
     
@@ -135,15 +137,13 @@ export default {
     //         self.status = response.data.status;
 
     //         if(self.status == 4){
-    //           self.isShow = true;
-    //           console.log("是管理員");
+    //           self.isShow = true;;
     //         }
       
         
     //       }
     //     })
     //     .catch(function(error) {
-    //       console.log(error);
     //     });
     // }
   }

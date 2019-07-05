@@ -87,10 +87,8 @@ export default {
                 )
                 .then(function(response) {
                     self.su_users = response.data;
-                    console.log(response)
                 })
                 .catch(function(error) {
-                    console.log(error.response);
                 });
             }
         }
@@ -110,10 +108,8 @@ export default {
           )
           .then(function(response) {
             self.su_users = response.data;
-            console.log(response)
           })
           .catch(function(error) {
-              console.log(error.response);
           });
         }
     },
@@ -132,10 +128,8 @@ export default {
         .then(function(response) {
           alert(response.data)
           self.update_signup();
-          console.log(response)
         })
         .catch(function(error) {
-            console.log(error.response);
         });
       },
       update_signup:function() {
@@ -150,10 +144,8 @@ export default {
         })
         .then(function(response) {
             self.su_users = response.data;
-            console.log(response)
         })
         .catch(function(error) {
-            console.log(error);
         });
       },
     },

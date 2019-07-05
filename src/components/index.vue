@@ -1,214 +1,154 @@
 <style scoped>
-.slideshow {
-  width: 60%;
-  float: left;
-  clear: both;
+.announce {
+  background-color: #dacfb8;
+  padding: 1rem;
 }
-.news {
-  width: 40%;
-  height: 100%;
-  float: right;
-  background-color: #94693f;
+.announce-list {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
-#newstitle {
-  font-size: "微軟正黑體";
-  color: #ffc710;
-}
-h1 {
-  padding-top: 50px;
-  padding-left: 20px;
-}
-h3 {
-  padding-left: 20px;
-}
-.intro {
-  background-color: rgb(255, 255, 255);
-  height: 330px;
-  width: 100%;
-  padding: bottom 35px;
-  border: #94693f;
-}
-.intro img {
-  margin-left: 100px;
-}
-.intro label {
+.announce-header {
+  /* text-align: center; */
   font-size: 25px;
-  color: #94693f;
-  font-weight: bold;
-  font-family: Microsoft JhengHei;
+  font-weight: 700;
+  color: #94693a;
 }
-.intro p {
-  font-size: 18px;
-  color: rgb(128, 128, 128);
+.announce-text {
+  margin: 0 auto;
+}
+.announce-date {
+  font-size: 14px;
+  color: gray;
+}
+.announce-more {
+  padding: 0.5rem 2rem 0.5rem 1rem;
+  color: #ffffff;
+  float: right;
+}
+.l-header {
+  color: #94693a;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 7px;
+}
+.landscpe-img{
+    width: 250px;
+}
+.guide-list {
+  background-color: #dacfb8;
+  border-radius: 20px;
+  margin: 0rem 1rem 1rem 1rem;
+}
+.guide-list img {
+  width: 200px;
+}
+@media (max-width: 1024px) {
+  .guide-list img {    
+    width: 150px;
+  }
+}
 
-  font-family: Microsoft JhengHei;
-}
-label.guidelabel {
-  font-size: 40pt;
-  color: #94693f;
-  font-weight: bold;
-  font-family: Microsoft JhengHei;
-  margin-left: 100px;
-  height: 80px;
-}
-.guide {
-  background-image: url("../image/guideBG.png");
-  background-size: 95%;
-  background-repeat: no-repeat;
-  width: 360px;
-  height: 350px;
-}
-.guide img {
-  width: 250px;
-  height: 290px;
-  margin-left: 40px;
-}
-tr {
-  height: 90px;
-}
 </style>
 
 <template>
-  <div id="index">
-    <!-- 輪播 -->
-    <div class="slideshow">
-      <b-carousel
-        id="carousel-1"
-        v-model="slide"
-        :interval="4000"
-        controls
-        indicators
-        background="#ababab"
-        img-width="1024"
-        img-height="480"
-        style="text-shadow: 1px 1px 2px #333;"
-        @sliding-start="onSlideStart"
-        @sliding-end="onSlideEnd"
-      >
-        <!-- Text slides with image -->
-        <b-carousel-slide
-          caption="台中火車站"
-          text="近年來，台中舊城成了許多人訪舊尋新，體驗多元文化的熱門地點，到底，這個老城區有何魅力？在秋涼10月，走一趟台中舊城，感受新舊交融的人文氣息。"
-          img-src="http://foritech-tlife.cloudapp.net/wp-content/uploads/2017/08/DSC_7114.jpg"
-          img-width="1600px"
-          img-height="1200px"
-        ></b-carousel-slide>
+  <div class="content">
+    <div class="row no-gutters mb-4">
+        <!--輪播-->
+        <div id="carouselExampleCaptions" class="carousel slide col-lg-8" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleCaptions" data-slide-to="0" class=""></li>
+                <li data-target="#carouselExampleCaptions" data-slide-to="1" class="active"></li>
+                <li data-target="#carouselExampleCaptions" data-slide-to="2" class=""></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="../assets/picBig.png" data-holder-rendered="true">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>台中車站</h5>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="../assets/picBig.png" data-holder-rendered="true">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>第一廣場</h5>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="../assets/picBig.png" data-holder-rendered="true">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>第三市場</h5>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <!--公告欄-->
+        <div class="announce col-lg-4">
+            <div class="announce-header text-center">最新公告</div>
+              <div class="row announce-list" v-for="Announce in Announces" :key="Announce.ann_id">
+                <router-link :to="{name:'Announce',params:{announce_id:Announce.ann_id}}">
+                  <div class="col-lg-10 announce-text text-truncate">{{Announce.title}}</div>
+                  <div class="col-lg-10 announce-text announce-date font-italic">{{Announce.created_at}}</div>
+                </router-link>
+              </div>
+            <div class="announce-more text-monospace font-italic">more▼</div>
 
-        <!-- Slides with custom text -->
-        <b-carousel-slide
-          caption="第二市場"
-          text="臺中市公有第二零售市場是位於臺灣臺中市中區三民路與臺灣大道一段路口的傳統觀光市場。"
-          img-src="https://imgs.gvm.com.tw/upload/gallery/20171120/41098_01.jpg"
-          img-width="1600px"
-          img-height="1000px"
-        ></b-carousel-slide>
-        <b-carousel-slide
-          caption="第三市場"
-          text="台中市公有第三市場，創立於日治1922年，舊名敷島町市場，至今已有90多年的歷史，位於台中火車站附近，主要是由和平街及民意街的攤販集中區所形成的親子市場，是台中市老牌市場之一。"
-          img-src="https://pic.pimg.tw/enlife/1447335050-2874038098_l.jpg"
-          img-width="1600px"
-          img-height="1200px"
-        ></b-carousel-slide>
-        <b-carousel-slide
-          caption="第五市場"
-          text="第五市場位於西區廣民里大明街九號，為台中市「市44」市場用地，佔地雖不大卻是五臟俱全，商品種類齊全，應有盡有，號稱「第五百貨」。"
-          img-src="http://3.blog.xuite.net/3/c/1/4/12133965/blog_765081/txt/511429765/0.jpg"
-          img-width="1600px"
-          img-height="1200px"
-        ></b-carousel-slide>
-
-        <!-- Slides with image only
-        <b-carousel-slide
-          img-src="https://picsum.photos/1024/480/?image=58"
-          img-width="1600px"
-          img-height="1200px"
-        ></b-carousel-slide>-->
-
-        <!-- Slides with img slot -->
-        <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-        <!-- <b-carousel-slide>
-          <img
-            slot="img"
-            class="d-block img-fluid w-100"
-            width="1600"
-            height="1200"
-            src="https://picsum.photos/1024/480/?image=55"
-            alt="image slot"
-          >
-        </b-carousel-slide>-->
-
-        <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-        <!-- <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eros felis, tincidunt
-            a tincidunt eget, convallis vel est. Ut pellentesque ut lacus vel interdum.
-          </p>
-        </b-carousel-slide>-->
-      </b-carousel>
+        </div>
     </div>
-    <table class="news">
-      <tr id="newstitle">
-        <h1>最新消息</h1>
-        <hr>
-      </tr>
-      <tr>
-        <h3>公告公告公告公告</h3>
-      </tr>
-      <tr>
-        <h3>公告公告公告公告</h3>
-      </tr>
-      <tr>
-        <h3>公告公告公告公告</h3>
-      </tr>
-      <tr>
-        <h3>公告公告公告公告</h3>
-      </tr>
-      <tr>
-        <h3>公告公告公告公告</h3>
-      </tr>
-      <tr>
-        <h3>公告公告公告公告</h3>
-      </tr>
-    </table>
-    <div style="clear:both;"></div>
-    <!--這是用來清除上方的浮動效果-->
-    <div class="content">
-      <div class="intro">
-        <table class="newsText" border="2" align="center" width="100%">
-          <tr>
-            <td width="475" height="300">
-              <img src="../image/picS.png">
-            </td>
-            <td width="475" height="300">
-              <label>遊程介紹</label>
-              <p id>簡介簡介簡介簡介簡介簡介簡介簡介簡介</p>
-              <p></p>
-            </td>
-            <td width="475" height="300">
-              <img src="../image/picS2.png">
-            </td>ㄊ
-            <td width="475" height="300">
-              <label>遊程介紹</label>
-              <p id>簡介簡介簡介簡介簡介簡介簡介簡介簡介</p>
-              <p></p>
-            </td>
-          </tr>
-        </table>
-        <label class="guidelabel">嚮 導 人 員</label>
-        <table align="center">
-          <tr>
-            <td class="guide">
-              <img src="../image/guidephoto.jpg" width="300px" height="320px">
-            </td>
-            <td class="guide"></td>
-            <td class="guide"></td>
-            <td class="guide"></td>
-            <td class="guide"></td>
-          </tr>
-        </table>
-      </div>
+    <!--遊程介紹-->
+    <div class="row border-top mb-4">
+        <div class="mt-3 text-center col-lg-3 col-md-6 col-sm-12">
+            <img src="../assets/picS.png" class="landscpe-img">
+        </div>
+        <div class="border-right mt-3 col-lg-3 col-md-6 col-sm-12">
+            <p class="l-header">遊程介紹</p>
+            <p>這是一個景點簡介，說明旅程內容活動內容等等等等等</p>
+        </div>
+        <div class="mt-3 text-center col-lg-3 col-md-6 col-sm-12">
+            <img src="../assets/picS2.png" class="landscpe-img">
+        </div>
+        <div class="mt-3 col-lg-3 col-md-6 col-sm-12">
+            <p class="l-header">遊程介紹</p>
+            <p>這是一個景點簡介，說明旅程內容活動內容等等等等等</p>
+        </div>
     </div>
-  </div>
+    <!--響導人員-->
+    <div class="row border-top pt-3 pl-5">
+        <p class="l-header ml-4 col-lg-11">響導人員</p>
+
+        <div class="guide-list col-lg-2 col-md-3 col-sm-4 col-6">
+            <img src="../assets/boy.png">
+        </div>
+
+        <div class="guide-list col-lg-2 col-md-3 col-sm-4 col-6">
+            <img src="../assets/boy.png">
+        </div>
+
+        <div class="guide-list col-lg-2 col-md-3 col-sm-4 col-6">
+            <img src="../assets/boy.png">
+        </div>
+
+        <div class="guide-list col-lg-2 col-md-3 col-sm-4 col-6">
+            <img src="../assets/boy.png">
+        </div>
+
+        <div class="guide-list col-lg-2 col-md-3 col-sm-4 col-6">
+            <img src="../assets/boy.png">
+        </div>
+
+
+    </div>
+</div>
 </template>
 <script>
 import axios from "axios";
@@ -217,21 +157,29 @@ import global_ from "@/components/Global/global";
 export default {
   data() {
     return {
-      slide: 0,
-      sliding: null,
-      getRes: [],
+      keystr: {
+        keyword: "all:"
+      },
+      Announces:''
+
      
     };
   },
-  mounted(){},
-  
+  mounted(){
+    const self = this;
+    axios.post(`http://163.17.145.142/api/searchAnnounce`,
+      {
+        keyword: `${this.keystr.keyword}`
+      }).then(function(response) {
+        if ((status = 200)) {
+          self.Announces = response.data;
+        }
+      })
+      .catch(function(error) {
+        alert(response);
+      });
+  },
   methods: {
-    onSlideStart(slide) {
-      this.sliding = true;
-    },
-    onSlideEnd(slide) {
-      this.sliding = false;
-    },
     
     
   }

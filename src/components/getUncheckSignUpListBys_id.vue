@@ -87,7 +87,6 @@ export default {
     isAdmin() {
       if (global_.userStatus == 4 || global_.userStatus == 3) {
         self.isShow = true;
-        console.log(self.isShow);
       }
     }
   

@@ -33,8 +33,7 @@
 .list {
   float: right;
   margin: 0;
-  padding-left: 1.5rem;
-  padding-top: 3vh;
+  padding: 1.5rem;
 }
 .list li {
   display: inline;
@@ -85,12 +84,12 @@
 }
 .menu-link {
   display: block;
-  white-space:nowrap;
   padding: 1rem 0rem 1rem 1.2rem;
   font-weight: 700;
   color: rgba(171, 138, 107, 1);
   letter-spacing: 5px;
   text-decoration: none;
+  white-space:nowrap;
 }
 .menu-link:hover {
   text-decoration: none;
@@ -112,23 +111,6 @@
   background-color: #ab8a6b;
   border-bottom: 1px solid rgba(171, 138, 107, 1);
 }
-.route_link:hover{
-  text-decoration: none;
-}
-@media (max-width: 1308px) {
-  .menu-nav {
-    width: 75%;
-  }
-}
-@media (max-width: 1221px) {
-  .menu-nav {
-    width: 85%;
-  }
-  .menu-link{
-    padding: .5rem;
-  }
-}
-
 @media (max-width: 1200px) {
   .menu-nav {
     width: 85%;
@@ -136,28 +118,14 @@
   .menu-link{
     padding: .5rem;
   }
-  .logo {
-    top: 0;
-  }
-  .logo img {
-    width: 50%;
-    height: 50%;
-  }
 }
-@media (max-width: 1078px) {
-  .menu-nav {
-    width: 90%;
+@media (max-width: 1024px) {
+  .navbar-collapse{
+    width: 95%;
   }
-  .menu-link{
-    padding: .5rem;
-  }
-}
-@media (max-width: 1018px) {
-  .menu-nav {
-    width: 100%;
-  }
-  .menu-link{
-    padding: .5rem;
+  .btn-md{
+    float: right;
+    line-height: 100px;
   }
 }
 @media (max-width: 979px) {
@@ -168,7 +136,16 @@
     font-size: 12px;
     letter-spacing: 5px;
   }
-  
+  .btn-md{
+    line-height: 50px;
+  }
+  .logo {
+    top: 0;
+  }
+  .logo img {
+    width: 80%;
+    height: 80%;
+  }
   .menu-nav {
     width: 100%;
   }
@@ -178,6 +155,11 @@
   .nav-item{
     width: 100%;
     background-image: none;
+  }
+}
+@media (max-width: 480px) {
+  .btn-md{
+    line-height: 30px;
   }
 }
 
@@ -224,7 +206,7 @@
               <div class="collapse navbar-collapse" id="navbarsExample05">
                   <ul class="navbar-nav">
                       <li class="nav-item">
-                          <a class="menu-link" href="#">最新消息</a>
+                          <router-link to="/news" class="menu-link">最新消息</router-link>
                       </li>
                       <li class="nav-item dropdown">
                           <a class="menu-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown"
@@ -320,7 +302,6 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error);
         });
     }
   },

@@ -107,9 +107,6 @@ export default {
       this.courses.c_content = html;
       this.courses.c_id = this.getc_id;
       const past_cid=this.getc_id;
-      
-
-      console.log(this.courses.c_id);
       axios
         .post(
           `http://oldcity.southeastasia.cloudapp.azure.com/api/editCourse`,
@@ -128,12 +125,10 @@ export default {
         .then(function(response) {
           if ((status = 200)) {
             alert("修改成功");
-            console.log(past_cid);
             // routerr.push({ name: 'getCourse', params: { past_cid }})
           }
         })
         .catch(function(error) {
-          console.log(error);
         });
     }
   }

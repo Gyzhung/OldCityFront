@@ -85,10 +85,8 @@ export default {
         )
         .then(function(response) {
             self.Branch = response.data[0];
-            //console.log(response)
         })
         .catch(function(error) {
-            console.log(error.response);
         });
 
        
@@ -107,11 +105,9 @@ export default {
             )
             .then(function(response) {
                 alert("報名成功")
-                console.log(response)
             })
             .catch(function(error) {
                 alert(error.response.data);
-                console.log(error.response);
             });
             // this.$http.get(`http://163.17.145.142/api/get_L_BranchListBys_id`,
             //     {

@@ -61,7 +61,6 @@ export default {
   },
   methods: {
     getData() {
-      console.log(global_.login_token);
       const self = this;
       axios
         .get(`http://localhost/api/getMyData`, {
@@ -81,17 +80,14 @@ export default {
                   }
                 })
                 .catch(function(error) {
-                  console.log(error);
                 });
             }
           }
         })
         .catch(function(error) {
-          console.log(error);
         });
     },
     getUser() {
-      console.log(global_.login_token);
       const self = this;
       axios
         .get(`http://localhost/api/getMyData`, {
@@ -103,7 +99,6 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error);
         });
     }
   }

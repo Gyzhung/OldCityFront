@@ -50,14 +50,13 @@ input#search::-webkit-input-placeholder {
         <td width="150">公告內容</td>
         <td width="500" v-html="ann_content"></td>
       </tr>
-      <tr>
-        <td>
+      <tr v-if="user.status == 4">
+        <td  >
           <button class="onclk" @click="delann">刪除公告</button>
         </td>
         <td>
           <router-link
             tag="button"
-            v-if="isShow"
             :to="{name:'editAnnounce',params:{announce_id:ann_id}}"
           >修改</router-link>
         </td>
@@ -72,7 +71,7 @@ input#search::-webkit-input-placeholder {
 import axios from "axios";
 import global_ from "@/components/Global/global";
 export default {
-  props:["isShow"],
+  props:["isShow",'user'],
   data() {
     return {
       annRes: [],
@@ -97,6 +96,7 @@ export default {
           }`
         )
         .then(function(response) {
+          console.log(response.data)
           self.annRes = response.data;
           self.ann_id = response.data.ann_id;
           self.ann_title = response.data.title;
@@ -119,7 +119,6 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error);
         });
     },
     delann() {

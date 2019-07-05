@@ -101,7 +101,6 @@ export default {
           alert(ann_type);
         })
         .catch(function(error) {
-          console.log(error);
         });
     }
   },
@@ -130,7 +129,6 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error);
           alert(response);
           alert("修改公告失敗");
         });

@@ -88,13 +88,11 @@ export default {
         }
       })
       .catch(function(error) {
-        console.log(error);
         alert(response);
       });
   },
   methods: {
     search() {
-      console.log(this.keystr.keyword);
 
       const self = this;
       axios
@@ -111,7 +109,6 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error);
           alert(response);
         });
     }

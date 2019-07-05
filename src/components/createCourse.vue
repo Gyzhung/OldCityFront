@@ -68,15 +68,10 @@ export default {
   methods: {
     printv() {
       let html = this.$refs.editor.d_render;
-      console.log(html);
     },
     addCourse() {
-      console.log(global_.login_token)
       let html = this.$refs.editor.d_render;
-      console.log(html);
       this.courses.c_content = html;
-  
-      console.log(this.courses.c_content);
       axios
         .post(
           `http://oldcity.southeastasia.cloudapp.azure.com/api/addCourse`,
@@ -95,7 +90,6 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error);
         });
     }
   }
