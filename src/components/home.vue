@@ -49,8 +49,8 @@ body {
   background-color:rgba(171, 138, 107, .6)
 }
 a:hover, a:visited, a:link, a:active {
-  text-decoration: none;
-  color: black;
+  text-decoration: none  !important;
+  color: black  !important;
 }
 
 @media (max-width: 480px) {
