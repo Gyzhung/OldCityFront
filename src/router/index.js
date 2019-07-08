@@ -10,10 +10,10 @@ import user from '@/components/user'
 import news from '@/components/news'
 
 //課程場次
-import createCourse from '@/components/createCourse'
-import searchCourse from '@/components/search'
-import ShowSession from '@/components/showSession'
-import Session from '@/components/Session'
+import createCourse from '@/components/course/create'
+import Course from '@/components/course/index'
+import Session from '@/components/session/index'
+import createSession from '@/components/session/create'
 
 import Branch from '@/components/Branch/Branch'
 import Branch_content from '@/components/Branch/content'
@@ -60,9 +60,13 @@ export default new Router({
                     name: 'login',
                     component: login,
                 }, {
-                    path: '/searchCourse',
-                    name: 'searchCourse',
-                    component: searchCourse,
+                    path: '/Course',
+                    name: 'Course',
+                    component: Course,
+                }, {
+                    path: '/createCourse',
+                    name: 'createCourse',
+                    component: createCourse,
                 },
                 {
                     path: '/getSessionListByc_id/:c_id',
@@ -107,15 +111,17 @@ export default new Router({
                     name: 'Announce',
                     component: Announce
                 }, {
-                    path: '/ShowSession/:c_id',
-                    name: 'ShowSession',
-                    component: ShowSession,
+                    path: '/Session/:c_id',
+                    name: 'Session',
+                    component: Session,
 
                 }, {
-                    path: '/Session/:s_id',
-                    name: 'Session',
-                    component: Session
-                }, {
+                    path: '/createSession',
+                    name: 'createSession',
+                    component: createSession,
+
+                },
+                {
                     path: '/Branch/:s_id',
                     name: 'Branch',
                     component: Branch

@@ -16,7 +16,7 @@
 }
 .profile-right {
   float: right;
-  width: 200px;
+  width: 250px;
   height: 10vh;
 }
 .right{
@@ -224,7 +224,7 @@
                           <a class="menu-link" href="#">嚮導簡介</a>
                       </li>
                       <li class="nav-item">
-                          <router-link to="/searchCourse" class="menu-link">嚮導課程訓練</router-link>
+                          <router-link to="/Course" class="menu-link">嚮導課程訓練</router-link>
                       </li>
                       <li class="nav-item">
                           <a class="menu-link" href="#">導覽媒合</a>

@@ -47,8 +47,8 @@ h1 {
         </tr>
         <tr :key="Branch.b_id" v-for="Branch in Branches">
             <td>{{Branch.title}}</td>
-            <td>{{Branch.signUpTime_start}}</td>
-            <td>{{Branch.signUpTime_end}}</td>
+            <td>{{Branch.signUpTime_start.substr(0,10)}}</td>
+            <td>{{Branch.signUpTime_end.substr(0,10)}}</td>
             <td>
               <router-link tag="button"  class="btn btn-primary" :to="{name:'Branch_content',params:{b_id:Branch.b_id}}" >
                 查看
@@ -84,52 +84,12 @@ export default {
   watch: {
     user:function(n,o) {
         if (o == "") {
-            const self = this;
-            this.$http.get(`http://163.17.145.142/api/get_L_BranchListBys_id`,
-                {
-                    headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
-                    params:{
-                        s_id:this.$route.params.s_id
-                    },
-                    
-                }
-            )
-            .then(function(response) {
-                self.Branches = response.data;
-            })
-            .catch(function(error) {
-            });
+            this.getBranchesData(this.user);
         }
     }
     },
   mounted() {
-    const self = this;
-    if (this.user == '') {
-      this.$http.get(`http://163.17.145.142/api/getBranchListBys_id`,{
-      params:{
-        s_id:self.$route.params.s_id
-      }}
-      )
-      .then(function(response) {
-        self.Branches = response.data;
-      })
-      .catch(function(error) {
-      });
-    }else{
-      this.$http.get(`http://163.17.145.142/api/get_L_BranchListBys_id`,
-      {
-        headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
-        params:{
-           s_id:this.$route.params.s_id
-        },
-        
-      }).then(function(response) {
-        self.Branches = response.data;
-      }).catch(function(error) {
-      });
-    }
-    
-    
+    this.getBranchesData(this.user);
   },
   methods: {
     addSignUp:function(b_id) {
@@ -137,29 +97,33 @@ export default {
           b_id : b_id
       }
       const self = this;
-      this.$http.post(`http://163.17.145.142/api/addSignUp`,data,
-          {
-              headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }
-          }
-      )
+      this.$http.post(`http://163.17.145.142/api/addSignUp`,data,{ headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
       .then(function(response) {
           alert("報名成功");
-
-          self.$http.get(`http://163.17.145.142/api/get_L_BranchListBys_id`,{
-            params:{
-              s_id:self.$route.params.s_id
-            },
-            headers: { authorization: `Bearer ${self.$GLOBAL.login_token}` }}
-          )
-          .then(function(response) {
-            self.Branches = response.data;
-          })
-          .catch(function(error) {
-          });
+          self.getBranchesData(self.user);
       })
       .catch(function(error) {
           alert(error.response.data);
       }); 
+    },
+    getBranchesData:function(user){
+      const self = this;
+      if (this.user == '') {
+        this.$http.get(`http://163.17.145.142/api/getBranchListBys_id`,{params:{ s_id:this.$route.params.s_id}})
+        .then(function(response) {
+          self.Branches = response.data;
+        })
+        .catch(function(error) {
+        });
+      }else{
+        this.$http.get(`http://163.17.145.142/api/get_L_BranchListBys_id`,
+        {headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },params:{s_id:this.$route.params.s_id},})
+        .then(function(response) {
+          self.Branches = response.data;
+        }).catch(function(error) {
+        });
+      }
+      
     }
   },
 }

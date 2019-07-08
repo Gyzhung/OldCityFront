@@ -109,61 +109,13 @@ export default {
     watch: {
         user:function(n,o) {
             if (o == "") {
-                const self = this;
-                this.$http.get(`http://163.17.145.142/api/getCheckSignUpListByb_id`,
-                    {
-                        headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
-                        params:{ b_id:this.$route.params.b_id },
-                    }
-                )
-                .then(function(response) {
-                    self.su_users = response.data;
-                    self.su_users.forEach(user => {
-                        if (user.completed.length ==0) {
-                            self.completed_list_input[user.su_id] = -1;
-                            self.$set(self.completed_isopen, user.su_id, false);
-                            self.$set(self.completed_list, user.su_id, -1);
-                        }else{
-                            self.completed_list_input[user.su_id] = -1;
-                            self.$set(self.completed_isopen, user.su_id, false);
-                            self.$set(self.completed_list, user.su_id, -1)
-                        }
-                    });
-                })
-                .catch(function(error) {
-                });
+                this.getSu_usersData();
             }
         }
     },
     mounted() {
-
-        const self = this;
         if (this.$GLOBAL.login_token !='') {
-          this.$http.get(`http://163.17.145.142/api/getCheckSignUpListByb_id`,
-            {
-                headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
-                params:{
-                    b_id:this.$route.params.b_id
-                },
-                
-            }
-          )
-          .then(function(response) {
-            self.su_users = response.data;
-            self.su_users.forEach(user => {
-                if (user.completed.length ==0) {
-                    self.completed_list_input[user.su_id] = -1;
-                    self.$set(self.completed_isopen, user.su_id, false);
-                    self.$set(self.completed_list, user.su_id, -1)
-                }else{
-                    self.completed_list_input[user.su_id] = -1;
-                    self.$set(self.completed_isopen, user.su_id, false);
-                    self.$set(self.completed_list, user.su_id, -1)
-                }
-            });
-          })
-          .catch(function(error) {
-          });
+          this.getSu_usersData();
         }
     },
     methods: {
@@ -184,52 +136,13 @@ export default {
                 }
                 this.$http.post(`http://163.17.145.142/api/updateCompleted`,data,{ headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
                 .then(function(response) {
-                    self.update_completed();
+                    self.getSu_usersData();
                     alert(response.data);
                 })
                 .catch(function(error) {
                 });
                 }
-            }else{
-                if (this.completed_list[su_user.su_id] != -1 && this.completed_list[su_user.su_id] !=  su_user.completed.completeExtent) {
-                    const data ={
-                        completedDate : this.$GLOBAL.formatDate(new Date()),
-                        completed : {
-                            su_id : su_user.su_id,
-                            completeExtent : this.completed_list[su_user.su_id],
-                        }
-                    }
-                }
             }
-            
-        },
-        // Completed_all:function() {
-        // },
-        update_completed:function() {
-            const self = this;
-            this.$http.get(`http://163.17.145.142/api/getCheckSignUpListByb_id`,
-            {
-                headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
-                params:{ b_id:this.$route.params.b_id },
-                
-            })
-            .then(function(response) {
-                self.su_users = response.data;
-                self.su_users.forEach(user => {
-                    if (user.completed.length ==0) {
-                        self.completed_list_input[user.su_id] = -1;
-                        self.$set(self.completed_isopen, user.su_id, false);
-                        self.$set(self.completed_list, user.su_id, -1)
-                    }else{
-                        self.completed_list_input[user.su_id] = -1;
-                        self.$set(self.completed_isopen, user.su_id, false);
-                        self.$set(self.completed_list, user.su_id, -1)
-                    }
-                    
-                });
-            })
-            .catch(function(error) {
-            });
         },
         completeExtent_tostring:function(completeExtent) {
             let str =''
@@ -252,6 +165,32 @@ export default {
             return str;
         }
     },
+    getSu_usersData:function() {
+        const self = this;
+        this.$http.get(`http://163.17.145.142/api/getCheckSignUpListByb_id`,
+        {
+            headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
+            params:{ b_id:this.$route.params.b_id },
+            
+        })
+        .then(function(response) {
+            self.su_users = response.data;
+            self.su_users.forEach(user => {
+                if (user.completed.length ==0) {
+                    self.completed_list_input[user.su_id] = -1;
+                    self.$set(self.completed_isopen, user.su_id, false);
+                    self.$set(self.completed_list, user.su_id, -1)
+                }else{
+                    self.completed_list_input[user.su_id] = -1;
+                    self.$set(self.completed_isopen, user.su_id, false);
+                    self.$set(self.completed_list, user.su_id, -1)
+                }
+                
+            });
+        })
+        .catch(function(error) {
+        });
+    }
 }
 </script>
 
