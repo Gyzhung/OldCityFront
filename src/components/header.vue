@@ -182,6 +182,7 @@
                           <img src="../assets/user.png" width="32px"><span class="profile-name">{{user.name}}</span>
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <router-link to="/createannounce" v-if="user.status ==4"><button class="dropdown-item" type="button">新增公告</button></router-link>
                           <button class="dropdown-item" type="button">修改個人資訊</button>
                           <button class="dropdown-item" type="button">會員專區</button>
                           <div class="dropdown-divider"></div>
@@ -234,32 +235,7 @@
           </nav>
       </div>
   </div>
-  <!-- <div>
-    <div class="col-lg-12 col-xs-12">
-      <div class="header">
-        <div class="dropdown" align="right">
-          <button class="btn btn-warning dropdown-toggle btn-lg" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span v-if="islogin">{{user.name}} 您好!</span>
-            <span v-else>未登入</span>
-          </button>
-          <div class="dropdown-menu" v-if="islogin" aria-labelledby="dropdownMenu2">
-            <router-link to="/searchCourse" class="dropdown-item route_link">搜尋</router-link>
-            <router-link to="/addAnnounce" class="dropdown-item route_link">新增公告</router-link>
-            <router-link to="/searchAnnounce" class="dropdown-item route_link">搜尋公告</router-link>
-            <router-link to="/Announce" class="dropdown-item route_link">公告</router-link>
-            <router-link to="/createCourse" class="dropdown-item route_link">建立</router-link>
-            <router-link to="/addAnnounce" class="dropdown-item route_link">修改個人資訊</router-link>
-            <router-link to="/addAnnounce" class="dropdown-item route_link">會員專區</router-link>
-            <div @click="logout"  class="dropdown-item route_link" style="cursor: pointer;">登出</div>
-          </div>
-          <div class="dropdown-menu" v-else aria-labelledby="dropdownMenu2">
-            <router-link to="/login" class="dropdown-item route_link">登入</router-link>
-            <router-link to="/register" class="dropdown-item route_link">註冊</router-link>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
+  
 </template>
 <script>
 import axios from "axios";

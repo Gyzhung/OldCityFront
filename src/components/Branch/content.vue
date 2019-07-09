@@ -49,7 +49,7 @@
                         </tr>
                         <tr>
                             <th scope="row">場次簡介</th>
-                            <td colspan="3"><p>{{Branch.content}}</p></td>
+                            <td colspan="3" v-html="Branch.content"></td>
                         </tr>
                         <tr>
                             <th scope="row">課程流程</th>
@@ -85,6 +85,7 @@ export default {
         )
         .then(function(response) {
             self.Branch = response.data[0];
+            console.log(self.Branch)
         })
         .catch(function(error) {
         });

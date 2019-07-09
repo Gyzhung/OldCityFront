@@ -10,21 +10,22 @@ import Header from '@/components/header'
 import Footer from '@/components/footer'
 import Index from '@/components/index'
 
+import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
+import datePicker from 'vue-bootstrap-datetimepicker'
 import $ from 'jquery'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
-
-import VueQuillEditor from 'vue-quill-editor'
+import CKEditor from '@ckeditor/ckeditor5-vue'
 
 
 Vue.use(VueAxios, axios);
-Vue.use(VueQuillEditor);
+Vue.use(CKEditor);
 Vue.prototype.$axios = axios;
 Vue.prototype.$GLOBAL = global_;
 
-
 Vue.config.productionTip = false
 Vue.component('Header', Header)
+Vue.component('date-picker', datePicker)
 Vue.component('Footer', Footer)
 Vue.component('Index', Index)
     /* eslint-disable no-new */

@@ -15,7 +15,8 @@ import Course from '@/components/course/index'
 import Session from '@/components/session/index'
 import createSession from '@/components/session/create'
 
-import Branch from '@/components/Branch/Branch'
+import Branch from '@/components/Branch/index'
+import createBranch from '@/components/Branch/create'
 import Branch_content from '@/components/Branch/content'
 import checkSignUp from '@/components/checkSignUp'
 import completed from '@/components/admin/completed'
@@ -23,9 +24,9 @@ import completed from '@/components/admin/completed'
 
 
 //公告
-import addAnnounce from '@/components/addAnnounce'
+import createAnnounce from '@/components/Announce/create'
 import searchAnnounce from '@/components/searchAnnounce'
-import Announce from '@/components/announce'
+import Announce from '@/components/Announce/announce'
 import getCourse from '@/components/getCourse'
 import editAnnounce from '@/components/editAnnounce'
 import getSessionListByc_id from '@/components/getSessionListByc_id'
@@ -92,9 +93,9 @@ export default new Router({
                     name: 'news',
                     component: news,
                 }, {
-                    path: '/addAnnounce',
-                    name: 'addAnnounce',
-                    component: addAnnounce
+                    path: '/createAnnounce',
+                    name: 'createAnnounce',
+                    component: createAnnounce
                 },
                 {
                     path: '/searchAnnounce',
@@ -129,6 +130,10 @@ export default new Router({
                     path: '/Branch_content/:b_id',
                     name: 'Branch_content',
                     component: Branch_content
+                }, {
+                    path: '/createBranch',
+                    name: 'createBranch',
+                    component: createBranch
                 }, {
                     path: '/checkSignUp/:b_id',
                     name: 'checkSignUp',
