@@ -61,7 +61,7 @@
                     <th width="10%"></th>
                     <th>場次名稱</th>
                     <th width="15%"></th>
-                    <th width="15%" v-if="user.status ==4"></th>
+                    <th width="15%" v-if="user.status == 4"></th>
                 </tr>
             </thead>
             <tbody>
@@ -71,7 +71,7 @@
                     <td>
                         <router-link :to="{name:'Branch',params:{s_id:session.s_id}}" class="btn btn-enter">查看</router-link>
                     </td>
-                    <td v-if="user.status ==4">
+                    <td v-if="user.status == 4">
                         <button @click="delete_session(session.s_id)" class="btn btn-danger">刪除</button>
                     </td>
                 </tr>

@@ -1,105 +1,235 @@
 <style scoped>
-.news {
-  float: right;
-  background-color: rgb(255, 238, 190);
-  border: 2px burlywood;
-  min-height: 60vh;
-  max-height: 60vh;
-  width: 70%;
-  min-width: 600px;
+.content {
+  height: 100%;
+  padding-bottom: 2rem;
 }
-.newsbutton {
-  float: left;
-  background-color: rgb(255, 255, 255);
-  min-height: 60vh;
-  max-height: 60vh;
-  width: 30%;
-  min-width: 300px;
+.nav{
+  height: 150px;
+  padding-left: 15px;
 }
-label {
-  font-size: 34px;
-  color: #94693f;
-  font-weight: bold;
-  font-family: Microsoft JhengHei;
+.table {
+  margin: 0 auto;
+  color: gray;
 }
-.newsbutton label {
-  padding-bottom: 55px;
-  margin-left: 50px;
-  margin-top: 50px;
+.table td {
+  vertical-align: middle;
 }
-.newsbutton img {
-  padding-bottom: 10px;
+.news_title{
+  border-radius: 10px;
+  background-color: #d6cab7;
+  border-collapse: collapse;
+  border-color: none;
 }
-.search {
-  padding-left: 50px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+.news_title th:first-child{
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
-.newsTitle {
-  margin-left: 40px;
+.news_title th:last-child{
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
-.newscontent {
-  margin-top: 20px;
+.table th {
+  vertical-align: middle;
+}
+.table-header {
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+  color: #784a45;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+.AManage-nav-item {
   width: 90%;
-  background-color: burlywood;
-  font-family: Microsoft JhengHei;
-  font-size: 15px;
-  border: 3px burlywood;
+  margin: 1rem 0 1rem 0;
+  padding: 1rem 0rem 1rem 2rem;
+  font-size: 20px;
+  text-align: right;
+  letter-spacing: 5px;
+  background-image: url("../assets/side-menu-item.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
-input {
-  background: #dacfb8;
-  border-radius: 5px;
-  padding: 5px 15px;
+.AManage-nav-link {
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 12px;
+  font-weight: 700;
+  color: rgba(171, 138, 107, 1);
 }
-input#search::-webkit-input-placeholder {
+.AManage-nav-link:hover {
+  text-decoration: none;
   color: #ffffff;
-  font-family: Microsoft JhengHei;
+  background-color: #94693a;
 }
+.manage-content {
+  
+  min-height: 40vw;
+}
+.btn-red {
+  background-color: #ec4b4b;
+  color: #ffffff;
+  font-weight: 700;
+}
+.btn-red:hover {
+  background-color: #c52121;
+  color: #ffffff;
+}
+@media (max-width: 980px) {
+  #course{
+    margin-top: 2rem;
+  }
+  .AManage-nav-item {
+    width: 20%;
+    padding: 0.5rem 0rem;
+    margin: 1rem 1rem;
+    text-align: center;
+    font-size: 15px;
+  }
+  .AManage-nav-link {
+    padding: 0.5rem;
+  }
+  .table-header {
+    width: 100%;
+    font-size: 20px;
+  }
+  .manage-content {
+    font-size: 15px;
+  } 
+}
+@media (max-width: 740px) {
+  .AManage-nav-item {
+    margin: 1rem 0.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .AManage-nav-item {
+    width: 22%;
+    margin: 1rem 0.25rem;
+    font-size: 12px;
+  }
+  .AManage-nav-link {
+    padding: .25rem 0;
+    border-radius: 8px;
+  } 
+  .manage-content {
+    font-size: 12px;
+  } 
+}
+
 </style>
 
 <template>
   <div class="content">
-    <div class="newsbutton">
-      <label id="new">最 新 消 息</label>
-      <br>
-      <img src="../image/allnews150.png" value="最新消息" width="300">
-      <br>
-      <img src="../image/AttractionsNews150.png" value="景點消息" width="300">
-      <br>
-      <img src="../image/activityNews150.png" value="活動消息" width="300">
-      <br>
-      <img src="../image/courseNews150.png" value="課程消息" width="300">
-      <br>
-      <img src="../image/interNews150.png" value="媒合消息" width="300">
+    <div class="row">
+        <ul class="nav col-lg-3 col-md-12 col-sm-12 col-12" id="myTab" role="tablist">
+            <li class="table-header">最新消息</li>
+            <li class="AManage-nav-item">
+                <span class="AManage-nav-link" id="allnews-tab" @click="type = 0">全部消息</span>
+            </li>
+            <li class="AManage-nav-item ">
+                <span class="AManage-nav-link" id="activitynews-tab" @click="type = 2" >活動消息</span>
+            </li>
+            <li class="AManage-nav-item">
+                <span class="AManage-nav-link" id="attractionnews-tab" @click="type = 1">景點消息</span>
+            </li>
+            <li class="AManage-nav-item">
+                <span class="AManage-nav-link" id="coursenews-tab" @click="type = 3">課程消息</span>
+            </li>
+            <li class="AManage-nav-item">
+                <span class="AManage-nav-link" id="medianews-tab" @click="type = 4">媒體消息</span>
+            </li>
+        </ul>
+        <div class="tab-content col-lg-9 col-md-12 col-sm-12 col-12" id="myTabContent">
+            <div class="tab-pane fade show active pt-4" id="allnews" role="tabpanel"
+                aria-labelledby="allnews-tab">
+                <div class="table-header col-lg-6">全部消息</div>
+                <div class="manage-content">
+                    <table class="table col-lg-11 col-md-11 col-sm-11 col-12">
+                        <tbody>
+                            <tr class="news_title">
+                                <th scope="row">分類</th>
+                                <th scope="row">公告標題</th>
+                                <th scope="row" width="30%">公告日期</th>
+
+                            </tr>
+                            <tr v-for="Announce in filter_Announce_list" :key="Announce.ann_id">
+                                <td>{{typeToString(Announce.ann_type)}}</td>
+                                <td>{{Announce.title}}</td>
+                                <td class="font-italic">{{Announce.created_at}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
     </div>
-    <div class="news">
-      <div class="search" align="left">
-        <input type="search" id="search" placeholder="輸 入  關  鍵  字">
-        <button>搜尋</button>
-        <br>
-      </div>
-      <div class="newsTitle" align="left">
-        <img src="../image/news_title.png" value="最新消息" width="1000">
-        <br>
-        <table class="newscontent" border="1" align="left">
-          <tr>
-            <td width="300" height="50">活動消息</td>
-            <td width="515">標題標題標題標題標題標題標題標題</td>
-            <td width="160">刊登日期刊登日期</td>
-          </tr>
-          <tr>
-            <td width="300" height="50">媒合消息</td>
-            <td width="515">標題標題標題標題標題標題標題標題</td>
-            <td width="160">2019-05-31</td>
-          </tr>
-          <tr>
-            <td width="300" height="50">活動消息</td>
-            <td width="515">標題標題標題標題標題標題標題標題</td>
-            <td width="160">2019-05-31</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
+</div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      type: 0,
+      Announce_list:[]
+    }
+  },
+  mounted() {
+    const self = this;
+    this.$http.post( `http://163.17.145.142/api/searchAnnounce`, {keyword: `all:`})
+    .then(function(response) {
+      if ((status = 200)) {
+        self.Announce_list = response.data;
+        console.log(self.Announce_list)
+      }
+    })
+    .catch(function(error) {
+      alert(response);
+    });
+  },
+  methods: {
+    typeToString:function(type) {
+      switch(type){
+        case 1:
+          return "景點消息";
+          break;
+        case 2:
+          return "活動消息";
+          break;
+        case 3:
+          return "課程消息";
+          break;
+        case 4:
+          return "媒合消息";
+          break;
+      }
+    }
+  },
+  computed: {
+    filter_Announce_list:function() {
+      switch(this.type){
+        case 0:
+          return this.Announce_list;
+          break;
+        case 1:
+          return this.Announce_list.filter(a => a.ann_type == 1);
+          break;
+        case 2:
+          return this.Announce_list.filter(a => a.ann_type == 2);
+          break;
+        case 3:
+          return this.Announce_list.filter(a => a.ann_type == 3);
+          break;
+        case 4:
+          return this.Announce_list.filter(a => a.ann_type == 4);
+          break;
+      }
+
+    }
+  },
+}
+</script>
