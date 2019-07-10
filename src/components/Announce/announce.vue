@@ -85,7 +85,6 @@ export default {
       const self = this;
       this.$http.get(`http://163.17.145.142/api/getAnnounceData?ann_id=${this.ann_id }` )
       .then(function(response) {
-        console.log(response.data)
         self.Announce = response.data;        
       })
       .catch(function(error) {

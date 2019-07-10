@@ -153,13 +153,12 @@
                                 <th scope="row">分類</th>
                                 <th scope="row">公告標題</th>
                                 <th scope="row" width="30%">公告日期</th>
-
                             </tr>
-                            <tr v-for="Announce in filter_Announce_list" :key="Announce.ann_id">
+                            <router-link style="cursor: pointer;" :to="`/Announce/${Announce.ann_id}`" tag="tr" v-for="Announce in filter_Announce_list" :key="Announce.ann_id">
                                 <td>{{typeToString(Announce.ann_type)}}</td>
                                 <td>{{Announce.title}}</td>
                                 <td class="font-italic">{{Announce.created_at}}</td>
-                            </tr>
+                            </router-link>
                         </tbody>
                     </table>
                 </div>
@@ -184,7 +183,6 @@ export default {
     .then(function(response) {
       if ((status = 200)) {
         self.Announce_list = response.data;
-        console.log(self.Announce_list)
       }
     })
     .catch(function(error) {
