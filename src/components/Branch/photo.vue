@@ -9,7 +9,7 @@
         <div class="container-fluid photo_page">
             <div class="row">
                 <div class="col-2">
-                    <router-link class="btn btn-primary" style="color:white;" :to="{name:'upload',params:{b_id:$route.params.b_id}}">新增</router-link>
+                    <router-link class="btn btn-primary" style="color:white;" v-if="user.status == 4" :to="{name:'upload',params:{b_id:$route.params.b_id}}">新增</router-link>
                 </div>
             </div>
             <div class="row mt-2">
@@ -71,7 +71,6 @@ export default {
             )
             .then(function(response) {
                 self.photos = response.data;
-                console.log(self.photos)
             })
             .catch(function(error) {
                 alert(error.response);
