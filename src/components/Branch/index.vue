@@ -86,8 +86,8 @@
                         <router-link  class="dropdown-item" :to="{name:'checkSignUp',params:{b_id:Branch.b_id}}" >審核</router-link>
                         <router-link  class="dropdown-item" :to="{name:'completed',params:{b_id:Branch.b_id}}" >點名</router-link>
                         <router-link  class="dropdown-item" :to="{name:'Branch_photo',params:{b_id:Branch.b_id}}" >花絮</router-link>
-                        <a class="dropdown-item" href="#">修改</a>
-                        <a class="dropdown-item" href="#">刪除</a>
+                        <!-- <a class="dropdown-item" href="#">修改</a> -->
+                        <!-- <a class="dropdown-item" href="#">刪除</a> -->
                       </div>
                     </div>
                   </td>
