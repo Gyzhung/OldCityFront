@@ -31,7 +31,7 @@
       <div class="form add">
           <div class="form-header ">新增公告</div>
           <div class="card-body">
-              <form name="my-form" onsubmit="return validform()" action="success.php" method="">
+              <div>
                   <div class="form-group row">
                       <label for="account" class="offset-1 col-md-1 col-form-label">標題:</label>
                       <div class="col-md-4">
@@ -58,7 +58,7 @@
                           建立公告
                       </button>
                   </div>
-              </form>
+              </div>
           </div>
       </div>
   </div>

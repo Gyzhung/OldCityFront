@@ -1,64 +1,64 @@
 
 <style scoped>
 #profile{
-      float:right;
-      background-color: rgba(240, 231, 208, 0.938);
-      border:2px burlywood;
-      padding-bottom: 20px;
-       
-        
-        
-    }
-    .profilebutton{
-      float:left;
-      background-color: rgb(255, 255, 255);
-      
-      padding: bottom 85px;
-    }
-    label{
-      font-size: 34px;
-      color: #94693F;
-      font-weight:bold;
-      font-family: Microsoft JhengHei;
-
-    }
-    .profilebutton label{
-      padding-bottom:  55px;
-      margin-left: 50px;
-      margin-top: 50px;
-    }
-    .profilebutton img{
-      padding-bottom:  55px;
-    }
-    .search{
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-    }
-    .newsText{
-      margin-top: 5px;
-      margin-left: 10px;
-      font-family: Microsoft JhengHei;
-      font-size: 15px;
-      border:3px burlywood;
-    }
-    p{
-      font-family: Microsoft JhengHei;
-      font-size: 18px;
-      color:#94693F;
-      font-weight:bold;
-      
-      
-    }
+  float:right;
+  background-color: rgba(240, 231, 208, 0.938);
+  border:2px burlywood;
+  padding-bottom: 20px;
     
-    .profileDetail input{
-      margin-top: 5px;
-      margin-bottom: 10px;
-    }
-    .profileDetail select{
-      margin-top: 5px;
-      margin-bottom: 10px;
-    }
+    
+    
+}
+.profilebutton{
+  float:left;
+  background-color: rgb(255, 255, 255);
+  
+  padding: bottom 85px;
+}
+.title{
+  font-size: 34px;
+  color: #94693F;
+  font-weight:bold;
+  font-family: Microsoft JhengHei;
+}
+.profilebutton label{
+  padding-bottom:  55px;
+  margin-left: 50px;
+  margin-top: 50px;
+}
+.profilebutton img{
+  padding-bottom:  55px;
+}
+.search{
+  padding-right: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.newsText{
+  margin-top: 5px;
+  margin-left: 10px;
+  font-family: Microsoft JhengHei;
+  font-size: 15px;
+  border:3px burlywood;
+}
+p{
+  font-family: Microsoft JhengHei;
+  font-size: 18px;
+  color:#94693F;
+  font-weight:bold;
+  
+  
+}
+
+.profileDetail input{
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.profileDetail select{
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
 </style>
 
 
@@ -66,37 +66,103 @@
   <div class="content">
     <div class="container">
       <div id ="profile" class="col-lg-12 col-xs-12" align="center" >
-        <label >會員註冊</label>
+        <label class="title">會員註冊</label>
       <div class="profileDetail" >
         <br>
-        <p>會員帳號:</p>
-        <input id="account" v-model="users.account"  type="text" >
-        <p>會員密碼:</p>
-        <input id="password" v-model="users.password" type="password">
-        <p>使用者名稱:</p>
-        <input id="name" v-model="users.name" type="text">
-        <p>身分證號碼:</p>
-        <input id="identity_num"  v-model="users.identity_num" type="text">
-        <p>性別:</p>
-        <select name="select_option" v-model="users.gender">
-          <option value="0">女</option>
-          <option value="1">男</option>
-          <option value="2">其他</option>
-        </select>
-        <p>通訊地址:</p>
-        <input id="address" v-model="users.address" type="text">
-        <p>家用電話:</p>
-        <input id="tel" v-model="users.tel" type="tel">
-        <p>行動電話:</p>
-        <input id="cel" v-model="users.cel" type="cel">
-        <p>Email:</p>
-        <input id="email" v-model="users.email" type="email">
-        <p>生日:</p>
-        <input id="birthday" v-model="users.birthday" type="date">
+        <div class="row">
+          <div class="text-md-right offset-1 col-2">
+            <label class="col-form-label" for="account">會員帳號: </label>
+          </div>
+          <div class="col-4">
+            <input id="account" class="form-control" v-model="users.account"  type="text">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="text-md-right offset-1 col-2">
+            <label class="col-form-label" for="password">會員密碼: </label>
+          </div>
+          <div class="col-4">
+            <input id="password" class="form-control" v-model="users.password" type="password">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="text-md-right offset-1 col-2">
+            <label class="col-form-label" for="name">使用者名稱: </label>
+          </div>
+          <div class="col-4">
+            <input id="name" class="form-control"  v-model="users.name" type="text">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="text-md-right offset-1 col-2">
+            <label class="col-form-label" for="identity_num">身分證號碼: </label>
+          </div>
+          <div class="col-4">
+            <input id="identity_num" class="form-control" v-model="users.identity_num" type="text">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="text-md-right offset-1 col-2">
+            <label class="col-form-label" for="account">性別: </label>
+          </div>
+          <div class="col-4">
+            <select id="select_option" class="form-control" name="select_option" v-model="users.gender">
+              <option value="0">女</option>
+              <option value="1">男</option>
+              <option value="2">其他</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="text-md-right offset-1 col-2">
+            <label class="col-form-label" for="address">通訊地址: </label>
+          </div>
+          <div class="col-4">
+            <input id="address" class="form-control" v-model="users.address" type="text">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="text-md-right offset-1 col-2">
+            <label class="col-form-label" for="address">家用電話: </label>
+          </div>
+          <div class="col-4">
+            <input id="tel" class="form-control" v-model="users.tel" type="tel">
+          </div>
+        </div>
+        <div class="row">
+          <div class="text-md-right offset-1 col-2">
+            <label class="col-form-label" for="cel">行動電話: </label>
+          </div>
+          <div class="col-4">
+            <input id="cel" class="form-control" v-model="users.cel" type="cel">
+          </div>
+        </div>
+        <div class="row">
+          <div class="text-md-right offset-1 col-2">
+            <label class="col-form-label" for="email">Email: </label>
+          </div>
+          <div class="col-4">
+            <input id="email" class="form-control" v-model="users.email" type="email">
+          </div>
+        </div>
+        <div class="row">
+          <div class="text-md-right offset-1 col-2">
+            <label class="col-form-label" for="birthday">生日: </label>
+          </div>
+          <div class="col-4">
+            <input id="birthday" class="form-control" v-model="users.birthday" type="date">
+          </div>
+        </div>     
         <br><br>
         <div>
           <p>蒐集個人資料告知事項:</p>
-          <textarea name="" id="" cols="30" rows="10" disabled>
+          <textarea name="" id="" cols="70" rows="10" disabled>
             本網站為遵守個人資料保護法規定，在您提供個人資料予本司前，依法 告知下列事項：
 一、本網站因協助台中學習型城市計畫等目的而獲取您下列 個人資料類別：姓名、出生年月日、國民身分證統一編號、性別、職業、 教育、連絡方式(包括但不限於電話號碼、E-MAIL、居住或工作地址)等， 或其他得以直接或間接識別您個人之資料。 
 二、本網站將依個人資料保護法及相關法令之規定下，依本司隱私權保護政策， 蒐集、處理及利用您的個人資料。 

@@ -63,7 +63,6 @@
                   <th></th>
                   <th></th>
                   <th v-if="user.status == 4"></th>
-                  <th v-if="user.status == 4"></th>
                 </tr>
             </thead>
             <tbody>
@@ -81,14 +80,16 @@
                     <button v-else type="button" @click="addSignUp(Branch.b_id)" class="btn btn-lightbrown">報名</button>
                   </td>
                   <td v-if="user.status == 4">
-                    <router-link tag="button"  class="btn btn-success" :to="{name:'checkSignUp',params:{b_id:Branch.b_id}}" >
-                      審核
-                    </router-link>
-                  </td>
-                  <td v-if="user.status == 4">
-                    <router-link tag="button"  class="btn btn-warning" :to="{name:'completed',params:{b_id:Branch.b_id}}" >
-                      點名
-                    </router-link>
+                    <div class="dropdown">
+                      <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">功能</button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <router-link  class="dropdown-item" :to="{name:'checkSignUp',params:{b_id:Branch.b_id}}" >審核</router-link>
+                        <router-link  class="dropdown-item" :to="{name:'completed',params:{b_id:Branch.b_id}}" >點名</router-link>
+                        <router-link  class="dropdown-item" :to="{name:'Branch_photo',params:{b_id:Branch.b_id}}" >花絮</router-link>
+                        <a class="dropdown-item" href="#">修改</a>
+                        <a class="dropdown-item" href="#">刪除</a>
+                      </div>
+                    </div>
                   </td>
                 </tr>
             </tbody>

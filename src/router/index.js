@@ -16,6 +16,9 @@ import Session from '@/components/session/index'
 import createSession from '@/components/session/create'
 
 import Branch from '@/components/Branch/index'
+import Branch_photo from '@/components/Branch/photo'
+import photo from '@/components/photo/list'
+import upload from '@/components/photo/upload'
 import createBranch from '@/components/Branch/create'
 import Branch_content from '@/components/Branch/content'
 import checkSignUp from '@/components/checkSignUp'
@@ -142,6 +145,18 @@ export default new Router({
                     path: '/completed/:b_id',
                     name: 'completed',
                     component: completed
+                }, {
+                    path: '/photo',
+                    name: 'photo',
+                    component: photo
+                }, {
+                    path: '/upload',
+                    name: 'upload',
+                    component: upload
+                }, {
+                    path: '/Branch_photo/:b_id',
+                    name: 'Branch_photo',
+                    component: Branch_photo
                 }
 
 

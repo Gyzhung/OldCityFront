@@ -219,13 +219,13 @@
                           </div>
                       </li>
                       <li class="nav-item">
-                          <a class="menu-link" href="#">活動簡介</a>
+                          <router-link to="/photo" class="menu-link">活動花絮</router-link>
                       </li>
                       <li class="nav-item">
                           <a class="menu-link" href="#">嚮導簡介</a>
                       </li>
                       <li class="nav-item">
-                          <router-link to="/Course" class="menu-link">嚮導課程訓練</router-link>
+                          <router-link to="/Course" class="menu-link">嚮導課程</router-link>
                       </li>
                       <li class="nav-item">
                           <a class="menu-link" href="#">導覽媒合</a>
