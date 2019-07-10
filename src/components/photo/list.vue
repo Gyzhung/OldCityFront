@@ -5,7 +5,7 @@
 </style>
 <template>
     <div class="content">
-        <div class="container-fluid photo_page">
+        <div class="container-fluid photo_page mt-3 mb-5">
             <div class="row">
                 <div class="col-4" v-for="branch in branch_list" :key="branch.b_id">
                     <router-link style="cursor: pointer;" :to="`/Branch_photo/${branch.b_id}`" tag="div" class="card">
@@ -13,11 +13,11 @@
                             {{branch.session_name}}-{{branch.title}}
                         </div>
                         <div class="card-body">
-                            <div v-if="branch.branch_pics[0].picType == 0">
-                                <img :src="`http://163.17.145.142/images/OriginalImage/${branch.branch_pics[0].b_picName}`" width="100%" alt="">
+                            <div v-if="branch.only_one_pic[0].picType == 0">
+                                <img :src="`http://163.17.145.142/images/OriginalImage/${branch.only_one_pic[0].b_picName}`" width="100%" alt="">
                             </div>
                             <div v-else>
-                                <video width="100%" :src="`http://163.17.145.142/videos/${branch.branch_pics[0].b_picName}`" />
+                                <video width="100%" :src="`http://163.17.145.142/videos/${branch.only_one_pic[0].b_picName}`" />
                             </div>
                         </div>
                         
@@ -40,7 +40,8 @@ export default {
         const self = this;
         this.$http.get(`http://163.17.145.142/api/getPicList`)
         .then(function(response) {
-            self.branch_list = response.data.filter(a => a.branch_pics.length != 0);
+            console.log(response.data)
+            self.branch_list = response.data.filter(a => a.only_one_pic.length != 0);
             console.log(self.branch_list)
 
         })

@@ -60,7 +60,7 @@
 .logo {
   z-index: 2;
   position: absolute;
-  top: 1%;
+  top: 1vh;
 }
 .menu-nav {
   background-color: #fff;
