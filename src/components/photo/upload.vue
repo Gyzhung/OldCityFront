@@ -36,29 +36,41 @@ export default {
             files:[]
         }
     },
+    mounted() {
+    },
     methods: {
         addFiles(){
             this.$refs.files.click();
         },
-        submitFiles(){            
-            this.files.forEach(file => {
+        submitFiles(){  
+            const self = this;      
+            function callback () { 
+                alert('上傳成功'); 
+                self.$router.push({ path: `/Branch_photo/${self.$route.params.b_id}`})
+            }
+
+            var itemsProcessed = 0;
+
+            this.files.forEach((item, index, array) => {
+                const self = this;
                 let formdata = new FormData();
                 formdata.append('b_id', this.$route.params.b_id);
-                formdata.append('b_pic', file);
-                
+                formdata.append('b_pic', item);
                 this.$http.post('http://163.17.145.142/api/add_b_pic',formdata,
                 {
                     headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
                     'Content-Type': 'multipart/form-data'
                 })
                 .then(function(response) {
-                    console.log("上傳成功")
+                    itemsProcessed++;
+                    if(itemsProcessed === array.length) {
+                        callback();
+                    }
                 })
                 .catch(function(error) {
-                    console.log(error.response)
-                });
+                    console.log(error)
+                });   
             });
-            
         },
         handleFilesUpload(){
             

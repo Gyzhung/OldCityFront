@@ -15,9 +15,16 @@
             <div class="row mt-2">
                 <div class="col-4" v-for="photo in photos" :key="photo.bp_id">
                     <div class="card">
-                        
+                        <div class="card-header" v-if="user.status == 4">
+                            <button class="btn btn-danger" @click="del_photo(photo.bp_id)">刪除</button>
+                        </div>
                         <div class="card-body">
-                            <img :src="`http://163.17.145.142/images/OriginalImage/${photo.b_picName}`" width="100%" alt="">
+                            <div v-if="photo.picType == 0">
+                                <img :src="`http://163.17.145.142/images/OriginalImage/${photo.b_picName}`" width="100%" alt="">
+                            </div>
+                            <div v-else>
+                                <video width="100%" :src="`http://163.17.145.142/videos/${photo.b_picName}`" ></video>
+                            </div>                            
                         </div>
                     </div>
                 </div>
@@ -28,25 +35,49 @@
 </template>
 
 <script>
+
 export default {
+    props:['user'],
     data() {
         return {
             photos:[]
         }
     },
     mounted() {
-        const self = this;
-        this.$http.get(`http://163.17.145.142/api/getPicListByb_id`,
-            {
-                params:{ b_id:this.$route.params.b_id}
-            }
-        )
-        .then(function(response) {
-            self.photos = response.data;
-        })
-        .catch(function(error) {
-            alert(error.response.data);
-        });
+        this.get_PicList()
     },
+    methods:{
+        del_photo:function (bp_id) {
+            const self = this;
+            const data = {
+                bp_id:bp_id
+            }
+            this.$http.post(`http://163.17.145.142/api/delete_b_pic`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+            .then(function(response) {
+                alert(response.data)
+                self.get_PicList();
+            })
+            .catch(function(error) {
+                alert(error);
+            });
+            
+        },
+        get_PicList:function(){
+            const self = this;
+            this.$http.get(`http://163.17.145.142/api/getPicListByb_id`,
+                {
+                    params:{ b_id:this.$route.params.b_id}
+                }
+            )
+            .then(function(response) {
+                self.photos = response.data;
+                console.log(self.photos)
+            })
+            .catch(function(error) {
+                alert(error.response);
+            });
+        }
+        
+    }
 }
 </script>

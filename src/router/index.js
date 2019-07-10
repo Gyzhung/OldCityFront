@@ -150,7 +150,7 @@ export default new Router({
                     name: 'photo',
                     component: photo
                 }, {
-                    path: '/upload',
+                    path: '/upload/:b_id',
                     name: 'upload',
                     component: upload
                 }, {
