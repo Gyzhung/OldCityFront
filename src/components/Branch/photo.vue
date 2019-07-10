@@ -23,7 +23,7 @@
                                 <img :src="`http://163.17.145.142/images/OriginalImage/${photo.b_picName}`" width="100%" alt="">
                             </div>
                             <div v-else>
-                                <video width="100%" :src="`http://163.17.145.142/videos/${photo.b_picName}`" ></video>
+                                <video width="100%" controls="controls" :src="`http://163.17.145.142/videos/${photo.b_picName}`" ></video>
                             </div>                            
                         </div>
                     </div>
