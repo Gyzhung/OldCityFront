@@ -163,34 +163,35 @@ export default {
                     break;
             }
             return str;
+        },
+        getSu_usersData:function() {
+            const self = this;
+            this.$http.get(`${this.$GLOBAL.path}/api/getCheckSignUpListByb_id`,
+            {
+                headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
+                params:{ b_id:this.$route.params.b_id },
+                
+            })
+            .then(function(response) {
+                self.su_users = response.data;
+                self.su_users.forEach(user => {
+                    if (user.completed.length ==0) {
+                        self.completed_list_input[user.su_id] = -1;
+                        self.$set(self.completed_isopen, user.su_id, false);
+                        self.$set(self.completed_list, user.su_id, -1)
+                    }else{
+                        self.completed_list_input[user.su_id] = -1;
+                        self.$set(self.completed_isopen, user.su_id, false);
+                        self.$set(self.completed_list, user.su_id, -1)
+                    }
+                    
+                });
+            })
+            .catch(function(error) {
+            });
         }
     },
-    getSu_usersData:function() {
-        const self = this;
-        this.$http.get(`${this.$GLOBAL.path}/api/getCheckSignUpListByb_id`,
-        {
-            headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
-            params:{ b_id:this.$route.params.b_id },
-            
-        })
-        .then(function(response) {
-            self.su_users = response.data;
-            self.su_users.forEach(user => {
-                if (user.completed.length ==0) {
-                    self.completed_list_input[user.su_id] = -1;
-                    self.$set(self.completed_isopen, user.su_id, false);
-                    self.$set(self.completed_list, user.su_id, -1)
-                }else{
-                    self.completed_list_input[user.su_id] = -1;
-                    self.$set(self.completed_isopen, user.su_id, false);
-                    self.$set(self.completed_list, user.su_id, -1)
-                }
-                
-            });
-        })
-        .catch(function(error) {
-        });
-    }
+    
 }
 </script>
 

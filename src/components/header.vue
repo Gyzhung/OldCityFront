@@ -239,27 +239,15 @@
 </template>
 <script>
 import axios from "axios";
-import global_ from "@/components/Global/global";
 import router from "@/router";
 export default {
   props: ["user"], //從home傳進來
   data() {
     return {
-      //isShow: true,
     };
-    // show:global_.isShow
   },
   watch: {},
-  mounted: function() {
-    // this.isLogin();
-  },
   methods: {
-    // isLogin() {
-    //   if (global_.isLogin == true) {
-    //     this.isShow = false;
-    //     console.log(this.isShow);
-    //   }
-    // },
     logout() {
       const self = this;
       axios
@@ -267,7 +255,7 @@ export default {
           `${this.$GLOBAL.path}/api/logout`,
           '',
           {
-            headers: { authorization: `Bearer ${global_.login_token}` }
+            headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }
           }
         )
         .then(function(response) {

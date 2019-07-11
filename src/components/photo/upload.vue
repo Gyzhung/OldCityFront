@@ -56,7 +56,7 @@ export default {
                 let formdata = new FormData();
                 formdata.append('b_id', this.$route.params.b_id);
                 formdata.append('b_pic', item);
-                this.$http.post('${this.$GLOBAL.path}/api/add_b_pic',formdata,
+                this.$http.post(`${this.$GLOBAL.path}/api/add_b_pic`,formdata,
                 {
                     headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
                     'Content-Type': 'multipart/form-data'
@@ -69,7 +69,7 @@ export default {
                 })
                 .catch(function(error) {
                     console.log(error)
-                });   
+                });
             });
         },
         handleFilesUpload(){
@@ -78,7 +78,6 @@ export default {
             for( var i = 0; i < uploadedFiles.length; i++ ){
                 this.files.push( uploadedFiles[i] );
             }
-            console.log(this.files)
         },
         removeFile( key ){
             this.files.splice( key, 1 );

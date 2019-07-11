@@ -63,7 +63,6 @@ export default {
         c_id: this.c_id,
         session_name: this.name
       }
-      console.log(data)
       this.$http.post(`${this.$GLOBAL.path}/api/addSession`,data,{ headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` } })
         .then(function(response) {
           if ((status = 200)) {

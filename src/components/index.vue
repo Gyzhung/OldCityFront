@@ -151,8 +151,6 @@
 </div>
 </template>
 <script>
-import axios from "axios";
-import global_ from "@/components/Global/global";
 
 export default {
   data() {
@@ -167,7 +165,7 @@ export default {
   },
   mounted(){
     const self = this;
-    axios.post(`${this.$GLOBAL.path}/api/searchAnnounce`,
+    this.$http.post(`${this.$GLOBAL.path}/api/searchAnnounce`,
       {
         keyword: `${this.keystr.keyword}`
       }).then(function(response) {

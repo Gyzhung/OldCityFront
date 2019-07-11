@@ -111,7 +111,7 @@ export default {
         this.user = user;
     },
     logout:function(user) {//再login.vue內套用
-      global_.delCookie("login_token");
+      this.$GLOBAL.delCookie("login_token");
       this.user = '';
     },
   }

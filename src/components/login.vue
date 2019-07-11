@@ -70,9 +70,6 @@
 
 
 <script>
-import axios from "axios";
-import global_ from "@/components/Global/global";
-
 export default {
   data() {
     return {
@@ -83,43 +80,34 @@ export default {
     };
   },
   computed: {},
-  // updated() {
-  //     this.getData();
-  // },
   methods: {
     login() {
       const self = this;
-      axios
-        .post("${this.$GLOBAL.path}/api/login", {
-          account: this.users.account,
-          password: this.users.password
-        })
-        .then(function(response) {
-          if ((status = 200)) {
-            global_.setCookie('login_token',response.data,1);
-            global_.login_token = response.data;
-            axios
-              .get(
-                `${this.$GLOBAL.path}/api/getMyData`,
-                {
-                  headers: { authorization: `Bearer ${global_.login_token}` }
-                }
-              )
-              .then(function(response) {
-                if (status == 200) {
-                  global_.status = response.data.status;
-                  alert("已登入");
-                  self.$emit("login",response.data);//使用外層方法
-                  self.$router.push({ path: `/index` });
-                }
-              })
-              .catch(function(error) {
-              });
-          }
-        })
-        .catch(function(error) {
-          alert(error.response.data[0])
-        });
+      const data = {
+        account: this.users.account,
+        password: this.users.password
+      }
+      this.$http.post(`${this.$GLOBAL.path}/api/login`,data)
+      .then(function(response) {
+        if ((status = 200)) {
+          self.$GLOBAL.setCookie('login_token',response.data,1);
+          self.$GLOBAL.login_token = response.data;
+          self.$http.get(`${self.$GLOBAL.path}/api/getMyData`,{ headers: { authorization: `Bearer ${self.$GLOBAL.login_token}`} })
+          .then(function(response) {
+            if (status == 200) {
+              self.$GLOBAL.status = response.data.status;
+              alert("已登入");
+              self.$emit("login",response.data);//使用外層方法
+              self.$router.push({ path: `/index` });
+            }
+          })
+          .catch(function(error) {
+          });
+        }
+      })
+      .catch(function(error) {
+        alert(error.response.data[0])
+      });
     }
   }
 };

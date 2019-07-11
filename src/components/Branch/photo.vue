@@ -20,10 +20,10 @@
                         </div>
                         <div class="card-body">
                             <div v-if="photo.picType == 0">
-                                <img :src="`${this.$GLOBAL.path}/images/OriginalImage/${photo.b_picName}`" width="100%" alt="">
+                                <img :src="`${$GLOBAL.path}/images/OriginalImage/${photo.b_picName}`" width="100%" alt="">
                             </div>
                             <div v-else>
-                                <video width="100%" controls="controls" :src="`${this.$GLOBAL.path}/videos/${photo.b_picName}`" ></video>
+                                <video width="100%" controls="controls" :src="`${$GLOBAL.path}/videos/${photo.b_picName}`" ></video>
                             </div>                            
                         </div>
                     </div>

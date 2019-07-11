@@ -112,10 +112,10 @@ export default {
     typeToString:function(type) {
       switch(type){
         case 1:
-          return "景點消息";
+          return "活動消息";
           break;
         case 2:
-          return "活動消息";
+          return "景點消息";
           break;
         case 3:
           return "課程消息";

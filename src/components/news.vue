@@ -130,10 +130,10 @@
                 <span class="AManage-nav-link" id="allnews-tab" @click="type = 0">全部消息</span>
             </li>
             <li class="AManage-nav-item ">
-                <span class="AManage-nav-link" id="activitynews-tab" @click="type = 2" >活動消息</span>
+                <span class="AManage-nav-link" id="activitynews-tab" @click="type = 1" >活動消息</span>
             </li>
             <li class="AManage-nav-item">
-                <span class="AManage-nav-link" id="attractionnews-tab" @click="type = 1">景點消息</span>
+                <span class="AManage-nav-link" id="attractionnews-tab" @click="type = 2">景點消息</span>
             </li>
             <li class="AManage-nav-item">
                 <span class="AManage-nav-link" id="coursenews-tab" @click="type = 3">課程消息</span>
@@ -145,7 +145,7 @@
         <div class="tab-content col-lg-9 col-md-12 col-sm-12 col-12" id="myTabContent">
             <div class="tab-pane fade show active pt-4" id="allnews" role="tabpanel"
                 aria-labelledby="allnews-tab">
-                <div class="table-header col-lg-6">全部消息</div>
+                <div class="table-header col-lg-6">{{typeToString(type)}}</div>
                 <div class="manage-content">
                     <table class="table col-lg-11 col-md-11 col-sm-11 col-12">
                         <tbody>
@@ -192,17 +192,20 @@ export default {
   methods: {
     typeToString:function(type) {
       switch(type){
+        case 0:
+          return "全部消息";
+          break;
         case 1:
-          return "景點消息";
+          return "活動消息";
           break;
         case 2:
-          return "活動消息";
+          return "景點消息";
           break;
         case 3:
           return "課程消息";
           break;
         case 4:
-          return "媒合消息";
+          return "媒體消息";
           break;
       }
     }

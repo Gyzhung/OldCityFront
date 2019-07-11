@@ -123,7 +123,6 @@ export default {
       this.search(this.keyword);
     },
     typetoString:function (type) {
-      console.log(type)
       switch (type) {
         case 1:
           return "活動"

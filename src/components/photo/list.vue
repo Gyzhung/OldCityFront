@@ -14,10 +14,10 @@
                         </div>
                         <div class="card-body">
                             <div v-if="branch.only_one_pic[0].picType == 0">
-                                <img :src="`${this.$GLOBAL.path}/images/OriginalImage/${branch.only_one_pic[0].b_picName}`" width="100%" alt="">
+                                <img :src="`${$GLOBAL.path}/images/OriginalImage/${branch.only_one_pic[0].b_picName}`" width="100%" alt="">
                             </div>
                             <div v-else>
-                                <video width="100%" :src="`${this.$GLOBAL.path}/videos/${branch.only_one_pic[0].b_picName}`" />
+                                <video width="100%" :src="`${$GLOBAL.path}/videos/${branch.only_one_pic[0].b_picName}`" />
                             </div>
                         </div>
                         
@@ -40,9 +40,7 @@ export default {
         const self = this;
         this.$http.get(`${this.$GLOBAL.path}/api/getPicList`)
         .then(function(response) {
-            console.log(response.data)
             self.branch_list = response.data.filter(a => a.only_one_pic.length != 0);
-            console.log(self.branch_list)
 
         })
     },

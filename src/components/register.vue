@@ -220,8 +220,6 @@ p{
 </template>
 
 <script>
-import axios from "axios";
-import global_ from "@/components/Global/global";
 export default {
   name: "HelloWorld",
 
@@ -254,8 +252,7 @@ export default {
     register() {
       if (this.check == 1) {
         const self = this;
-        axios 
-          .post(`${this.$GLOBAL.path}/api/register`, {
+        this.$http.post(`${this.$GLOBAL.path}/api/register`, {
             account: this.users.account,
             password: this.users.password,
             identity_num: this.users.identity_num,
@@ -275,7 +272,6 @@ export default {
             }
           })
           .catch(function(error) {
-            console.log(error.response)
             alert(error.response.data[0])
         });
       }else{

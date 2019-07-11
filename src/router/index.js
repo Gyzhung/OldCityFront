@@ -28,7 +28,7 @@ import completed from '@/components/admin/completed'
 //公告
 import createAnnounce from '@/components/Announce/create'
 import Announce from '@/components/Announce/announce'
-import editAnnounce from '@/components/editAnnounce'
+import editAnnounce from '@/components/Announce/edit'
 
 
 

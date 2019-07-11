@@ -144,8 +144,6 @@ export default {
                 signUpTime_end:this.signUpTime_end,
                 branchSchedule: this.branchSchedule.map(a=>JSON.stringify(a)),
             }
-           
-            console.log(data)
             this.$http.post(`${this.$GLOBAL.path}/api/addBranch`,data,{ headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` } })
             .then(function(response) {
             if ((status = 200)) {

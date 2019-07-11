@@ -85,7 +85,6 @@ export default {
         )
         .then(function(response) {
             self.Branch = response.data[0];
-            console.log(self.Branch)
         })
         .catch(function(error) {
         });
@@ -110,19 +109,6 @@ export default {
             .catch(function(error) {
                 alert(error.response.data);
             });
-            // this.$http.get(`${this.$GLOBAL.path}/api/get_L_BranchListBys_id`,
-            //     {
-            //         headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
-            //         params:{ s_id:1 }
-            //     }
-            // )
-            // .then(function(response) {
-                
-            //     console.log(response)
-            // })
-            // .catch(function(error) {
-            //     console.log(error.response);
-            // }); 
         }
     },
 }
