@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col-4" v-for="photo in photos" :key="photo.bp_id">
+                <div class="col-4 mb-2" v-for="photo in photos" :key="photo.bp_id">
                     <div class="card">
                         <div class="card-header" v-if="user.status == 4">
                             <button class="btn btn-danger" @click="del_photo(photo.bp_id)">刪除</button>
