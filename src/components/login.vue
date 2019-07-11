@@ -90,7 +90,7 @@ export default {
     login() {
       const self = this;
       axios
-        .post("http://163.17.145.142/api/login", {
+        .post("${this.$GLOBAL.path}/api/login", {
           account: this.users.account,
           password: this.users.password
         })
@@ -100,7 +100,7 @@ export default {
             global_.login_token = response.data;
             axios
               .get(
-                `http://163.17.145.142/api/getMyData`,
+                `${this.$GLOBAL.path}/api/getMyData`,
                 {
                   headers: { authorization: `Bearer ${global_.login_token}` }
                 }

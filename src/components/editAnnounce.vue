@@ -83,7 +83,7 @@ export default {
 
       axios
         .get(
-          `http://163.17.145.142/api/getAnnounceData?ann_id=${
+          `${this.$GLOBAL.path}/api/getAnnounceData?ann_id=${
             this.ann_id
           }`
         )

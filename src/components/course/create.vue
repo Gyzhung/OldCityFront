@@ -80,7 +80,7 @@ export default {
         type:this.type,
       } 
       const self = this;
-      this.$http.post(`http://163.17.145.142/api/addCourse`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+      this.$http.post(`${this.$GLOBAL.path}/api/addCourse`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
       .then(function(response) {
         if ((status = 200)) {
           alert("建立成功");

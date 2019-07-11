@@ -122,7 +122,7 @@ export default {
           b_id : b_id
       }
       const self = this;
-      this.$http.post(`http://163.17.145.142/api/addSignUp`,data,{ headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+      this.$http.post(`${this.$GLOBAL.path}/api/addSignUp`,data,{ headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
       .then(function(response) {
           alert("報名成功");
           self.getBranchesData(self.user);
@@ -134,7 +134,7 @@ export default {
     getBranchesData:function(user){
       const self = this;
       if (this.user == '') {
-        this.$http.get(`http://163.17.145.142/api/getBranchListBys_id`,{params:{ s_id:this.$route.params.s_id}})
+        this.$http.get(`${this.$GLOBAL.path}/api/getBranchListBys_id`,{params:{ s_id:this.$route.params.s_id}})
         .then(function(response) {
           self.Branches = response.data;
           
@@ -142,7 +142,7 @@ export default {
         .catch(function(error) {
         });
       }else{
-        this.$http.get(`http://163.17.145.142/api/get_L_BranchListBys_id`,
+        this.$http.get(`${this.$GLOBAL.path}/api/get_L_BranchListBys_id`,
         {headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },params:{s_id:this.$route.params.s_id},})
         .then(function(response) {
           self.Branches = response.data;

@@ -56,7 +56,7 @@ export default {
                 let formdata = new FormData();
                 formdata.append('b_id', this.$route.params.b_id);
                 formdata.append('b_pic', item);
-                this.$http.post('http://163.17.145.142/api/add_b_pic',formdata,
+                this.$http.post('${this.$GLOBAL.path}/api/add_b_pic',formdata,
                 {
                     headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
                     'Content-Type': 'multipart/form-data'

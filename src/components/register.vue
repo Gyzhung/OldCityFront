@@ -255,7 +255,7 @@ export default {
       if (this.check == 1) {
         const self = this;
         axios 
-          .post(`http://163.17.145.142/api/register`, {
+          .post(`${this.$GLOBAL.path}/api/register`, {
             account: this.users.account,
             password: this.users.password,
             identity_num: this.users.identity_num,

@@ -179,7 +179,7 @@ export default {
   },
   mounted() {
     const self = this;
-    this.$http.post( `http://163.17.145.142/api/searchAnnounce`, {keyword: `all:`})
+    this.$http.post( `${this.$GLOBAL.path}/api/searchAnnounce`, {keyword: `all:`})
     .then(function(response) {
       if ((status = 200)) {
         self.Announce_list = response.data;

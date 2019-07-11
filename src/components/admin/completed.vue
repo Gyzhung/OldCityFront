@@ -134,7 +134,7 @@ export default {
                     su_id : su_user.su_id,
                     completeExtent : parseInt(this.completed_list[su_user.su_id])
                 }
-                this.$http.post(`http://163.17.145.142/api/updateCompleted`,data,{ headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+                this.$http.post(`${this.$GLOBAL.path}/api/updateCompleted`,data,{ headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
                 .then(function(response) {
                     self.getSu_usersData();
                     alert(response.data);
@@ -167,7 +167,7 @@ export default {
     },
     getSu_usersData:function() {
         const self = this;
-        this.$http.get(`http://163.17.145.142/api/getCheckSignUpListByb_id`,
+        this.$http.get(`${this.$GLOBAL.path}/api/getCheckSignUpListByb_id`,
         {
             headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
             params:{ b_id:this.$route.params.b_id },

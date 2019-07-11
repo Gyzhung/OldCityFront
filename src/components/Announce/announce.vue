@@ -83,7 +83,7 @@ export default {
   methods: {
     getann() {
       const self = this;
-      this.$http.get(`http://163.17.145.142/api/getAnnounceData?ann_id=${this.ann_id }` )
+      this.$http.get(`${this.$GLOBAL.path}/api/getAnnounceData?ann_id=${this.ann_id }` )
       .then(function(response) {
         self.Announce = response.data;        
       })
@@ -92,7 +92,7 @@ export default {
     },
     delann() {
       const self = this;
-      this.$http.post(`http://163.17.145.142/api/deleteAnnounce?ann_id=${this.ann_id}`,{},
+      this.$http.post(`${this.$GLOBAL.path}/api/deleteAnnounce?ann_id=${this.ann_id}`,{},
         {
           headers: {
             authorization: `Bearer ${this.$GLOBAL.login_token}`

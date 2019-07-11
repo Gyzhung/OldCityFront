@@ -146,7 +146,7 @@ export default {
             }
            
             console.log(data)
-            this.$http.post(`http://163.17.145.142/api/addBranch`,data,{ headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` } })
+            this.$http.post(`${this.$GLOBAL.path}/api/addBranch`,data,{ headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` } })
             .then(function(response) {
             if ((status = 200)) {
                 alert("建立成功");

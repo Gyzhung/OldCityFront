@@ -78,7 +78,7 @@ export default {
     },
     mounted() {
         const self = this;
-        this.$http.get(`http://163.17.145.142/api/getBranchData`,{
+        this.$http.get(`${this.$GLOBAL.path}/api/getBranchData`,{
             params:{
                 b_id:this.$route.params.b_id
             }}
@@ -99,7 +99,7 @@ export default {
                 b_id : this.$route.params.b_id
             }
             const self = this;
-            this.$http.post(`http://163.17.145.142/api/addSignUp`,data,
+            this.$http.post(`${this.$GLOBAL.path}/api/addSignUp`,data,
                 {
                     headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }
                 }
@@ -110,7 +110,7 @@ export default {
             .catch(function(error) {
                 alert(error.response.data);
             });
-            // this.$http.get(`http://163.17.145.142/api/get_L_BranchListBys_id`,
+            // this.$http.get(`${this.$GLOBAL.path}/api/get_L_BranchListBys_id`,
             //     {
             //         headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
             //         params:{ s_id:1 }

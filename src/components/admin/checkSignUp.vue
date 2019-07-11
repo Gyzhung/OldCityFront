@@ -76,7 +76,7 @@ export default {
         user:function(n,o) {
             if (o == "") {
                 const self = this;
-                this.$http.get(`http://163.17.145.142/api/getSignUpListByb_id`,
+                this.$http.get(`${this.$GLOBAL.path}/api/getSignUpListByb_id`,
                     {
                         headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
                         params:{
@@ -97,7 +97,7 @@ export default {
 
         const self = this;
         if (this.$GLOBAL.login_token !='') {
-          this.$http.get(`http://163.17.145.142/api/getSignUpListByb_id`,
+          this.$http.get(`${this.$GLOBAL.path}/api/getSignUpListByb_id`,
             {
                 headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
                 params:{
@@ -120,7 +120,7 @@ export default {
           su_id: su_id,
           reviewResult : 1
         }
-        this.$http.post(`http://163.17.145.142/api/reviewSignUp`,data,
+        this.$http.post(`${this.$GLOBAL.path}/api/reviewSignUp`,data,
           {
               headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
           }
@@ -134,7 +134,7 @@ export default {
       },
       update_signup:function() {
         const self = this;
-        this.$http.get(`http://163.17.145.142/api/getSignUpListByb_id`,
+        this.$http.get(`${this.$GLOBAL.path}/api/getSignUpListByb_id`,
         {
             headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
             params:{

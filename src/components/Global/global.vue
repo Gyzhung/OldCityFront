@@ -2,6 +2,7 @@
 export default {
     // url,
     // api_url : `${url}/api`,
+    path:'https://tclearncity.nutc.edu.tw',
     login_token:'',
     userStatus:'',
     isShow:false,

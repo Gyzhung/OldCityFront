@@ -107,7 +107,7 @@ export default {
   methods: {
     search(keyword) {
       const self = this;
-      this.$http.post(`http://163.17.145.142/api/searchCourse`, {
+      this.$http.post(`${this.$GLOBAL.path}/api/searchCourse`, {
         keyword: keyword
       })
       .then(function(response) {
@@ -145,7 +145,7 @@ export default {
         if (c_id == 1 ) {
         
         }else{
-          this.$http.post(`http://163.17.145.142/api/deleteCourse`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+          this.$http.post(`${this.$GLOBAL.path}/api/deleteCourse`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
           .then(function(response) {
             if ((status = 200)) {
               self.search(`all:`);

@@ -167,7 +167,7 @@ export default {
   },
   mounted(){
     const self = this;
-    axios.post(`http://163.17.145.142/api/searchAnnounce`,
+    axios.post(`${this.$GLOBAL.path}/api/searchAnnounce`,
       {
         keyword: `${this.keystr.keyword}`
       }).then(function(response) {

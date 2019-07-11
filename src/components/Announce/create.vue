@@ -96,7 +96,7 @@ export default {
         content: this.announce.content,
         ann_type: this.announce.ann_type
       }
-      this.$http.post(`http://163.17.145.142/api/addAnnounce`,data,{headers: {authorization: `Bearer ${this.$GLOBAL.login_token}`}})
+      this.$http.post(`${this.$GLOBAL.path}/api/addAnnounce`,data,{headers: {authorization: `Bearer ${this.$GLOBAL.login_token}`}})
       .then(function(response) {
         if ((status = 200)) {
           alert("新增公告成功");

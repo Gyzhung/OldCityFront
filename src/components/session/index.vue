@@ -97,7 +97,7 @@ export default {
   methods: {
     getSession() {
       const self = this;
-      this.$http.get(`http://163.17.145.142/api/getSessionListByc_id?c_id=${this.$route.params.c_id}`)
+      this.$http.get(`${this.$GLOBAL.path}/api/getSessionListByc_id?c_id=${this.$route.params.c_id}`)
       .then(function(response) {
         self.sessions = response.data;
       })
@@ -111,7 +111,7 @@ export default {
       const self = this;
       if(confirm("確定刪除活動/課程?"))
       {
-        this.$http.post(`http://163.17.145.142/api/deleteSession`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+        this.$http.post(`${this.$GLOBAL.path}/api/deleteSession`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
         .then(function(response) {
           if ((status = 200)) {
             self.getSession();

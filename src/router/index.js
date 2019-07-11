@@ -6,7 +6,6 @@ import register from '@/components/register'
 import login from '@/components/login'
 import Home from '@/components/home'
 import Index from '@/components/index'
-import user from '@/components/user'
 import news from '@/components/news'
 
 //課程場次
@@ -21,22 +20,17 @@ import photo from '@/components/photo/list'
 import upload from '@/components/photo/upload'
 import createBranch from '@/components/Branch/create'
 import Branch_content from '@/components/Branch/content'
-import checkSignUp from '@/components/checkSignUp'
+import checkSignUp from '@/components/admin/checkSignUp'
 import completed from '@/components/admin/completed'
 
 
 
 //公告
 import createAnnounce from '@/components/Announce/create'
-import searchAnnounce from '@/components/searchAnnounce'
 import Announce from '@/components/Announce/announce'
-import getCourse from '@/components/getCourse'
 import editAnnounce from '@/components/editAnnounce'
-import getSessionListByc_id from '@/components/getSessionListByc_id'
 
 
-import getUncheckSignUpListBys_id from '@/components/getUncheckSignUpListBys_id'
-import getCheckSignUpListBys_id from '@/components/getCheckSignUpListBys_id'
 
 
 // use
@@ -71,26 +65,6 @@ export default new Router({
                     path: '/createCourse',
                     name: 'createCourse',
                     component: createCourse,
-                },
-                {
-                    path: '/getSessionListByc_id/:c_id',
-                    name: 'getSessionListByc_id',
-                    component: getSessionListByc_id
-                },
-                {
-                    path: '/getCheckSignUpListBys_id/:s_id',
-                    name: 'getCheckSignUpListBys_id',
-                    component: getCheckSignUpListBys_id
-                },
-
-                {
-                    path: '/getUncheckSignUpListBys_id/:s_id',
-                    name: 'getUncheckSignUp',
-                    component: getUncheckSignUpListBys_id
-                }, {
-                    path: '/getCourse/:c_id',
-                    name: 'getCourse',
-                    component: getCourse,
                 }, {
                     path: '/news',
                     name: 'news',
@@ -99,11 +73,6 @@ export default new Router({
                     path: '/createAnnounce',
                     name: 'createAnnounce',
                     component: createAnnounce
-                },
-                {
-                    path: '/searchAnnounce',
-                    name: 'searchAnnounce',
-                    component: searchAnnounce
                 },
                 {
                     path: '/editannounce/:announce_id',

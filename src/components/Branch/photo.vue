@@ -20,10 +20,10 @@
                         </div>
                         <div class="card-body">
                             <div v-if="photo.picType == 0">
-                                <img :src="`http://163.17.145.142/images/OriginalImage/${photo.b_picName}`" width="100%" alt="">
+                                <img :src="`${this.$GLOBAL.path}/images/OriginalImage/${photo.b_picName}`" width="100%" alt="">
                             </div>
                             <div v-else>
-                                <video width="100%" controls="controls" :src="`http://163.17.145.142/videos/${photo.b_picName}`" ></video>
+                                <video width="100%" controls="controls" :src="`${this.$GLOBAL.path}/videos/${photo.b_picName}`" ></video>
                             </div>                            
                         </div>
                     </div>
@@ -52,7 +52,7 @@ export default {
             const data = {
                 bp_id:bp_id
             }
-            this.$http.post(`http://163.17.145.142/api/delete_b_pic`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+            this.$http.post(`${this.$GLOBAL.path}/api/delete_b_pic`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
             .then(function(response) {
                 alert(response.data)
                 self.get_PicList();
@@ -64,7 +64,7 @@ export default {
         },
         get_PicList:function(){
             const self = this;
-            this.$http.get(`http://163.17.145.142/api/getPicListByb_id`,
+            this.$http.get(`${this.$GLOBAL.path}/api/getPicListByb_id`,
                 {
                     params:{ b_id:this.$route.params.b_id}
                 }

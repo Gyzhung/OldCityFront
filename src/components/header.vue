@@ -264,7 +264,7 @@ export default {
       const self = this;
       axios
         .post(
-          `http://163.17.145.142/api/logout`,
+          `${this.$GLOBAL.path}/api/logout`,
           '',
           {
             headers: { authorization: `Bearer ${global_.login_token}` }
