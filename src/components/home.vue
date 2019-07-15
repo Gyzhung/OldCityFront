@@ -62,7 +62,7 @@ a:hover, a:visited, a:link, a:active {
   <div class="home">
     <Header :user="user" @logout="logout"></Header>
     
-    <router-view :user="user" @login="login" :isShow="isShow"></router-view>
+    <router-view :user="user" @login="login" :isShow="isShow" @update_userdata="update_userdata"></router-view>
     <!-- <div class="contentroute">
     
     </div> -->
@@ -81,8 +81,22 @@ export default {
   },
   mounted() {
     this.$GLOBAL.login_token = this.$GLOBAL.getCookie("login_token");
-    const self = this;
-    if (this.$GLOBAL.login_token != null) {
+    this.update_userdata();
+  },
+  updated: function() {
+   //this.getData();
+  },
+  methods: {
+    login:function(user) {//再login.vue內套用
+        this.user = user;
+    },
+    logout:function(user) {//再login.vue內套用
+      this.$GLOBAL.delCookie("login_token");
+      this.user = '';
+    },
+    update_userdata:function() {
+      const self = this;
+      if (this.$GLOBAL.login_token != null) {
       this.$http.get(`${this.$GLOBAL.path}/api/getMyData`, {
         headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }
       })
@@ -102,18 +116,7 @@ export default {
       .catch(function(error) {
       });
     }
-  },
-  updated: function() {
-   //this.getData();
-  },
-  methods: {
-    login:function(user) {//再login.vue內套用
-        this.user = user;
-    },
-    logout:function(user) {//再login.vue內套用
-      this.$GLOBAL.delCookie("login_token");
-      this.user = '';
-    },
+    }
   }
 };
 </script>

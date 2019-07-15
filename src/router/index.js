@@ -23,7 +23,11 @@ import Branch_content from '@/components/Branch/content'
 import checkSignUp from '@/components/admin/checkSignUp'
 import completed from '@/components/admin/completed'
 
-
+//user
+import profile from '@/components/user/profile'
+import resume from '@/components/user/Resume'
+import editprofile from '@/components/user/editprofile'
+import editresume from '@/components/user/editresume'
 
 //公告
 import createAnnounce from '@/components/Announce/create'
@@ -126,6 +130,22 @@ export default new Router({
                     path: '/Branch_photo/:b_id',
                     name: 'Branch_photo',
                     component: Branch_photo
+                }, {
+                    path: '/profile',
+                    name: 'profile',
+                    component: profile
+                }, {
+                    path: '/resume',
+                    name: 'resume',
+                    component: resume
+                }, {
+                    path: '/editprofile',
+                    name: 'editprofile',
+                    component: editprofile
+                }, {
+                    path: '/editresume',
+                    name: 'editresume',
+                    component: editresume
                 }
 
 

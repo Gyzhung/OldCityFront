@@ -183,7 +183,8 @@
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         <router-link to="/createannounce" v-if="user.status ==4"><button class="dropdown-item" type="button">新增公告</button></router-link>
-                          <button class="dropdown-item" type="button">修改個人資訊</button>
+                        <router-link to="/profile" ><button class="dropdown-item" type="button">個人資訊</button></router-link>
+                        <router-link to="/resume" ><button class="dropdown-item" type="button">我的履歷</button></router-link>
                           <button class="dropdown-item" type="button">會員專區</button>
                           <div class="dropdown-divider"></div>
                           <div @click="logout"  class="dropdown-item" style="cursor: pointer;">登出</div>
