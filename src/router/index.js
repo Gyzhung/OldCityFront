@@ -22,12 +22,17 @@ import createBranch from '@/components/Branch/create'
 import Branch_content from '@/components/Branch/content'
 import checkSignUp from '@/components/admin/checkSignUp'
 import completed from '@/components/admin/completed'
+import banuser from '@/components/admin/banuser'
+import addbanuser from '@/components/admin/addbanuser'
 
 //user
 import profile from '@/components/user/profile'
 import resume from '@/components/user/Resume'
 import editprofile from '@/components/user/editprofile'
 import editresume from '@/components/user/editresume'
+import signuplist from '@/components/user/signuplist'
+
+
 
 //公告
 import createAnnounce from '@/components/Announce/create'
@@ -146,6 +151,18 @@ export default new Router({
                     path: '/editresume',
                     name: 'editresume',
                     component: editresume
+                }, {
+                    path: '/signuplist',
+                    name: 'signuplist',
+                    component: signuplist
+                }, {
+                    path: '/banuser',
+                    name: 'banuser',
+                    component: banuser
+                }, {
+                    path: '/addbanuser',
+                    name: 'addbanuser',
+                    component: addbanuser
                 }
 
 

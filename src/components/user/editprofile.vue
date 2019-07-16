@@ -74,7 +74,11 @@
                     性別 
                 </div>
                 <div class="col-md-4 col-sm-8 col-8">
-                    <input v-model="gender" type="text" class="form-control">
+                    <select v-model="gender" class="form-control">
+                        <option value="0">女</option>
+                        <option value="1">男</option>
+                        <option value="2">其他</option>
+                    </select>
                 </div>
             </div>
             <div class="row justify-content-center mt-3 mb-3">
@@ -102,7 +106,7 @@ export default {
         }
     },
     watch: {
-        user:function name(params) {
+        user:function() {
             this.account=this.user.account
             this.name=this.user.name
             this.birthday=this.user.birthday
@@ -134,7 +138,9 @@ export default {
             .then(function(response) {
                 console.log(response.data)
                 //對上層 home 取用戶資料
+                
                 self.$emit("update_userdata");
+                alert(response.data);
                 self.$router.push("/profile");
             
             }).catch(function(error) {

@@ -185,6 +185,7 @@
                         <router-link to="/createannounce" v-if="user.status ==4"><button class="dropdown-item" type="button">新增公告</button></router-link>
                         <router-link to="/profile" ><button class="dropdown-item" type="button">個人資訊</button></router-link>
                         <router-link to="/resume" ><button class="dropdown-item" type="button">我的履歷</button></router-link>
+                        <router-link to="/signuplist" ><button class="dropdown-item" type="button">我的報名</button></router-link>
                           <button class="dropdown-item" type="button">會員專區</button>
                           <div class="dropdown-divider"></div>
                           <div @click="logout"  class="dropdown-item" style="cursor: pointer;">登出</div>

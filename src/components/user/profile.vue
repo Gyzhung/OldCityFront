@@ -55,7 +55,7 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-4 col-sm-11">
-                    性別 : {{user.gender}}
+                    性別 : {{genderTostring(user.gender)}}
                 </div>
             </div>
             <div class="row justify-content-center mt-3 mb-3">
@@ -78,8 +78,18 @@ export default {
         
     },
     methods:{
-        update:function(){
-
+        genderTostring:function(gender){
+            switch (gender) {
+                case 0:
+                    return "女"
+                    break;
+                case 1:
+                    return "男"
+                    break;
+                default:
+                    return "其他"
+                    break;
+            }
         }
     }
 }
