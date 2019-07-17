@@ -51,7 +51,7 @@
                   <div class="form-group row">
                     <div class="offset-1 col-md-10">
                       <label for="account" class="text-md-right">內容:</label>
-                      <ckeditor :editor="editor" v-model="announce.content"  :config="editorConfig" ></ckeditor>
+                      <ckeditor ref="editor" @ready="onReady" :editor="editor" v-model="announce.content"  :config="editorConfig" ></ckeditor>
                     </div>
                   </div>
                   <div class="col-md-6 offset-md-5">
@@ -66,6 +66,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import zh from '@ckeditor/ckeditor5-build-classic/build/translations/zh.js';
 export default {
@@ -78,6 +79,20 @@ export default {
       },
       editor:ClassicEditor,
       editorConfig:{
+        image: {
+            toolbar: [ 'imageTextAlternative', '|', 'imageStyle:alignLeft', 'imageStyle:full', 'imageStyle:alignRight' ],
+
+            styles: [
+                // This option is equal to a situation where no style is applied.
+                'full',
+
+                // This represents an image aligned to the left.
+                'alignLeft',
+
+                // This represents an image aligned to the right.
+                'alignRight'
+            ]
+        },
         language: 'zh',
         heading: {
             options: [
@@ -90,7 +105,14 @@ export default {
       },
     };
   },
+  mounted() {
+  },
   methods: {
+    onReady( editor )  {
+      editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
+        return new UploadAdapter( loader );
+      };
+    },
     create() {
       const self = this;
       const data ={
@@ -98,6 +120,7 @@ export default {
         content: this.announce.content,
         ann_type: this.announce.ann_type
       }
+      console.log(data)
       this.$http.post(`${this.$GLOBAL.path}/api/addAnnounce`,data,{headers: {authorization: `Bearer ${this.$GLOBAL.login_token}`}})
       .then(function(response) {
         if ((status = 200)) {
@@ -111,4 +134,37 @@ export default {
     }
   }
 };
+
+class UploadAdapter {
+    constructor(loader, url) {
+        this.loader = loader;
+    }
+    upload() {
+        return new Promise((resolve, reject) => {
+          let formdata = new FormData();
+          this.loader.file.then(function(result) {
+              formdata.append("image", result);
+              axios({
+                method:"POST",
+                url:`https://api.imgur.com/3/image`,
+                data:formdata,
+                headers: {
+                  authorization: `Bearer 5eeae49394cd929e299785c8805bd168fc675280`,
+                },
+                mimetype:"multipart/form-data"
+              })
+              .then(function(response) {
+                console.log(response)
+                resolve({ default: response.data.data.link });
+              })
+              .catch(function(error) {
+                console.log(error);
+              });
+          })
+        })
+    }
+    abort() {
+        console.log("abort")
+    }
+}
 </script>

@@ -28,6 +28,9 @@ input#search::-webkit-input-placeholder {
   color: #ffffff;
   font-family: Microsoft JhengHei;
 }
+.ann_content{
+  max-width: 500px;
+}
 </style>
 
 <template>
@@ -48,7 +51,7 @@ input#search::-webkit-input-placeholder {
       </tr>
       <tr>
         <td width="150">公告內容</td>
-        <td width="500" v-html="Announce.content"></td>
+        <td width="500" class="ann_content" v-html="Announce.content"></td>
       </tr>
       <tr v-if="user.status == 4">
         <td>
@@ -85,7 +88,8 @@ export default {
       const self = this;
       this.$http.get(`${this.$GLOBAL.path}/api/getAnnounceData?ann_id=${this.ann_id }` )
       .then(function(response) {
-        self.Announce = response.data;        
+        self.Announce = response.data;     
+        console.log(self.Announce)   
       })
       .catch(function(error) {
       });

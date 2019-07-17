@@ -45,11 +45,11 @@
     <div class="form session">
       <div class="row">
         <div class="table-header col-lg-6">
-          <div>黑名單</div>
+          <div>已限制用戶</div>
         </div>
         <div class="col-lg-10 col-md-9 col-sm-6 col-10 mb-2" style="margin: 0 auto;" v-if="user.status ==4">
           <div style="float:left;">
-            <router-link :to="{name:'addbanuser'}"  class="btn btn-success" style="color:white;">封鎖</router-link>
+            <router-link :to="{name:'addbanuser'}"  class="btn btn-danger" style="color:white;">限制</router-link>
           </div>
         </div>
         <table class="table col-lg-10 col-md-9 col-sm-6 col-10">
@@ -57,14 +57,14 @@
                 <tr>
                   <th>用戶名稱</th>
                   <th>帳號</th>
+                  <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="banuser in banusers" :key="banuser.su_id">
-                  <!-- <td>{{signup.c_name}}</td>
-                  <td>{{signup.session_name}}</td>
-                  <td>{{signup.title}}</td>
-                  <td>{{ResultTostring(signup.reviewResult)}}</td> -->
+                  <td>{{banuser.name}}</td>
+                  <td>{{banuser.account}}</td>
+                  <td><button button class="btn btn-primary" @click="ban_user(banuser.account,banuser.is_ban)">解除</button></td>
                 </tr>
             </tbody>
         </table>
@@ -82,40 +82,38 @@ export default {
     },
     watch: {
         user:function(){
-            const self = this;
-            this.$http.get(`${this.$GLOBAL.path}/api/getBanUserList`,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
-            .then(function(response) {
-                self.banusers = response.data
-                console.log(self.banusers)
-            }).catch(function(error) {
-                console.log(error.response)
-            });
+            this.getbanuser()
         }
     },
     mounted() {
         if (this.user != '') {
-            const self = this;
-            this.$http.get(`${this.$GLOBAL.path}/api/getBanUserList`,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
-            .then(function(response) {
-                self.banusers = response.data
-                console.log(self.banusers)
-            }).catch(function(error) {
-                console.log(error.response)
-            });
+          this.getbanuser()
         }
     },
     methods: {
-        ban:function(u_id) {
-            const data = {
-                u_id : u_id
-            }
-            this.$http.post(`${this.$GLOBAL.path}/api/reviewUser`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
-            .then(function(response) {
-                console.log(response)
-            }).catch(function(error) {
-                console.log(error.response)
-            });
+      ban_user:function(account,is_ban) {
+        const self = this;
+        const data ={
+          review_account:account,
+          reviewResult:!is_ban
         }
+        this.$http.post(`${this.$GLOBAL.path}/api/reviewUser`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+        .then(function(response) {
+          self.getbanuser()
+        }).catch(function(error) {
+          console.log(error.response)
+        });
+      },
+      getbanuser:function() {
+        const self = this;
+        this.$http.get(`${this.$GLOBAL.path}/api/getBanUserList`,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+        .then(function(response) {
+            self.banusers = response.data
+            console.log(self.banusers)
+        }).catch(function(error) {
+            console.log(error.response)
+        });
+      }
     },
 }
 </script>

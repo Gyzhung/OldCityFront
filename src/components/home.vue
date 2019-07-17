@@ -55,7 +55,20 @@ a:hover, a:visited, a:link, a:active {
 
 @media (max-width: 480px) {
 }
-
+p{
+  word-wrap:break-word;
+}
+.image img{
+  width: 100%;
+}
+.image-style-align-left img{
+  float: left;
+  width: 50%;
+}
+.image-style-align-right img{
+  float: right;
+  width: 50%;
+}
 </style>
 
 <template>

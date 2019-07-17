@@ -124,7 +124,7 @@
     </div>
     <!--響導人員-->
     <div class="row border-top pt-3 pl-5">
-        <p class="l-header ml-4 col-lg-11">響導人員</p>
+        <p class="l-header ml-4 col-lg-11">嚮導人員</p>
 
         <div class="guide-list col-lg-2 col-md-3 col-sm-4 col-6">
             <img src="../assets/boy.png">

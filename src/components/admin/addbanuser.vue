@@ -45,11 +45,12 @@
     <div class="form session">
       <div class="row">
         <div class="table-header col-lg-6">
-          <div>黑名單</div>
+          <div>新增限制用戶</div>
         </div>
         <div class="col-lg-10 col-md-9 col-sm-6 col-10 mb-2" style="margin: 0 auto;" v-if="user.status ==4">
-          <div style="float:left;">
-            <router-link :to="{name:'addbanuser'}"  class="btn btn-success" style="color:white;">封鎖</router-link>
+          <div style="float:right;">
+            <input type="text" v-model="keyword">
+            <button class="btn btn-success" style="color:white;" @click="search">搜尋</button>
           </div>
         </div>
         <table class="table col-lg-10 col-md-9 col-sm-6 col-10">
@@ -64,8 +65,8 @@
                 <tr v-for="user in users" :key="user.u_id">
                   <td>{{user.account}}</td>
                   <td>{{user.name}}</td>
-                  <td v-if="user.abc == 1"><button class="btn btn-primary">解除</button></td>
-                  <td v-else><button class="btn btn-danger">封鎖</button></td>
+                  <td v-if="user.is_ban == 1"><button class="btn btn-primary" @click="ban_user(user.account,user.is_ban)">解除</button></td>
+                  <td v-else><button class="btn btn-danger" @click="ban_user(user.account,user.is_ban)">限制</button></td>
                 </tr>
             </tbody>
         </table>
@@ -78,35 +79,66 @@ export default {
     props:["user"],
     data() {
         return {
-            users:[]
+            users:[],
+            keyword:''
         }
     },
     watch: {
         user:function(){
-            const self = this;
-            this.$http.get(`${this.$GLOBAL.path}/api/getUserDataByAdmin`,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
-            .then(function(response) {
-                self.users = response.data
-                console.log(self.users)
-            }).catch(function(error) {
-                console.log(error.response)
-            });
+            this.getuserlist("all:")
+            
         }
     },
     mounted() {
-        // if (this.user != '') {
-        //     const self = this;
-        //     this.$http.get(`${this.$GLOBAL.path}/api/getUserDataByAdmin`,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
-        //     .then(function(response) {
-        //         self.banusers = response.data
-        //         console.log(self.banusers)
-        //     }).catch(function(error) {
-        //         console.log(error.response)
-        //     });
-        // }
+        if (this.user != '') {
+          this.getuserlist("all:");
+        }
     },
     methods: {
-        
+        ban_user:function(account,is_ban) {
+          const self = this;
+          const data ={
+            review_account:account,
+            reviewResult:!is_ban
+          }
+          this.$http.post(`${this.$GLOBAL.path}/api/reviewUser`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+          .then(function(response) {
+            self.getuserlist("all:");
+          }).catch(function(error) {
+              console.log(error.response)
+          });
+        },
+        getuserlist:function (keyword) {
+          const self = this;
+          const data ={
+            keyword:keyword
+          }
+          this.$http.post(`${this.$GLOBAL.path}/api/searchUser`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+          .then(function(response) {
+              self.users = response.data
+          }).catch(function(error) {
+              console.log(error.response)
+          });
+        },
+        search:function() {
+          const self = this;
+          let data;
+          if (this.keyword == "") {
+            data ={
+              keyword:"all:"
+            }
+          }else{
+            data ={
+              keyword:this.keyword
+            }
+          }
+          this.$http.post(`${this.$GLOBAL.path}/api/searchUser`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+          .then(function(response) {
+              self.users = response.data
+          }).catch(function(error) {
+              console.log(error.response)
+          });
+        }
     },
 }
 </script>

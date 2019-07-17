@@ -142,7 +142,11 @@
                     <input v-model="language.languages" type="text" class="form-control" placeholder="語言">
                 </div>
                 <div class="col-md-2 col-sm-4 col-4">
-                    <input v-model="language.level" type="text" class="form-control" placeholder="級數">
+                    <select v-model="language.level" class="form-control" placeholder="級數">
+                        <option value="1">優等</option>
+                        <option value="2">普通</option>
+                        <option value="3">尚可</option>
+                    </select>
                 </div>
             </div>
             <div class="row justify-content-center mt-2">
@@ -237,13 +241,13 @@ export default {
                     data[element] = this[element]
                 }
             });
+            
             this.user_languages.forEach(element => {
                 if (element.languages !="" && element.level != "") {
                     data.languages.push(element)
                 } 
             });
             data.languages = data.languages.map(a=>JSON.stringify(a))
-
             this.$http.post(`${this.$GLOBAL.path}/api/updateResume`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },params:{s_id:this.$route.params.s_id},})
             .then(function(response) {
                 console.log(response.data)

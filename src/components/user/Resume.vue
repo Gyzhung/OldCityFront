@@ -93,8 +93,8 @@
                     語言 : 
                     <span v-for="(language,index) in user.user_languages" :key="index">
                         <span v-if="index!=0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        {{language.languages}}-{{language.level}}級
-                        <br/>
+                        {{language.languages}}-{{levelTostring(language.level)}}
+                        <button class="btn btn-danger mt-1" @click="dellanguage(language.ul_id)">刪除</button><br/>
                     </span>
                 </div>
             </div>
@@ -109,5 +109,37 @@
 <script>
 export default {
     props:['user'],
+    methods: {
+        levelTostring:function(level){
+            switch (level) {
+                case 1:
+                    return "優等"
+                    break;
+                case 2:
+                    return "普通"
+                    break;
+                case 3:
+                    return "尚可"
+                    break;
+                default:
+                    break;
+            }
+        },
+        dellanguage:function(ul_id) {
+            const self = this;
+            const data = {
+                ul_id:ul_id
+            }
+            this.$http.post(`${this.$GLOBAL.path}/api/deleteLanguage`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },params:{s_id:this.$route.params.s_id},})
+            .then(function(response) {
+                console.log(response.data)
+                //對上層 home 取用戶資料
+                self.$emit("update_userdata");
+            
+            }).catch(function(error) {
+                console.log(error)
+            });
+        }
+    },
 }
 </script>
