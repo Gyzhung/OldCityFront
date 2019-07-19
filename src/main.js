@@ -19,6 +19,27 @@ import 'bootstrap/dist/js/bootstrap.min'
 import CKEditor from '@ckeditor/ckeditor5-vue'
 
 
+import VueQuillEditor, { Quill } from 'vue-quill-editor'
+
+// require styles
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
+
+import { ImageDrop } from 'quill-image-drop-module'
+import ImageResize from 'quill-image-resize-module'
+Quill.register('modules/imageDrop', ImageDrop)
+Quill.register('modules/imageResize', ImageResize)
+
+import { ImageExtend } from 'quill-image-extend-module'
+Quill.register('modules/ImageExtend', ImageExtend)
+
+Vue.use(VueQuillEditor)
+
+
+
+
 Vue.use(VueAxios, axios);
 Vue.use(CKEditor);
 Vue.prototype.$axios = axios;

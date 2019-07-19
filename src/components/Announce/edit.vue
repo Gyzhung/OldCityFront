@@ -51,7 +51,8 @@
                   <div class="form-group row">
                     <div class="offset-1 col-md-10">
                       <label for="account" class="text-md-right">內容:</label>
-                      <ckeditor :editor="editor" v-model="editAnnounce.content"  :config="editorConfig" ></ckeditor>
+                      <quill-editor  v-model="editAnnounce.content" :options="editorOption">
+                      </quill-editor>
                     </div>
                   </div>
                   <div class="col-md-6 offset-md-5">
@@ -66,8 +67,8 @@
 </template>
 
 <script>
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import zh from '@ckeditor/ckeditor5-build-classic/build/translations/zh.js';
+import { addQuillTitle } from '../../js/quill_title'
+import { QuillWatch } from 'quill-image-extend-module'
 export default {
   data() {
     return {
@@ -77,21 +78,50 @@ export default {
         ann_type: ""
       },
       ann_id: this.$route.params.announce_id,
-      editor:ClassicEditor,
-      editorConfig:{
-        language: 'zh',
-        heading: {
-            options: [
-                { model: 'paragraph', title: '標題', class: 'ck-heading_paragraph' },
-                { model: 'heading1', view: 'h1', title: '大標題', class: 'ck-heading_heading1' },
-                { model: 'heading2', view: 'h2', title: '中標題', class: 'ck-heading_heading2' },
-                { model: 'heading3', view: 'h3', title: '小標題', class: 'ck-heading_heading3' },
-            ]
-        },
-      },
+      editorOption: {
+        modules: {
+          ImageExtend: {
+            loading: true,
+            name: "ann_pic",
+            action: `${this.$GLOBAL.path}/api/add_ann_pic`,
+            response: (res) => {
+              return `${this.$GLOBAL.path}/images/OriginalImage/${res}`
+            },
+            headers: (xhr) => {
+              xhr.setRequestHeader("authorization", `Bearer ${this.$GLOBAL.login_token}`)
+            },
+          },
+          toolbar: {container:[
+            [{ 'size': ['small', false, 'large'] }],
+            ['bold', 'italic'],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            ['link', 'image'],
+            
+          ],handlers: {
+              'image': function () { 
+                  QuillWatch.emit(this.quill.id)
+              }
+          }},
+          history: {
+            delay: 1000,
+            maxStack: 50,
+            userOnly: false
+          },
+          imageDrop: true,
+          imageResize: {
+            displayStyles: {
+              backgroundColor: 'black',
+              border: 'none',
+              color: 'white'
+            },
+            modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
+          }
+        }
+      }
     };
   },
   mounted() {
+    addQuillTitle();
     const self = this;
     this.$http.get(`${this.$GLOBAL.path}/api/getAnnounceData?ann_id=${this.ann_id }` )
     .then(function(response) {

@@ -19,55 +19,80 @@ label {
   font-size: 15px;
   border: 3px burlywood;
 }
-input {
-  background: #dacfb8;
-  border-radius: 5px;
-  padding: 5px 15px;
+.ann_content img{
+  width: 100%;
 }
-input#search::-webkit-input-placeholder {
-  color: #ffffff;
-  font-family: Microsoft JhengHei;
+img{
+  max-width:100% !important;
 }
-.ann_content{
-  max-width: 500px;
+</style>
+<style>
+img{
+  max-width:100% !important;
+}
+.col_b_left_top{
+  border-style:solid;
+}
+.col_b_left{
+  border-right-style:solid;
+  border-bottom-style:solid;
+  border-left-style:solid;
+}
+.col_b_right_top{
+  border-right-style:solid;
+  border-bottom-style:solid;
+  border-top-style:solid;
+}
+.col_b_right{
+  border-right-style:solid;
+  border-bottom-style:solid;
 }
 </style>
 
 <template>
   <div class="annDetail" align="center">
     <label>公告詳細</label>
-    <table class="newsText" border="1">
-      <tr>
-        <td width="150">標題</td>
-        <td width="500">{{Announce.title}}</td>
-      </tr>
-      <tr>
-        <td width="150">公告日期</td>
-        <td width="500">{{Announce.created_at}}</td>
-      </tr>
-      <tr>
-        <td width="150">分類</td>
-        <td width="500" >{{typeToString(Announce.ann_type)}}</td>
-      </tr>
-      <tr>
-        <td width="150">公告內容</td>
-        <td width="500" class="ann_content" v-html="Announce.content"></td>
-      </tr>
-      <tr v-if="user.status == 4">
-        <td>
-          <button class="onclk" @click="delann">刪除公告</button>
-        </td>
-        <td>
-          <router-link
-            tag="button"
-            :to="{name:'editAnnounce',params:{announce_id:ann_id}}"
-          >修改</router-link>
-        </td>
-      </tr>
-    </table>
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-1 text-left col_b_left_top pb-2"> 
+          <span>標題</span>
+        </div>
+        <div class="col-md-10 text-left col_b_right_top">
+          <span>{{Announce.title}}</span>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-1 text-left col_b_left pb-2"> 
+          <span>公告日期</span>
+        </div>
+        <div class="col-md-10 text-left col_b_right">
+          <span>{{Announce.created_at}}</span>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-1 text-left col_b_left pb-2"> 
+          <span>分類</span>
+        </div>
+        <div class="col-md-10 text-left col_b_right">
+          <span>{{typeToString(Announce.ann_type)}}</span>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-1 text-left col_b_left pb-2"> 
+          <span>公告內容</span>
+        </div>
+        <div class="col-md-10 text-left col_b_right">
+          <span v-html="Announce.content"></span>
+        </div>
+      </div>
+      <div v-if="user.status == 4" class="row justify-content-center mt-2 pb-2">
+        <div class="offset-1 col-md-10 text-left"> 
+          <button class="onclk btn btn-danger" @click="delann">刪除公告</button>
+          <router-link tag="button" :to="{name:'editAnnounce',params:{announce_id:ann_id}}" class="btn btn-warning">修改公告</router-link>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <!-- 8 -->
 </template>
 
 <script>

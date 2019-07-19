@@ -70,7 +70,8 @@
                     <div class="form-group row">
                         <label for="account" class="col-md-2 col-form-label text-md-right">場次簡介:</label>
                         <div class="col-md-10">
-                            <ckeditor :editor="editor" v-model="content"  :config="editorConfig" ></ckeditor>
+                            <quill-editor  v-model="content" :options="editorOption">
+                      </quill-editor>
                         </div>
                     </div>
                     <div class="col-md-6 offset-md-5">
@@ -84,12 +85,12 @@
     </div>
 </template>
 <script>
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import zh from '@ckeditor/ckeditor5-build-classic/build/translations/zh.js';
 import datePicker from 'vue-bootstrap-datetimepicker'
 import '@fortawesome/fontawesome-free/css/fontawesome.css';
 import '@fortawesome/fontawesome-free/css/regular.css';
 import '@fortawesome/fontawesome-free/css/solid.css';
+import { addQuillTitle } from '../../js/quill_title'
+import { QuillWatch } from 'quill-image-extend-module'
 
 $.extend(true, $.fn.datetimepicker.defaults, {
     icons: {
@@ -108,18 +109,15 @@ $.extend(true, $.fn.datetimepicker.defaults, {
 export default {
     data() {
         return {
-            editor: ClassicEditor,
-            editorConfig: {
-                language: 'zh',
-                heading: {
-                    options: [
-                        { model: 'paragraph', title: '標題', class: 'ck-heading_paragraph' },
-                        { model: 'heading1', view: 'h1', title: '大標題', class: 'ck-heading_heading1' },
-                        { model: 'heading2', view: 'h2', title: '中標題', class: 'ck-heading_heading2' },
-                        { model: 'heading3', view: 'h3', title: '小標題', class: 'ck-heading_heading3' },
-                    ]
-                },
-
+            editorOption: {
+                modules: {
+                toolbar:[
+                    [{ 'size': ['small', false, 'large'] }],
+                    ['bold', 'italic'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    ['link'],
+                    
+                ]}
             },
             s_id:this.$route.params.s_id,
             title:'',
