@@ -141,7 +141,7 @@
             <span class="AManage-nav-link" id="medianews-tab" @click="type = 4">媒體消息</span>
           </li>
         </ul>
-        <div class="tab-content col-lg-9 col-md-12 col-sm-12 col-12" id="myTabContent">
+        <div class="tab-content col-lg-9 col-md-12 col-sm-12 col-12 mt-5" id="myTabContent">
           <div
             class="tab-pane fade show active pt-4"
             id="allnews"

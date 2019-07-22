@@ -50,12 +50,12 @@
           <div v-if="sessions[0] != undefined">{{sessions[0].c_name}}</div>
           <div v-else>尚未建立任何場次</div>
         </div>
-        <div class="col-lg-9 col-md-9 col-sm-6 col-10 mb-2" style="margin: 0 auto;" v-if="user.status ==4">
+        <div class="col-lg-9 col-md-9 col-sm-9 col-10 mb-2" style="margin: 0 auto;" v-if="user.status ==4">
           <div style="float:left;">
             <router-link :to="{name:'createSession',params:{c_id:$route.params.c_id}}"  class="btn btn-success" style="color:white;">新增</router-link>
           </div>
         </div>
-        <table class="table col-lg-9 col-md-9 col-sm-6 col-10">
+        <table class="table col-lg-9 col-md-9 col-sm-9 col-10">
             <thead>
                 <tr>
                     <th width="10%"></th>

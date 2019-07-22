@@ -15,34 +15,10 @@
         <div class="container-fluid" >
             <div class="row justify-content-center mt-2">
                 <div class="col-md-2 col-sm-4 col-4">
-                    帳號 
-                </div>
-                <div class="col-md-4 col-sm-8 col-8">
-                    <input v-model="account" type="text" class="form-control">
-                </div>
-            </div>
-            <div class="row justify-content-center mt-2">
-                <div class="col-md-2 col-sm-4 col-4">
                     姓名  
                 </div>
                 <div class="col-md-4 col-sm-8 col-8">
                     <input v-model="name" type="text" class="form-control">
-                </div>
-            </div>
-            <div class="row justify-content-center mt-2">
-                <div class="col-md-2 col-sm-4 col-4">
-                    生日  
-                </div>
-                <div class="col-md-4 col-sm-8 col-8">
-                    <input v-model="birthday" type="text" class="form-control">
-                </div>
-            </div>
-            <div class="row justify-content-center mt-2">
-                <div class="col-md-2 col-sm-4 col-4">
-                    身分證字號 
-                </div>
-                <div class="col-md-4 col-sm-8 col-8">
-                    <input v-model="identity_num" type="text" class="form-control">
                 </div>
             </div>
             <div class="row justify-content-center mt-2">
@@ -95,10 +71,7 @@ export default {
     props:['user'],
     data() {
         return {
-            account:this.user.account,
             name:this.user.name,
-            birthday:this.user.birthday,
-            identity_num:this.user.identity_num,
             email:this.user.email,
             tel:this.user.tel,
             cel:this.user.cel,
@@ -107,10 +80,7 @@ export default {
     },
     watch: {
         user:function() {
-            this.account=this.user.account
             this.name=this.user.name
-            this.birthday=this.user.birthday
-            this.identity_num=this.user.identity_num
             this.email=this.user.email
             this.tel=this.user.tel
             this.cel=this.user.cel
@@ -124,10 +94,7 @@ export default {
         update:function(){
             const self = this;
             const data = {
-                account:this.account,
                 name:this.name,
-                birthday:this.birthday,
-                identity_num:this.identity_num,
                 email:this.email,
                 tel:this.tel,
                 cel:this.cel,

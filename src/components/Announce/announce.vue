@@ -1,98 +1,62 @@
 
 <style scoped>
-.annDetail {
-  background-color: rgb(255, 238, 190);
-  border: 2px burlywood;
-  font-family: Microsoft JhengHei;
+.b_content {
+  background-color: #d6cab7;
+  height: 100%;
+  padding-bottom: 2rem;
 }
-
-label {
-  font-size: 34px;
-  color: #94693f;
-  font-weight: bold;
-  font-family: Microsoft JhengHei;
+.table {
+  margin: 0 auto;
 }
-.newsText {
-  margin-top: 5px;
-  margin-left: 10px;
-  font-family: Microsoft JhengHei;
-  font-size: 15px;
-  border: 3px burlywood;
+.table-header {
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+  color: #784a45;
+  font-size: 25px;
+  font-weight: 700;
 }
-.ann_content img{
-  width: 100%;
-}
-img{
-  max-width:100% !important;
-}
-</style>
-<style>
-img{
-  max-width:100% !important;
-}
-.col_b_left_top{
-  border-style:solid;
-}
-.col_b_left{
-  border-right-style:solid;
-  border-bottom-style:solid;
-  border-left-style:solid;
-}
-.col_b_right_top{
-  border-right-style:solid;
-  border-bottom-style:solid;
-  border-top-style:solid;
-}
-.col_b_right{
-  border-right-style:solid;
-  border-bottom-style:solid;
+.btn-lightbrown{
+    margin-top: 2rem;
+    font-weight: 600;
+    letter-spacing: 2px;
 }
 </style>
 
 <template>
-  <div class="annDetail" align="center">
-    <label>公告詳細</label>
-    <div class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="col-md-1 text-left col_b_left_top pb-2"> 
-          <span>標題</span>
+  <div class="content">
+        <div class="b_content">
+            <div class="form course">
+                <div class="table-header col-lg-6">公告詳細</div>
+                <table class="table table-bordered col-lg-9 col-md-9 col-sm-9 col-10">
+                    <tbody>
+                        <tr>
+                            <th scope="row" width="20%">標題</th>
+                            <td colspan="3">{{Announce.title}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">公告日期</th>
+                            <td colspan="3">{{Announce.created_at}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">分類</th>
+                            <td colspan="3">{{typeToString(Announce.ann_type)}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">公告內容</th>
+                            <td colspan="3" v-html="Announce.content"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div v-if="user.status == 4" class="row justify-content-center mt-2 pb-2">
+                  <div class="offset-1 col-md-10 text-left"> 
+                    <button class="onclk btn btn-danger" @click="delann">刪除公告</button>
+                    <router-link tag="button" :to="{name:'editAnnounce',params:{announce_id:ann_id}}" class="btn btn-warning">修改公告</router-link>
+                  </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-10 text-left col_b_right_top">
-          <span>{{Announce.title}}</span>
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-md-1 text-left col_b_left pb-2"> 
-          <span>公告日期</span>
-        </div>
-        <div class="col-md-10 text-left col_b_right">
-          <span>{{Announce.created_at}}</span>
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-md-1 text-left col_b_left pb-2"> 
-          <span>分類</span>
-        </div>
-        <div class="col-md-10 text-left col_b_right">
-          <span>{{typeToString(Announce.ann_type)}}</span>
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-md-1 text-left col_b_left pb-2"> 
-          <span>公告內容</span>
-        </div>
-        <div class="col-md-10 text-left col_b_right">
-          <span v-html="Announce.content"></span>
-        </div>
-      </div>
-      <div v-if="user.status == 4" class="row justify-content-center mt-2 pb-2">
-        <div class="offset-1 col-md-10 text-left"> 
-          <button class="onclk btn btn-danger" @click="delann">刪除公告</button>
-          <router-link tag="button" :to="{name:'editAnnounce',params:{announce_id:ann_id}}" class="btn btn-warning">修改公告</router-link>
-        </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>

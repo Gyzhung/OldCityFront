@@ -210,7 +210,7 @@
                         <router-link to="/resume" ><button class="dropdown-item" type="button">我的履歷</button></router-link>
                         <router-link to="/signuplist" ><button class="dropdown-item" type="button">我的報名</button></router-link>
                         <router-link to="/banuser"  v-if="user.status ==4"><button class="dropdown-item" type="button">限制用戶</button></router-link>
-                          <button class="dropdown-item" type="button">會員專區</button>
+                          <!-- <button class="dropdown-item" type="button">會員專區</button> -->
                           <div class="dropdown-divider"></div>
                           <div @click="logout"  class="dropdown-item" style="cursor: pointer;">登出</div>
 
@@ -238,7 +238,7 @@
                       <li class="nav-item dropdown" >
                           <a class="menu-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown"
                               aria-haspopup="true" aria-expanded="false">景點簡介</a>
-                          <div class="dropdown-menu" aria-labelledby="dropdown05" @click="close_nav">
+                          <div class="dropdown-menu" aria-labelledby="dropdown05" @click="close_nav();notOpen()">
                               <a class="dropdown-item" href="#">第二市場</a>
                               <a class="dropdown-item" href="#">第三市場</a>
                               <a class="dropdown-item" href="#">第五市場</a>
@@ -247,13 +247,13 @@
                       <li class="nav-item" @click="close_nav">
                           <router-link to="/photo" class="menu-link">活動花絮</router-link>
                       </li>
-                      <li class="nav-item" @click="close_nav">
+                      <li class="nav-item" @click="close_nav();notOpen()">
                           <a class="menu-link" href="#">嚮導簡介</a>
                       </li>
                       <li class="nav-item" @click="close_nav">
                           <router-link to="/Course" class="menu-link">嚮導課程</router-link>
                       </li>
-                      <li class="nav-item" @click="close_nav">
+                      <li class="nav-item" @click="close_nav();notOpen()">
                           <a class="menu-link" href="#">導覽媒合</a>
                       </li>
                   </ul>
@@ -322,6 +322,9 @@ export default {
       if (this.is_small) {
         this.$refs.navbar_toggler.click()
       }
+    },
+    notOpen:function() {
+      alert("尚未開放")
     }
   },
   computed: {

@@ -18,11 +18,11 @@
                     照片 :  {{user.profile_pic}}
                 </div>
             </div> -->
-            <div class="row justify-content-center">
+            <!-- <div class="row justify-content-center">
                 <div class="col-md-4 col-sm-11">
                     帳號 : {{user.account}}
                 </div>
-            </div>
+            </div> -->
             <div class="row justify-content-center">
                 <div class="col-md-4 col-sm-11">
                     姓名 : {{user.name}}
@@ -75,7 +75,7 @@ export default {
         }
     },
     mounted() {
-        
+        console.log(this.user)
     },
     methods:{
         genderTostring:function(gender){
