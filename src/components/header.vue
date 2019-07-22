@@ -54,7 +54,7 @@
 }
 .menu {
   width: 100%;
-  height: 12vh;
+  min-height: 12vh;
   background-color: #e7e6e1;
 }
 .logo {
@@ -111,12 +111,37 @@
   background-color: #ab8a6b;
   border-bottom: 1px solid rgba(171, 138, 107, 1);
 }
+@media (max-width: 1314px) {
+  .menu-nav {
+    width: 80%;
+  }
+  .menu-link{
+    padding: .5rem;
+  }
+}
 @media (max-width: 1200px) {
   .menu-nav {
     width: 85%;
   }
   .menu-link{
     padding: .5rem;
+  }
+}
+@media (max-width: 1200px) {
+  .menu-nav {
+    width: 90%;
+  }
+  .menu-link{
+    padding: .5rem;
+  }
+}
+@media (max-width: 1039px) {
+  .navbar-collapse{
+    width: 93%;
+  }
+  .btn-md{
+    float: right;
+    line-height: 100px;
   }
 }
 @media (max-width: 1024px) {
@@ -162,8 +187,6 @@
     line-height: 30px;
   }
 }
-
-
 </style>
 <template>
     <div class="header">
@@ -202,35 +225,35 @@
       <div class="menu">
           <nav class="menu-nav navbar navbar-expand-lg navbar-light ">
               <!--響應式漢堡條-->
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05"
+              <button ref="navbar_toggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05"
                   aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
               </button>
 
               <div class="collapse navbar-collapse" id="navbarsExample05">
                   <ul class="navbar-nav">
-                      <li class="nav-item">
+                      <li class="nav-item" @click="close_nav">
                           <router-link to="/news" class="menu-link">最新消息</router-link>
                       </li>
-                      <li class="nav-item dropdown">
+                      <li class="nav-item dropdown" >
                           <a class="menu-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown"
                               aria-haspopup="true" aria-expanded="false">景點簡介</a>
-                          <div class="dropdown-menu" aria-labelledby="dropdown05">
+                          <div class="dropdown-menu" aria-labelledby="dropdown05" @click="close_nav">
                               <a class="dropdown-item" href="#">第二市場</a>
                               <a class="dropdown-item" href="#">第三市場</a>
                               <a class="dropdown-item" href="#">第五市場</a>
                           </div>
                       </li>
-                      <li class="nav-item">
+                      <li class="nav-item" @click="close_nav">
                           <router-link to="/photo" class="menu-link">活動花絮</router-link>
                       </li>
-                      <li class="nav-item">
+                      <li class="nav-item" @click="close_nav">
                           <a class="menu-link" href="#">嚮導簡介</a>
                       </li>
-                      <li class="nav-item">
+                      <li class="nav-item" @click="close_nav">
                           <router-link to="/Course" class="menu-link">嚮導課程</router-link>
                       </li>
-                      <li class="nav-item">
+                      <li class="nav-item" @click="close_nav">
                           <a class="menu-link" href="#">導覽媒合</a>
                       </li>
                   </ul>
@@ -247,9 +270,33 @@ export default {
   props: ["user"], //從home傳進來
   data() {
     return {
+      screenWidth:document.body.clientWidth,
+      is_small:false
     };
   },
-  watch: {},
+  watch: {
+    screenWidth:function(n,o) {
+      if (n <= 989 && o > 989) {
+        this.is_small = true;
+      }else if(n > 989 && o <= 989){
+        this.is_small = false;
+      }
+    },
+  },
+  mounted() {
+    const self = this;
+    window.onresize = () => {
+      return (() => {
+        window.screenWidth = document.body.clientWidth
+        self.screenWidth = window.screenWidth
+      })()
+    }
+    if (this.screenWidth >989) {
+      this.is_small = false;
+    }else{
+      this.is_small = true;
+    }
+  },
   methods: {
     logout() {
       const self = this;
@@ -270,6 +317,11 @@ export default {
         })
         .catch(function(error) {
         });
+    },
+    close_nav:function() {
+      if (this.is_small) {
+        this.$refs.navbar_toggler.click()
+      }
     }
   },
   computed: {

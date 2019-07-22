@@ -49,20 +49,18 @@
           <div v-if="Branches[0] != undefined">{{Branches?Branches[0].session_name:""}}</div>
           <div v-else>尚未建立任何場次</div>
         </div>
-        <div class="col-lg-10 col-md-9 col-sm-6 col-10 mb-2" style="margin: 0 auto;" v-if="user.status ==4">
+        <div class="col-lg-9 col-md-9 col-sm-10 col-12 mb-2" style="margin: 0 auto;" v-if="user.status ==4">
           <div style="float:left;">
             <router-link :to="{name:'createBranch',params:{s_id:$route.params.s_id}}"  class="btn btn-success" style="color:white;">新增</router-link>
           </div>
         </div>
-        <table class="table col-lg-10 col-md-9 col-sm-6 col-10">
+        <table class="table col-lg-9 col-md-9 col-sm-10 col-12">
             <thead>
                 <tr>
                   <th>流程名稱 </th>
                   <th>報名開始</th>
                   <th>報名截止</th>
                   <th></th>
-                  <th></th>
-                  <th v-if="user.status == 4"></th>
                 </tr>
             </thead>
             <tbody>
@@ -70,24 +68,26 @@
                   <td>{{Branch.title}}</td>
                   <td>{{Branch.signUpTime_start.substr(0,10)}}</td>
                   <td>{{Branch.signUpTime_end.substr(0,10)}}</td>
-                  <td>
-                    <router-link tag="button"  class="btn btn-primary" :to="{name:'Branch_content',params:{b_id:Branch.b_id}}" >
-                      查看
-                    </router-link>
-                  </td>
-                  <td>
-                    <div v-if="user !='' && Branch.Is_signUp == 1">已報名</div>
-                    <button v-else type="button" @click="addSignUp(Branch.b_id)" class="btn btn-lightbrown">報名</button>
-                  </td>
-                  <td v-if="user.status == 4">
-                    <div class="dropdown">
-                      <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">功能</button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <router-link  class="dropdown-item" :to="{name:'checkSignUp',params:{b_id:Branch.b_id}}" >審核</router-link>
-                        <router-link  class="dropdown-item" :to="{name:'completed',params:{b_id:Branch.b_id}}" >點名</router-link>
-                        <router-link  class="dropdown-item" :to="{name:'Branch_photo',params:{b_id:Branch.b_id}}" >花絮</router-link>
-                        <!-- <a class="dropdown-item" href="#">修改</a> -->
-                        <!-- <a class="dropdown-item" href="#">刪除</a> -->
+                  <td class="form-inline">
+                    <div class="pt-1 pl-2">
+                      <router-link tag="button"  class="btn btn-primary" :to="{name:'Branch_content',params:{b_id:Branch.b_id}}" >
+                        查看
+                      </router-link>
+                    </div>
+                    <div class="pt-1 pl-2">
+                      <button type="button" style="font-size:17px" @click="deleteSignUp(Branch.su_id)"  class="btn btn-lightbrown" v-if="user !='' && Branch.Is_signUp == 1">已報名</button>
+                      <button v-else type="button" @click="addSignUp(Branch.b_id)" class="btn btn-lightbrown">報名</button>
+                    </div>
+                    <div v-if="user.status == 4" class="pt-1 pl-2">
+                      <div class="dropdown" >
+                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">功能</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <router-link  class="dropdown-item" :to="{name:'checkSignUp',params:{b_id:Branch.b_id}}" >審核</router-link>
+                          <router-link  class="dropdown-item" :to="{name:'completed',params:{b_id:Branch.b_id}}" >點名</router-link>
+                          <router-link  class="dropdown-item" :to="{name:'Branch_photo',params:{b_id:Branch.b_id}}" >花絮</router-link>
+                          <!-- <a class="dropdown-item" href="#">修改</a> -->
+                          <!-- <a class="dropdown-item" href="#">刪除</a> -->
+                        </div>
                       </div>
                     </div>
                   </td>
@@ -130,6 +130,23 @@ export default {
       .catch(function(error) {
           alert(error.response.data);
       }); 
+    },
+    deleteSignUp:function(su_id) {
+      const self = this;
+      if(confirm("取消報名"))
+      {
+        const data ={
+          su_id:su_id
+        }
+        this.$http.post(`${this.$GLOBAL.path}/api/deleteSignUp`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+        .then(function(response) {
+          alert("取消成功")
+          self.getBranchesData(self.user);
+        })
+        .catch(function(error) {
+          alert(error.response.data)
+        });
+      }
     },
     getBranchesData:function(user){
       const self = this;

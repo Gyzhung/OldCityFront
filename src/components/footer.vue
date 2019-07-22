@@ -17,14 +17,16 @@
 
 <template>
   <div class="footer pt-5 pb-5">
-    <div class="row">
-      <div class="col-lg-6 col-md-6 col-sm-6 col-6 text-right pr-5">
-        <img src="../assets/mail.png" width="64">
-        <p class="mt-2 font-weight-bold">聯絡我們</p>
-      </div>
-      <div class="col-lg-6 col-md-6 col-sm-6 col-6 pl-5">
-        <img src="../assets/fb.png" width="64">
-        <p class="mt-2 font-weight-bold">紛絲專頁</p>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-6 text-right pr-5">
+          <img src="../assets/mail.png" width="64">
+          <p class="mt-2 font-weight-bold">聯絡我們</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-6 pl-5">
+          <img src="../assets/fb.png" width="64">
+          <p class="mt-2 font-weight-bold">紛絲專頁</p>
+        </div>
       </div>
     </div>
     <div class="bottom-bar"></div>

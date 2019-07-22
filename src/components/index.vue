@@ -3,18 +3,11 @@
   background-color: #dacfb8;
   padding: 1rem;
 }
-.announce-list {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-}
 .announce-header {
   /* text-align: center; */
   font-size: 25px;
   font-weight: 700;
   color: #94693a;
-}
-.announce-text {
-  margin: 0 auto;
 }
 .announce-date {
   font-size: 14px;
@@ -95,18 +88,19 @@
         <!--公告欄-->
         <div class="announce col-lg-4">
             <div class="announce-header text-center">最新公告</div>
-              <div class="row announce-list" v-for="Announce in Announces" :key="Announce.ann_id">
-                <router-link :to="{name:'Announce',params:{announce_id:Announce.ann_id}}">
-                  <div class="col-lg-10 announce-text text-truncate">{{Announce.title}}</div>
-                  <div class="col-lg-10 announce-text announce-date font-italic">{{Announce.created_at}}</div>
-                </router-link>
-              </div>
+            <div class=" announce-list container-fluid" v-for="Announce in Announces" :key="Announce.ann_id">
+              <router-link class="row" :to="{name:'Announce',params:{announce_id:Announce.ann_id}}">
+                <div class="col-lg-10 announce-text text-truncate">{{Announce.title}}</div>
+                <div class="col-lg-10 announce-text announce-date font-italic">{{Announce.created_at}}</div>
+              </router-link>
+            </div>
             <div class="announce-more text-monospace font-italic">more▼</div>
 
         </div>
     </div>
     <!--遊程介紹-->
-    <div class="row border-top mb-4">
+    <div class="container-fluid">
+      <div class="row border-top mb-4">
         <div class="mt-3 text-center col-lg-3 col-md-6 col-sm-12">
             <img src="../assets/picS.png" class="landscpe-img">
         </div>
@@ -121,32 +115,29 @@
             <p class="l-header">遊程介紹</p>
             <p>這是一個景點簡介，說明旅程內容活動內容等等等等等</p>
         </div>
+      </div>
     </div>
+    
     <!--響導人員-->
-    <div class="row border-top pt-3 pl-5">
+    <div class="container-fluid">
+      <div class="row border-top pt-3 pl-5">
         <p class="l-header ml-4 col-lg-11">嚮導人員</p>
-
         <div class="guide-list col-lg-2 col-md-3 col-sm-4 col-6">
             <img src="../assets/boy.png">
         </div>
-
         <div class="guide-list col-lg-2 col-md-3 col-sm-4 col-6">
             <img src="../assets/boy.png">
         </div>
-
         <div class="guide-list col-lg-2 col-md-3 col-sm-4 col-6">
             <img src="../assets/boy.png">
         </div>
-
         <div class="guide-list col-lg-2 col-md-3 col-sm-4 col-6">
             <img src="../assets/boy.png">
         </div>
-
         <div class="guide-list col-lg-2 col-md-3 col-sm-4 col-6">
             <img src="../assets/boy.png">
         </div>
-
-
+      </div>
     </div>
 </div>
 </template>

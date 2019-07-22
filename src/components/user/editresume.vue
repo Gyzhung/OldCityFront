@@ -18,7 +18,7 @@
                     最高學歷 
                 </div>
                 <div class="col-md-4 col-sm-8 col-8">
-                    <input v-model="residenceAddress" type="text" class="form-control">
+                    <input v-model="education" type="text" class="form-control">
                 </div>
             </div>
             <div class="row justify-content-center mt-2">
@@ -26,7 +26,7 @@
                     通訊地址 
                 </div>
                 <div class="col-md-4 col-sm-8 col-8">
-                    <input v-model="education" type="text" class="form-control">
+                    <input v-model="currentAddress" type="text" class="form-control">
                 </div>
             </div>
             <div class="row justify-content-center mt-2">
@@ -66,7 +66,10 @@
                     服務 
                 </div>
                 <div class="col-md-4 col-sm-8 col-8">
-                    <input v-model="serve" type="text" class="form-control">
+                    <select v-model="serve" class="form-control" placeholder="級數">
+                        <option value="0">已退休</option>
+                        <option value="1">在職中</option>
+                    </select>
                 </div>
             </div>
             <div class="row justify-content-center mt-2">
@@ -256,7 +259,7 @@ export default {
                 self.$router.push("/resume");
             
             }).catch(function(error) {
-                console.log(error)
+                alert(error.response.data)
             });
         }
     }

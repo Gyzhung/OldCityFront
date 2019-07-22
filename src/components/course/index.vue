@@ -35,18 +35,61 @@
   background-color: rgb(126, 98, 71);
   color: #ffffff;
 }
-.session {
-  margin: 0 auto;
-  width: 80%;
-  min-height: 70vh;
-}
 </style>
 
 <template>
   <div class="content">
-    <div class="form session">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="table-header col-lg-6">課程列表</div>
+      </div>
+      <div class="row justify-content-center mb-2">
+        <div class="col-lg-9 col-md-9 col-sm-10 col-12">
+          <div style="float:left;" v-if="user.status ==4">
+            <router-link to="createCourse" class="btn btn-success" style="color:white;">新增</router-link>
+          </div>
+          <div class="form-inline" style="float:right;align-items:flex-start">
+            <div class="form-group pr-2">
+              <input type="test" v-model="keyword" class="form-control" @keyup.enter="search" id="search_keyword" />
+            </div>
+            <button type="submit" class="btn btn-primary" @click="keyword_search">搜尋</button>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <table class="table col-lg-9 col-md-9 col-sm-10 col-12">
+          <thead>
+            <tr>
+              <th width="25%">課程名稱</th>
+              <th>課程簡介</th>
+              <th width="8%">類別</th>
+              <th width="10%"></th>
+              <th width="10%" v-if="user.status ==4"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="course in courses" :key="course.c_id">
+              <td>{{course.c_name}}</td>
+              <td>{{course.introduce}}</td>
+              <td>{{typetoString(course.type)}}</td>
+              <td>
+                <router-link
+                  :to="{name:'Session',params:{c_id:course.c_id}}"
+                  class="btn btn-enter"
+                >查看</router-link>
+              </td>
+              <td v-if="user.status ==4"> 
+                <button @click="delete_course(course.c_id)" class="btn btn-danger">刪除</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- <div class="form session row">
       <div class="table-header col-lg-6">課程列表</div>
-      <div class="col-lg-12 col-md-9 col-sm-6 col-10" style="margin: 0 auto;">
+      <div class="col-lg-12 col-md-9 col-sm-6 col-12" style="margin: 0 auto;">
         <div style="float:left;" v-if="user.status ==4">
           <router-link to="createCourse" class="btn btn-success" style="color:white;">新增</router-link>
         </div>
@@ -57,7 +100,7 @@
           <button type="submit" class="btn btn-primary"  @click="keyword_search">搜尋</button>
         </div>
       </div>
-      <table class="table col-lg-12 col-md-9 col-sm-6 col-10">
+      <table class="table col-lg-12 col-md-9 col-sm-6 col-12">
         <thead>
           <tr>
             <th>課程名稱</th>
@@ -84,7 +127,7 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
   </div>
 </template>
 

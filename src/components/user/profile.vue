@@ -12,7 +12,7 @@
 <template>
     <div class="content">
         <div class="title">我的個人資訊</div>
-        <div>
+        <div class="container-fluid">
             <!-- <div class="row justify-content-center">
                 <div class="col-md-4 col-sm-11">
                     照片 :  {{user.profile_pic}}

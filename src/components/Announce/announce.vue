@@ -106,7 +106,6 @@ export default {
   },
   mounted: function() {
     this.getann();
- 
   },
   methods: {
     getann() {

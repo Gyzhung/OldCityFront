@@ -4,10 +4,6 @@
   font-family: "Microsoft JhengHei";
   text-decoration: none;
 }
-.container-fluid {
-  margin: 0;
-  padding: 0;
-}
 
 body {
   margin: 0;
@@ -23,10 +19,6 @@ body {
   margin: 0;
   position: relative;
   padding-bottom: 1.5rem;
-}
-.row {
-  margin-right: 0;
-  margin-left: 0;
 }
 .contentroute {
   height: 100%;

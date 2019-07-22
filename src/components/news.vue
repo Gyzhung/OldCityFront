@@ -3,7 +3,7 @@
   height: 100%;
   padding-bottom: 2rem;
 }
-.nav{
+.nav {
   height: 150px;
   padding-left: 15px;
 }
@@ -14,18 +14,18 @@
 .table td {
   vertical-align: middle;
 }
-.news_title{
+.news_title {
   border-radius: 10px;
   background-color: #d6cab7;
   border-collapse: collapse;
   border-color: none;
 }
-.news_title th:first-child{
+.news_title th:first-child {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
 
-.news_title th:last-child{
+.news_title th:last-child {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -65,7 +65,6 @@
   background-color: #94693a;
 }
 .manage-content {
-  
   min-height: 40vw;
 }
 .btn-red {
@@ -78,7 +77,7 @@
   color: #ffffff;
 }
 @media (max-width: 980px) {
-  #course{
+  #course {
     margin-top: 2rem;
   }
   .AManage-nav-item {
@@ -97,7 +96,7 @@
   }
   .manage-content {
     font-size: 15px;
-  } 
+  }
 }
 @media (max-width: 740px) {
   .AManage-nav-item {
@@ -111,87 +110,97 @@
     font-size: 12px;
   }
   .AManage-nav-link {
-    padding: .25rem 0;
+    padding: 0.25rem 0;
     border-radius: 8px;
-  } 
+  }
   .manage-content {
     font-size: 12px;
-  } 
+  }
 }
-
 </style>
 
 <template>
   <div class="content">
-    <div class="row">
+    <div class="container-fluid">
+      <div class="row">
         <ul class="nav col-lg-3 col-md-12 col-sm-12 col-12" id="myTab" role="tablist">
-            <li class="table-header">最新消息</li>
-            <li class="AManage-nav-item">
-                <span class="AManage-nav-link" id="allnews-tab" @click="type = 0">全部消息</span>
-            </li>
-            <li class="AManage-nav-item ">
-                <span class="AManage-nav-link" id="activitynews-tab" @click="type = 1" >活動消息</span>
-            </li>
-            <li class="AManage-nav-item">
-                <span class="AManage-nav-link" id="attractionnews-tab" @click="type = 2">景點消息</span>
-            </li>
-            <li class="AManage-nav-item">
-                <span class="AManage-nav-link" id="coursenews-tab" @click="type = 3">課程消息</span>
-            </li>
-            <li class="AManage-nav-item">
-                <span class="AManage-nav-link" id="medianews-tab" @click="type = 4">媒體消息</span>
-            </li>
+          <li class="table-header">最新消息</li>
+          <li class="AManage-nav-item">
+            <span class="AManage-nav-link" id="allnews-tab" @click="type = 0">全部消息</span>
+          </li>
+          <li class="AManage-nav-item">
+            <span class="AManage-nav-link" id="activitynews-tab" @click="type = 1">活動消息</span>
+          </li>
+          <li class="AManage-nav-item">
+            <span class="AManage-nav-link" id="attractionnews-tab" @click="type = 2">景點消息</span>
+          </li>
+          <li class="AManage-nav-item">
+            <span class="AManage-nav-link" id="coursenews-tab" @click="type = 3">課程消息</span>
+          </li>
+          <li class="AManage-nav-item">
+            <span class="AManage-nav-link" id="medianews-tab" @click="type = 4">媒體消息</span>
+          </li>
         </ul>
         <div class="tab-content col-lg-9 col-md-12 col-sm-12 col-12" id="myTabContent">
-            <div class="tab-pane fade show active pt-4" id="allnews" role="tabpanel"
-                aria-labelledby="allnews-tab">
-                <div class="table-header col-lg-6">{{typeToString(type)}}</div>
-                <div class="manage-content">
-                    <table class="table col-lg-11 col-md-11 col-sm-11 col-12">
-                        <tbody>
-                            <tr class="news_title">
-                                <th scope="row">分類</th>
-                                <th scope="row">公告標題</th>
-                                <th scope="row" width="30%">公告日期</th>
-                            </tr>
-                            <router-link style="cursor: pointer;" :to="`/Announce/${Announce.ann_id}`" tag="tr" v-for="Announce in filter_Announce_list" :key="Announce.ann_id">
-                                <td>{{typeToString(Announce.ann_type)}}</td>
-                                <td>{{Announce.title}}</td>
-                                <td class="font-italic">{{Announce.created_at}}</td>
-                            </router-link>
-                        </tbody>
-                    </table>
-                </div>
+          <div
+            class="tab-pane fade show active pt-4"
+            id="allnews"
+            role="tabpanel"
+            aria-labelledby="allnews-tab"
+          >
+            <div class="table-header col-lg-6">{{typeToString(type)}}</div>
+            <div class="manage-content">
+              <table class="table col-lg-11 col-md-11 col-sm-11 col-12">
+                <tbody>
+                  <tr class="news_title">
+                    <th scope="row">分類</th>
+                    <th scope="row">公告標題</th>
+                    <th scope="row" width="30%">公告日期</th>
+                  </tr>
+                  <router-link
+                    style="cursor: pointer;"
+                    :to="`/Announce/${Announce.ann_id}`"
+                    tag="tr"
+                    v-for="Announce in filter_Announce_list"
+                    :key="Announce.ann_id"
+                  >
+                    <td>{{typeToString(Announce.ann_type)}}</td>
+                    <td>{{Announce.title}}</td>
+                    <td class="font-italic">{{Announce.created_at}}</td>
+                  </router-link>
+                </tbody>
+              </table>
             </div>
+          </div>
         </div>
-
-
+      </div>
     </div>
-</div>
+  </div>
 </template>
 <script>
 export default {
   data() {
     return {
       type: 0,
-      Announce_list:[]
-    }
+      Announce_list: []
+    };
   },
   mounted() {
     const self = this;
-    this.$http.post( `${this.$GLOBAL.path}/api/searchAnnounce`, {keyword: `all:`})
-    .then(function(response) {
-      if ((status = 200)) {
-        self.Announce_list = response.data;
-      }
-    })
-    .catch(function(error) {
-      alert(response);
-    });
+    this.$http
+      .post(`${this.$GLOBAL.path}/api/searchAnnounce`, { keyword: `all:` })
+      .then(function(response) {
+        if ((status = 200)) {
+          self.Announce_list = response.data;
+        }
+      })
+      .catch(function(error) {
+        alert(response);
+      });
   },
   methods: {
-    typeToString:function(type) {
-      switch(type){
+    typeToString: function(type) {
+      switch (type) {
         case 0:
           return "全部消息";
           break;
@@ -211,8 +220,8 @@ export default {
     }
   },
   computed: {
-    filter_Announce_list:function() {
-      switch(this.type){
+    filter_Announce_list: function() {
+      switch (this.type) {
         case 0:
           return this.Announce_list;
           break;
@@ -229,8 +238,7 @@ export default {
           return this.Announce_list.filter(a => a.ann_type == 4);
           break;
       }
-
     }
-  },
-}
+  }
+};
 </script>

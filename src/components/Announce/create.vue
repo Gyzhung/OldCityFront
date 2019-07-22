@@ -32,12 +32,12 @@
           <div class="form-header ">新增公告</div>
           <div class="card-body">
               <div>
-                  <div class="form-group row">
-                      <label for="account" class="offset-1 col-md-1 col-form-label">標題:</label>
+                  <div class="form-group row justify-content-center">
+                      <label for="account" class="col-md-1 col-form-label">標題:</label>
                       <div class="col-md-4">
                           <input type="text"  v-model="announce.title"  class="form-control">
                       </div>
-                      <label for="account" class="offset-1 col-md-1 col-form-label">分類:</label>
+                      <label for="account" class="col-md-1 col-form-label">分類:</label>
                       <div class="col-md-4">
                           <select class="form-control"  v-model="announce.ann_type" >
                               <option value="1">活動</option>
@@ -48,8 +48,8 @@
                       </div>
                   </div>
                   
-                  <div class="form-group row">
-                    <div class="offset-1 col-md-10">
+                  <div class="form-group row justify-content-center">
+                    <div class="col-md-10">
                       <label for="account" class="text-md-right">內容:</label>
                       <quill-editor  v-model="announce.content" :options="editorOption">
                       </quill-editor>

@@ -12,7 +12,7 @@
 <template>
     <div class="content">
         <div class="title">我的履歷</div>
-        <div>
+        <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-md-4 col-sm-11">
                     最高學歷 : {{user.education}}
@@ -45,7 +45,7 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-4 col-sm-11">
-                    服務 : {{user.serve}}
+                    服務 : {{serveTostring(user.serve)}}
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -139,6 +139,18 @@ export default {
             }).catch(function(error) {
                 console.log(error)
             });
+        },
+        serveTostring:function(serve) {
+            switch (serve) {
+                case 0:
+                    return "已退休"
+                    break;
+                case 1:
+                    return "在職中"
+                    break;
+                default:
+                    break;
+            }
         }
     },
 }

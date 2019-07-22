@@ -34,10 +34,10 @@
                             <td colspan="3">{{Branch.title}}</td>
                         </tr>
                         <tr>
-                            <th width="15%" scope="row">報名日期(起)</th>
-                            <td width="35%">{{Branch.signUpTime_start}}</td>
-                            <th width="15%" scope="row">報名日期(訖)</th>
-                            <td width="35%">{{Branch.signUpTime_end}}</td>
+                            <th width="20%" scope="row">報名日期(起)</th>
+                            <td width="30%">{{Branch.signUpTime_start}}</td>
+                            <th width="20%" scope="row">報名日期(訖)</th>
+                            <td width="30%">{{Branch.signUpTime_end}}</td>
                         </tr>
                         <!-- <tr>
                             <th scope="row">系列課程總時長(小時)</th>
