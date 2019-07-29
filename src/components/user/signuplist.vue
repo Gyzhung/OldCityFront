@@ -86,7 +86,6 @@ export default {
             this.$http.get(`${this.$GLOBAL.path}/api/getMyBranchList`,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
             .then(function(response) {
                 self.mysignup = response.data;
-                console.log(self.mysignup)
             
             }).catch(function(error) {
                 console.log(error.response)
@@ -99,7 +98,6 @@ export default {
             this.$http.get(`${this.$GLOBAL.path}/api/getMyBranchList`,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
             .then(function(response) {
                 self.mysignup = response.data;
-                console.log(self.mysignup)
             
             }).catch(function(error) {
                 console.log(error.response)

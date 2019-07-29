@@ -27,7 +27,6 @@
  letter-spacing: 2px;
 }
 .btn-enter{
-  float: right;
   background-color: #784a45;
   color: #ffffff;
 }
@@ -60,8 +59,7 @@
                 <tr>
                     <th width="10%"></th>
                     <th>場次名稱</th>
-                    <th width="15%"></th>
-                    <th width="15%" v-if="user.status == 4"></th>
+                    <th width="30%"></th>
                 </tr>
             </thead>
             <tbody>
@@ -69,10 +67,19 @@
                     <th scope="row">{{session.s_id}}</th>
                     <td>{{session.session_name}}</td>
                     <td>
-                        <router-link :to="{name:'Branch',params:{s_id:session.s_id}}" class="btn btn-enter">查看</router-link>
-                    </td>
-                    <td v-if="user.status == 4">
-                        <button @click="delete_session(session.s_id)" class="btn btn-danger">刪除</button>
+                      <div  class="form-inline">
+                          <router-link :to="{name:'Branch',params:{s_id:session.s_id}}" class="btn btn-enter mr-3">查看</router-link>
+                          <div v-if="user.status == 4" class="dropdown" >
+                            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">功能</button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <!-- <router-link  class="dropdown-item" :to="{name:'checkSignUp',params:{b_id:Branch.b_id}}" >審核</router-link>
+                              <router-link  class="dropdown-item" :to="{name:'completed',params:{b_id:Branch.b_id}}" >點名</router-link> -->
+                              <router-link  class="dropdown-item" :to="`/wizardreview/${session.s_id}`" >審核嚮導</router-link>
+                              <div class="dropdown-divider"></div>
+                              <button @click="delete_session(session.s_id)" class="dropdown-item">刪除</button>
+                            </div>
+                          </div>
+                        </div>
                     </td>
                 </tr>
             </tbody>

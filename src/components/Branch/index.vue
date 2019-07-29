@@ -39,6 +39,24 @@
   width: 90%;
   min-height: 70vh;
 }
+@media (max-width: 1225px) {
+  .th_w{
+    width: 15%;
+  }
+  
+}
+@media (max-width: 972px) {
+  .th_w{
+    width: 20%;
+  }
+  
+}
+@media (max-width: 650px) {
+  .th_w{
+    width: 25%;
+  }
+  
+}
 </style>
 
 <template>
@@ -58,16 +76,16 @@
             <thead>
                 <tr>
                   <th>流程名稱 </th>
-                  <th>報名開始</th>
-                  <th>報名截止</th>
+                  <th class="th_w">報名時間</th>
+                  <th class="th_w">活動時間</th>
                   <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="Branch in Branches" :key="Branch.b_id">
                   <td>{{Branch.title}}</td>
-                  <td>{{Branch.signUpTime_start.substr(0,10)}}</td>
-                  <td>{{Branch.signUpTime_end.substr(0,10)}}</td>
+                  <td v-html="signUpTime(Branch)"></td>
+                  <td v-html="eventTime(Branch)"></td>
                   <td class="form-inline">
                     <div class="pt-1 pl-2">
                       <router-link tag="button"  class="btn btn-primary" :to="{name:'Branch_content',params:{b_id:Branch.b_id}}" >
@@ -86,7 +104,7 @@
                           <router-link  class="dropdown-item" :to="{name:'completed',params:{b_id:Branch.b_id}}" >點名</router-link>
                           <router-link  class="dropdown-item" :to="{name:'Branch_photo',params:{b_id:Branch.b_id}}" >花絮</router-link>
                           <!-- <a class="dropdown-item" href="#">修改</a> -->
-                          <!-- <a class="dropdown-item" href="#">刪除</a> -->
+                          <button class="dropdown-item" @click="delbranch(Branch.b_id)">刪除</button>
                         </div>
                       </div>
                     </div>
@@ -154,7 +172,6 @@ export default {
         this.$http.get(`${this.$GLOBAL.path}/api/getBranchListBys_id`,{params:{ s_id:this.$route.params.s_id}})
         .then(function(response) {
           self.Branches = response.data;
-          
         })
         .catch(function(error) {
         });
@@ -168,6 +185,28 @@ export default {
         });
       }
       
+    },
+    signUpTime:function (Branche) {
+      return `${Branche.signUpTime_start.substr(5,5)}~<br/>${Branche.signUpTime_end.substr(5,5)}`
+    },
+    eventTime:function (Branche) {
+      return `${Branche.eventTime_start.substr(5,5)}~<br/>${Branche.eventTime_end.substr(5,5)}`
+    },
+    delbranch:function(b_id) {
+      const self = this;
+       if(confirm("刪除流程?"))
+      {
+        const data ={
+          b_id:b_id
+        }
+        this.$http.post(`${this.$GLOBAL.path}/api/deleteBranch`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+        .then(function(response) {
+          alert(response.data)
+          self.getBranchesData(self.user);
+        }).catch(function(error) {
+          alert(error.response)
+        });
+      }
     }
   },
 }

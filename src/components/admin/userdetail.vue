@@ -11,18 +11,12 @@
 </style>
 <template>
     <div class="content">
-        <div class="title">我的個人資訊</div>
+        <div class="title">{{user.name}}的個人資訊</div>
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-md-4 col-sm-11 text-center">
                     <img v-if="user.profile_pic != null" :src="`${this.$GLOBAL.path}/images/ThumbnailImage/${user.profile_pic}`" alt="">
-                    <img v-else src="../../assets/user.png" alt="">
-                    <div>
-                        <input hidden class="form-control-file" type="file" id="files" ref="files" v-on:change="handleFilesUpload()"/>
-                        <div v-if="files !=null">{{files.name}}</div>
-                        <button @click="addFiles" class="mt-2">選擇圖片</button>
-                        <button v-if="files !=null" class="mt-2" @click="submitFiles">上傳</button>
-                    </div>                    
+                    <img v-else src="../../assets/user.png" alt="">                  
                 </div>
             </div>
             <!-- <div class="row justify-content-center">
@@ -65,31 +59,37 @@
                     性別 : {{genderTostring(user.gender)}}
                 </div>
             </div>
-            <div class="row justify-content-center mt-3 mb-3">
-                <div class="col-md-4 col-sm-11">
-                     <router-link tag="button"  class="btn btn-warning" to="passwordchange">變更密碼</router-link>
-                </div>
-            </div>
-            <div class="row justify-content-center mt-3 mb-3">
-                <div class="col-md-4 col-sm-11">
-                    <router-link tag="button"  class="btn btn-primary" to="editprofile">修改</router-link>
-                </div>
-                
-            </div>
         </div>
     </div>
 </template>
 <script>
 export default {
-    props:['user'],
     data() {
         return {
-            files:null
+            files:null,
+            user:''
         }
     },
     mounted() {
+        this.getuser()
     },
     methods:{
+        getuser:function () {
+            const self =  this;
+            this.$http.get(`${this.$GLOBAL.path}/api/getUserDataByAdmin`,{
+                headers:{ 
+                    authorization: `Bearer ${this.$GLOBAL.login_token}`
+                },
+                params:{
+                    get_account:this.$route.params.account
+                }})
+            .then(function(response) {
+                self.user = response.data;
+            })
+            .catch(function(error) {
+                console.log(error.response)
+            });
+        },
         genderTostring:function(gender){
             switch (gender) {
                 case 0:
@@ -102,33 +102,8 @@ export default {
                     return "其他"
                     break;
             }
-        }
-        ,addFiles(){
-            this.$refs.files.click();
         },
-        handleFilesUpload(){
-            let uploadedFiles = this.$refs.files.files;
-            this.files = uploadedFiles[0];
-        },
-        submitFiles(){  
-            const self = this;
-            let formdata = new FormData();
-            formdata.append('profile_pic', this.files);
-            this.$http.post(`${this.$GLOBAL.path}/api/updateProfilePic`,formdata,
-            {
-                headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },
-                'Content-Type': 'multipart/form-data'
-            })
-            .then(function(response) {
-                self.files = null;
-                self.$emit("update_userdata");
-                alert("上傳成功")
-                
-            })
-            .catch(function(error) {
-                console.log(error.response)
-            });
-        },
+        
     }
 }
 </script>

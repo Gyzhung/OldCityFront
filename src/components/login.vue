@@ -48,23 +48,6 @@
             </div>
         </div>               
       </div>
-    <!-- <div class="container">        
-        <div id ="profile" class="col-lg-12 col-xs-12" align="center" >
-          <label >會員登入</label>
-        <div class="profileDetail">
-          <br>
-          <p>會員帳號:</p>
-          <input id="account"  v-model="users.account" type="text" >
-          
-          <p>會員密碼:</p>
-          <input id="password" @keyup.enter="login" v-model="users.password" type="password">
-          <br><br>
-          <button type="button" class="btn btn-light" >註冊會員</button>
-          <button type="button" @click="login" class="btn btn-primary">登入</button>
-          </div>
-        </div>
-      </div>
-    <div style="clear:both;"></div>這是用來清除上方的浮動效果-->
   </div>
 </template>
 

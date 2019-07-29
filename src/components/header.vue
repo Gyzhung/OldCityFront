@@ -70,6 +70,22 @@
   letter-spacing: 10px;
   text-shadow: 0.1em 0.1em 0.2em black;
 }
+
+.list {
+  float: right;
+  margin: 0;
+}
+.list li {
+  display: inline;
+  color: #fff;
+  font-weight: 700;
+  padding-left: 0.5rem;
+  letter-spacing: 10px;
+  text-shadow: 0.1em 0.1em 0.2em black;
+}
+.b-right {
+  border-right: 1.5px solid #fff;
+}
 @media (max-width: 1156px) {
   .logo{
     padding: 10px;
@@ -107,6 +123,13 @@
      width:200px;
   }
 }
+.message_img {
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    float:left;
+    margin-right: 10px;
+}
 </style>
 <template>
   <div>
@@ -122,13 +145,17 @@
           <div v-else class="dropdown mid">
             <button class="btn dropdown-toggle btn-md" type="button" id="dropdownMenu2"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="../assets/user.png" width="32px"><span class="profile-name">{{user.name}}</span>
+                <div v-if="user.profile_pic != null"  class="message_img" style="width: 32px; height: 32px;">
+                  <img :src="`${this.$GLOBAL.path}/images/ThumbnailImage/${user.profile_pic}`" alt="" class="img" width="32" height="32" style="vertical-align:baseline;">
+                </div>
+                <img v-else src="../assets/user.png" width="32px"><span class="profile-name">{{user.name}}</span>
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
               <router-link to="/createannounce" v-if="user.status ==4"><button class="dropdown-item" type="button">新增公告</button></router-link>
               <router-link to="/profile" ><button class="dropdown-item" type="button">個人資訊</button></router-link>
               <router-link to="/resume" ><button class="dropdown-item" type="button">我的履歷</button></router-link>
               <router-link to="/signuplist" ><button class="dropdown-item" type="button">我的報名</button></router-link>
+              <router-link to="/userlist"  v-if="user.status ==4"><button class="dropdown-item" type="button">查詢用戶</button></router-link>
               <router-link to="/banuser"  v-if="user.status ==4"><button class="dropdown-item" type="button">限制用戶</button></router-link>
                 <button class="dropdown-item" type="button">會員專區</button> 
                 <div class="dropdown-divider"></div>
@@ -162,11 +189,11 @@
                 <li class="nav-item" @click="close_nav">
                     <router-link to="/photo" class="menu-link">活動花絮</router-link>
                 </li>
-                <li class="nav-item" @click="close_nav();notOpen()">
-                    <a class="menu-link" href="#">嚮導簡介</a>
+                <li class="nav-item" @click="close_nav()">
+                    <router-link to="/wizard_introduction" class="menu-link">嚮導簡介</router-link>
                 </li>
                 <li class="nav-item" @click="close_nav">
-                    <router-link to="/Course" class="menu-link">嚮導課程</router-link>
+                    <router-link to="/Session/1" class="menu-link">嚮導課程</router-link>
                 </li>
                 <li class="nav-item" @click="close_nav();notOpen()">
                     <a class="menu-link" href="#">導覽媒合</a>

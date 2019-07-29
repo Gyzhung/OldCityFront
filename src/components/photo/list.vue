@@ -7,7 +7,7 @@
     <div class="content">
         <div class="container-fluid photo_page mt-3 mb-5">
             <div class="row">
-                <div class="col-4" v-for="branch in branch_list" :key="branch.b_id">
+                <div class="col-md-4 col-12" v-for="branch in branch_list" :key="branch.b_id">
                     <router-link style="cursor: pointer;" :to="`/Branch_photo/${branch.b_id}`" tag="div" class="card">
                         <div class="card-header">
                             {{branch.session_name}}-{{branch.title}}

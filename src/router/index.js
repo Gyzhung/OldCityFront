@@ -7,6 +7,7 @@ import login from '@/components/login'
 import Home from '@/components/home'
 import Index from '@/components/index'
 import news from '@/components/news'
+import wizard_introduction from '@/components/page/wizard_introduction'
 
 //課程場次
 import createCourse from '@/components/course/create'
@@ -23,7 +24,10 @@ import Branch_content from '@/components/Branch/content'
 import checkSignUp from '@/components/admin/checkSignUp'
 import completed from '@/components/admin/completed'
 import banuser from '@/components/admin/banuser'
-import addbanuser from '@/components/admin/addbanuser'
+import userlist from '@/components/admin/userlist'
+import userdetail from '@/components/admin/userdetail'
+import wizardreview from '@/components/admin/wizardreview'
+
 
 //user
 import profile from '@/components/user/profile'
@@ -31,6 +35,7 @@ import resume from '@/components/user/Resume'
 import editprofile from '@/components/user/editprofile'
 import editresume from '@/components/user/editresume'
 import signuplist from '@/components/user/signuplist'
+import passwordchange from '@/components/user/passwordChange'
 
 
 
@@ -112,7 +117,7 @@ export default new Router({
                     name: 'Branch_content',
                     component: Branch_content
                 }, {
-                    path: '/createBranch',
+                    path: '/createBranch/:s_id',
                     name: 'createBranch',
                     component: createBranch
                 }, {
@@ -160,9 +165,25 @@ export default new Router({
                     name: 'banuser',
                     component: banuser
                 }, {
-                    path: '/addbanuser',
-                    name: 'addbanuser',
-                    component: addbanuser
+                    path: '/userlist',
+                    name: 'userlist',
+                    component: userlist
+                }, {
+                    path: '/wizard_introduction',
+                    name: 'wizard_introduction',
+                    component: wizard_introduction
+                }, {
+                    path: '/passwordchange',
+                    name: 'passwordchange',
+                    component: passwordchange
+                }, {
+                    path: '/userdetail/:account',
+                    name: 'userdetail',
+                    component: userdetail
+                }, {
+                    path: '/wizardreview/:s_id',
+                    name: 'wizardreview',
+                    component: wizardreview
                 }
 
 

@@ -45,7 +45,7 @@
     <div class="form session">
       <div class="row">
         <div class="table-header col-lg-6">
-          <div>新增限制用戶</div>
+          <div>查詢用戶</div>
         </div>
         <div class="col-lg-10 col-md-9 col-sm-6 col-10 mb-2" style="margin: 0 auto;" v-if="user.status ==4">
           <div style="float:right;">
@@ -58,15 +58,18 @@
                 <tr>
                   <th>用戶名稱</th>
                   <th>帳號</th>
-                  <th></th>
+                  <th width="25%"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="user in users" :key="user.u_id">
                   <td>{{user.account}}</td>
                   <td>{{user.name}}</td>
-                  <td v-if="user.is_ban == 1"><button class="btn btn-primary" @click="ban_user(user.account,user.is_ban)">解除</button></td>
-                  <td v-else><button class="btn btn-danger" @click="ban_user(user.account,user.is_ban)">限制</button></td>
+                  <td>
+                    <router-link tag="button"  class="btn btn-primary" :to="`userdetail/${user.account}`">查看</router-link>
+                    <button v-if="user.is_ban == 1" class="btn btn-warning" @click="ban_user(user.account,user.is_ban)">解除</button>
+                    <button v-else class="btn btn-danger" @click="ban_user(user.account,user.is_ban)">限制</button>
+                  </td>
                 </tr>
             </tbody>
         </table>

@@ -76,8 +76,7 @@ export default {
       const self = this;
       this.$http.get(`${this.$GLOBAL.path}/api/getAnnounceData?ann_id=${this.ann_id }` )
       .then(function(response) {
-        self.Announce = response.data;     
-        console.log(self.Announce)   
+        self.Announce = response.data;
       })
       .catch(function(error) {
       });

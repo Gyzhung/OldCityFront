@@ -130,7 +130,6 @@ export default {
         content: this.announce.content,
         ann_type: this.announce.ann_type
       }
-      console.log(data)
       this.$http.post(`${this.$GLOBAL.path}/api/addAnnounce`,data,{headers: {authorization: `Bearer ${this.$GLOBAL.login_token}`}})
       .then(function(response) {
         if ((status = 200)) {

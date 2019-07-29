@@ -55,23 +55,23 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="../assets/picBig.png" data-holder-rendered="true">
+                    <img class="d-block w-100" src="../assets/IMG_5603.jpg" data-holder-rendered="true">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>台中車站</h5>
+                        <h5>第二市場</h5>
                         <p></p>
                     </div>
                 </div>
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="../assets/picBig.png" data-holder-rendered="true">
+                    <img class="d-block w-100" src="../assets/IMG_5575.jpg" data-holder-rendered="true">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>第一廣場</h5>
+                        <h5>第三市場</h5>
                         <p></p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="../assets/picBig.png" data-holder-rendered="true">
+                    <img class="d-block w-100" src="../assets/IMG_5541.jpg" data-holder-rendered="true">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>第三市場</h5>
+                        <h5>第五市場</h5>
                         <p></p>
                     </div>
                 </div>
@@ -122,7 +122,7 @@
     <div class="container-fluid">
       <div class="row border-top pt-3 pl-5">
         <p class="l-header ml-4 col-lg-11">嚮導人員</p>
-        <div class="guide-list col-lg-2 col-md-3 col-sm-4 col-6">
+        <!-- <div class="guide-list col-lg-2 col-md-3 col-sm-4 col-6">
             <img src="../assets/boy.png">
         </div>
         <div class="guide-list col-lg-2 col-md-3 col-sm-4 col-6">
@@ -136,7 +136,8 @@
         </div>
         <div class="guide-list col-lg-2 col-md-3 col-sm-4 col-6">
             <img src="../assets/boy.png">
-        </div>
+        </div> -->
+        尚無嚮導人員
       </div>
     </div>
 </div>

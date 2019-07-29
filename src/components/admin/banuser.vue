@@ -49,7 +49,7 @@
         </div>
         <div class="col-lg-10 col-md-9 col-sm-6 col-10 mb-2" style="margin: 0 auto;" v-if="user.status ==4">
           <div style="float:left;">
-            <router-link :to="{name:'addbanuser'}"  class="btn btn-danger" style="color:white;">限制</router-link>
+            <router-link :to="{name:'userlist'}"  class="btn btn-danger" style="color:white;">限制</router-link>
           </div>
         </div>
         <table class="table col-lg-10 col-md-9 col-sm-6 col-10">
@@ -109,7 +109,6 @@ export default {
         this.$http.get(`${this.$GLOBAL.path}/api/getBanUserList`,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
         .then(function(response) {
             self.banusers = response.data
-            console.log(self.banusers)
         }).catch(function(error) {
             console.log(error.response)
         });

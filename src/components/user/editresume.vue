@@ -213,7 +213,6 @@ export default {
         }
     },
     mounted() {
-        console.log(this.user)
         const self = this;
         if (this.user.user_languages != undefined) {
             this.user.user_languages.forEach(element => {
@@ -253,7 +252,6 @@ export default {
             data.languages = data.languages.map(a=>JSON.stringify(a))
             this.$http.post(`${this.$GLOBAL.path}/api/updateResume`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },params:{s_id:this.$route.params.s_id},})
             .then(function(response) {
-                console.log(response.data)
                 //對上層 home 取用戶資料
                 self.$emit("update_userdata");
                 self.$router.push("/resume");

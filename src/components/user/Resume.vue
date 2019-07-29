@@ -132,7 +132,6 @@ export default {
             }
             this.$http.post(`${this.$GLOBAL.path}/api/deleteLanguage`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },params:{s_id:this.$route.params.s_id},})
             .then(function(response) {
-                console.log(response.data)
                 //對上層 home 取用戶資料
                 self.$emit("update_userdata");
             
