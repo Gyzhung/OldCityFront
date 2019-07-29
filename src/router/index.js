@@ -185,11 +185,12 @@ export default new Router({
                     path: '/userdetail/:account',
                     name: 'userdetail',
                     component: userdetail
-                }, {
-                    path: '/wizardreview/:s_id',
-                    name: 'wizardreview',
-                    component: wizardreview
                 }
+                // }, {
+                //     path: '/wizardreview/:s_id',
+                //     name: 'wizardreview',
+                //     component: wizardreview
+                // }
 
 
             ]

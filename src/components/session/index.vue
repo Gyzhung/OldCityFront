@@ -74,7 +74,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                               <!-- <router-link  class="dropdown-item" :to="{name:'checkSignUp',params:{b_id:Branch.b_id}}" >審核</router-link>
                               <router-link  class="dropdown-item" :to="{name:'completed',params:{b_id:Branch.b_id}}" >點名</router-link> -->
-                              <router-link  class="dropdown-item" :to="`/wizardreview/${session.s_id}`" >審核嚮導</router-link>
+                              <!-- <router-link  class="dropdown-item" :to="`/wizardreview/${session.s_id}`" >審核嚮導</router-link> -->
                               <div class="dropdown-divider"></div>
                               <button @click="delete_session(session.s_id)" class="dropdown-item">刪除</button>
                             </div>
