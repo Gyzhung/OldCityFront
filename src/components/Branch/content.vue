@@ -30,7 +30,9 @@
                     <div class="table-header col-lg-6">課程詳細</div>           
                 </div>
                 <div class="row justify-content-center mb-3">
-                    <div class="col-lg-9 col-md-9 col-sm-6 col-10 "><button class="btn btn-primary">修改</button></div>
+                    <div class="col-lg-9 col-md-9 col-sm-6 col-10 ">
+                       <router-link tag="button"  class="btn btn-primary" :to="{name:'editbranch',params:{b_id:this.b_id}}">修改</router-link>
+                    </div>
                 </div>
                 <div class="row">
                     <table class="table table-bordered col-lg-9 col-md-9 col-sm-6 col-10">
@@ -87,8 +89,10 @@ export default {
     props:["user"],
     data() {
         return {
-            Branch:[]
+            Branch:[],
+            b_id:this.$route.params.b_id
         }
+        
     },
     mounted() {
        this.getsignup();

@@ -14,7 +14,7 @@ import createCourse from '@/components/course/create'
 import Course from '@/components/course/index'
 import Session from '@/components/session/index'
 import createSession from '@/components/session/create'
-
+import editbranch from '@/components/Branch/edit'
 import Branch from '@/components/Branch/index'
 import Branch_photo from '@/components/Branch/photo'
 import photo from '@/components/photo/list'
@@ -112,6 +112,11 @@ export default new Router({
                     path: '/Branch/:s_id',
                     name: 'Branch',
                     component: Branch
+                },
+                {
+                    path: '/editbranch/:b_id',
+                    name: 'editbranch',
+                    component: editbranch
                 }, {
                     path: '/Branch_content/:b_id',
                     name: 'Branch_content',
