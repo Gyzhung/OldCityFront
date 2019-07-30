@@ -39,6 +39,10 @@
   width: 90%;
   min-height: 70vh;
 }
+
+</style>
+<style>
+  @import url('../../assets/css/tooltip.css');
 </style>
 
 <template>
@@ -49,23 +53,23 @@
           
           <div>我的報名</div>
         </div>
-        <table class="table col-lg-10 col-md-9 col-sm-6 col-10">
+        <table class="table col-lg-10 col-md-10 col-sm-10 col-12">
             <thead>
                 <tr>
-                  <th>課程名稱</th>
                   <th>場次名稱</th>
                   <th>流程名稱</th>
-                  <th>審核狀態</th>
+                  <th>活動時間</th>
+                  <th>報名狀態</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="signup in mysignup" :key="signup.su_id">
-                  <td>{{signup.c_name}}</td>
-                  <td>{{signup.session_name}}</td>
+                <router-link style="cursor: pointer;" tag="tr" v-tooltip="signup.c_name" :to="`/Branch_content/${signup.b_id}`"  v-for="signup in mysignup" :key="signup.su_id">
+                  <td >{{signup.session_name}}</td>
                   <td>{{signup.title}}</td>
+                  <td>{{eventTime(signup)}}</td>
                   <td>{{ResultTostring(signup.reviewResult)}}</td>
                   
-                </tr>
+                </router-link>
             </tbody>
         </table>
       </div>
@@ -108,7 +112,7 @@ export default {
         ResultTostring:function (Result) {
             switch (Result) {
                 case 1:
-                    return "已審核"
+                    return "報名成功"
                     break;
                 case 0:
                     return "待審核"
@@ -116,7 +120,10 @@ export default {
                 default:
                     break;
             }
-        }
+        },
+        eventTime:function (signup) {
+          return `${signup.eventTime_start.substr(5,5)}~${signup.eventTime_end.substr(5,5)}`
+        },
     },
 }
 </script>

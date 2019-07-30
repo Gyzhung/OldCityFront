@@ -35,6 +35,9 @@ Quill.register('modules/imageResize', ImageResize)
 import { ImageExtend } from 'quill-image-extend-module'
 Quill.register('modules/ImageExtend', ImageExtend)
 
+import VTooltip from 'v-tooltip'
+Vue.use(VTooltip)
+
 Vue.use(VueQuillEditor)
 
 

@@ -75,17 +75,19 @@
         <table class="table col-lg-9 col-md-9 col-sm-10 col-12">
             <thead>
                 <tr>
+                  <th></th>
                   <th>流程名稱 </th>
-                  <th class="th_w">報名時間</th>
                   <th class="th_w">活動時間</th>
+                  <th class="th_w">報名時間</th>
                   <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="Branch in Branches" :key="Branch.b_id">
+                <tr v-for="(Branch,index) in Branches" :key="Branch.b_id">
+                  <td>{{index+1}}</td>
                   <td>{{Branch.title}}</td>
-                  <td v-html="signUpTime(Branch)"></td>
                   <td v-html="eventTime(Branch)"></td>
+                  <td v-html="signUpTime(Branch)"></td>
                   <td class="form-inline">
                     <div class="pt-1 pl-2">
                       <router-link tag="button"  class="btn btn-primary" :to="{name:'Branch_content',params:{b_id:Branch.b_id}}" >

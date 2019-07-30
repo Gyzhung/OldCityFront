@@ -1,4 +1,5 @@
 <style scoped>
+
 table.search {
   margin: auto auto;
   width: 60%;
@@ -28,7 +29,15 @@ h1 {
   margin-top: 5%;
   margin-bottom: 2%;
 }
+tr:hover{
+  background-color: #ab8a6b;
+}
+
 </style>
+<style>
+  @import url('../../assets/css/tooltip.css');
+</style>
+
 <template>
     <div class="content">
       <div style="min-height: 80vh;margin-top:50px;">
@@ -42,23 +51,22 @@ h1 {
               <th></th>
           </tr>
           <tr :key="su_user.su_id" v-for="su_user in su_users">
-              <td>{{su_user.account}}</td>
-              <td>{{su_user.name}}</td>
-              <td>{{su_user.title}}</td>
-              <!-- <td>{{Branch.signUpTime_start}}</td>
-              <td>{{Branch.signUpTime_end}}</td>
-              <td>
-                <router-link tag="button" :to="{name:'Branch_content',params:{b_id:Branch.b_id}}" >
-                  查看
-                </router-link>
-              </td> -->
-              <td v-if="user.status == 4">
-                <button v-if="su_user.reviewResult != 1" class="btn btn-primary" @click="reviewSignUp(su_user.su_id,su_user.reviewResult)">
-                  審核
-                </button>
-                <div v-else>已審核</div>
-              </td>
-              
+            <router-link tag="td" style="cursor: pointer;" v-tooltip.top-center="tooltip_msg" :to="`/userdetail/${su_user.account}`">{{su_user.account}}</router-link>
+            <router-link tag="td" style="cursor: pointer;" v-tooltip.top-center="tooltip_msg" :to="`/userdetail/${su_user.account}`">{{su_user.name}}</router-link>
+            <td>{{su_user.title}}</td>
+            <!-- <td>{{Branch.signUpTime_start}}</td>
+            <td>{{Branch.signUpTime_end}}</td>
+            <td>
+              <router-link tag="button" :to="{name:'Branch_content',params:{b_id:Branch.b_id}}" >
+                查看
+              </router-link>
+            </td> -->
+            <td v-if="user.status == 4">
+              <button v-if="su_user.reviewResult != 1" class="btn btn-primary" @click="reviewSignUp(su_user.su_id,su_user.reviewResult)">
+                審核
+              </button>
+              <div v-else>已審核</div>
+            </td>
           </tr>
           </table>
         </div>
@@ -69,7 +77,8 @@ export default {
     props:['user'],
     data() {
         return {
-            su_users:[]
+            su_users:[],
+            tooltip_msg:"點擊前往用戶個人頁面"
         }
     },
     watch: {
@@ -94,7 +103,6 @@ export default {
         }
     },
     mounted() {
-
         const self = this;
         if (this.$GLOBAL.login_token !='') {
           this.$http.get(`${this.$GLOBAL.path}/api/getSignUpListByb_id`,
