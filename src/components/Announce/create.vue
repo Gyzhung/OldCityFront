@@ -139,7 +139,7 @@ export default {
       })
       .catch(function(error) {
         console.log(error.response)
-        alert("新增公告失敗");
+        alert(error.response.data[0]);
       });
     }
   }

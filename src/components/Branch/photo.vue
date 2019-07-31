@@ -7,19 +7,20 @@
 <template>
     <div class="content">
         <div class="container-fluid photo_page">
+            <div class="text-center"><h1>{{Branch.title}}</h1></div>
             <div class="row">
                 <div class="col-2">
                     <router-link class="btn btn-primary" style="color:white;" v-if="user.status == 4" :to="{name:'upload',params:{b_id:$route.params.b_id}}">新增</router-link>
                 </div>
             </div>
-            <div class="row mt-2">
-                <div class="col-md-4 col-12 mb-2" v-for="photo in photos" :key="photo.bp_id">
+            <div class="row mt-2" v-viewer>
+                <div class="col-md-4 col-12 mb-2" v-for="photo in photos" :key="photo.bp_id" >
                     <div class="card">
                         <div class="card-header" v-if="user.status == 4">
                             <button class="btn btn-danger" @click="del_photo(photo.bp_id)">刪除</button>
                         </div>
-                        <div class="card-body">
-                            <div v-if="photo.picType == 0">
+                        <div class="card-body" >
+                            <div v-if="photo.picType == 0" >
                                 <img :src="`${$GLOBAL.path}/images/OriginalImage/${photo.b_picName}`" width="100%" alt="">
                             </div>
                             <div v-else>
@@ -40,7 +41,8 @@ export default {
     props:['user'],
     data() {
         return {
-            photos:[]
+            photos:[],
+            Branch:[]
         }
     },
     mounted() {
@@ -62,20 +64,18 @@ export default {
             });
             
         },
-        get_PicList:function(){
-            const self = this;
-            this.$http.get(`${this.$GLOBAL.path}/api/getPicListByb_id`,
-                {
-                    params:{ b_id:this.$route.params.b_id}
-                }
-            )
-            .then(function(response) {
-                self.photos = response.data;
-            })
-            .catch(function(error) {
-                alert(error.response);
+        get_PicList:async function(){
+            let res = await this.$http.get(`${this.$GLOBAL.path}/api/getPicListByb_id`,{
+                params:{ b_id:this.$route.params.b_id}
             });
-        }
+            this.photos = res.data;
+            
+            res = await this.$http.get(`${this.$GLOBAL.path}/api/getBranchData`,{
+                params:{ b_id:this.photos[0].b_id}
+            });
+            this.Branch = res.data[0];
+        },
+         
         
     }
 }

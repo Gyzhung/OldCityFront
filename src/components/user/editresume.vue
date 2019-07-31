@@ -257,7 +257,7 @@ export default {
                 self.$router.push("/resume");
             
             }).catch(function(error) {
-                alert(error.response.data)
+                alert(error.response.data[0])
             });
         }
     }

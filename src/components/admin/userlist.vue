@@ -120,7 +120,7 @@ export default {
           .then(function(response) {
               self.users = response.data
           }).catch(function(error) {
-              console.log(error.response)
+              alert(error.response.data[0])
           });
         },
         search:function() {
@@ -139,7 +139,7 @@ export default {
           .then(function(response) {
               self.users = response.data
           }).catch(function(error) {
-              console.log(error.response)
+              alert(error.response.data[0])
           });
         }
     },

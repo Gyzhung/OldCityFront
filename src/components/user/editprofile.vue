@@ -110,7 +110,7 @@ export default {
                 self.$router.push("/profile");
             
             }).catch(function(error) {
-                console.log(error)
+                alert(error.response.data[0])
             });
         }
     }

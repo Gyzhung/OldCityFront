@@ -165,7 +165,7 @@ export default {
             }
             })
             .catch(function(error) {
-                console.log(error.response)
+                alert(error.response.data[0])
             });
         },
         save:function () {

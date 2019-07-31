@@ -193,7 +193,7 @@
                     <router-link to="/wizard_introduction" class="menu-link">嚮導簡介</router-link>
                 </li>
                 <li class="nav-item" @click="close_nav">
-                    <router-link to="/Session/1" class="menu-link">嚮導課程</router-link>
+                    <router-link to="/Course" class="menu-link">嚮導課程</router-link>
                 </li>
                 <li class="nav-item" @click="close_nav();notOpen()">
                     <a class="menu-link" href="#">導覽媒合</a>

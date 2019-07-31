@@ -147,7 +147,7 @@ export default {
         self.$router.push(`/Announce/${self.ann_id}`)
       })
       .catch(function(error) {
-        alert("修改失敗");
+        alert(error.response.data[0]);
       });
     }
   }
