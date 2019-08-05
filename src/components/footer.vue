@@ -25,7 +25,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 pl-5">
           <img src="../assets/fb.png" width="64">
-          <p class="mt-2 font-weight-bold">紛絲專頁</p>
+          <p class="mt-2 font-weight-bold">粉絲專頁</p>
         </div>
       </div>
     </div>

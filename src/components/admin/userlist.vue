@@ -88,43 +88,42 @@ export default {
     },
     watch: {
         user:function(){
-            this.getuserlist("all:")
+            this.getuserlist()
             
         }
     },
     mounted() {
         if (this.user != '') {
-          this.getuserlist("all:");
+          this.getuserlist();
         }
     },
     methods: {
         ban_user:function(account,is_ban) {
-          const self = this;
-          const data ={
-            review_account:account,
-            reviewResult:!is_ban
+          const banRemark = prompt("請輸入限制理由")
+          let data ={
+              review_account:account,
+              reviewResult:!is_ban,
+            }
+          if (banRemark != "") {
+            data["banRemark"] = banRemark
           }
+          
           this.$http.post(`${this.$GLOBAL.path}/api/reviewUser`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
-          .then(function(response) {
-            self.getuserlist("all:");
+          .then( response => {
+            this.getuserlist();
           }).catch(function(error) {
               console.log(error.response)
           });
         },
-        getuserlist:function (keyword) {
-          const self = this;
-          const data ={
-            keyword:keyword
-          }
-          this.$http.post(`${this.$GLOBAL.path}/api/searchUser`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
-          .then(function(response) {
-              self.users = response.data
+        getuserlist:function () {
+          this.$http.get(`${this.$GLOBAL.path}/api/getAllUser`,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+          .then(response => {
+              this.users = response.data
           }).catch(function(error) {
               alert(error.response.data[0])
           });
         },
         search:function() {
-          const self = this;
           let data;
           if (this.keyword == "") {
             data ={
@@ -136,8 +135,8 @@ export default {
             }
           }
           this.$http.post(`${this.$GLOBAL.path}/api/searchUser`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
-          .then(function(response) {
-              self.users = response.data
+          .then(response=> {
+              this.users = response.data
           }).catch(function(error) {
               alert(error.response.data[0])
           });

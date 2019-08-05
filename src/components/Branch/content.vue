@@ -59,6 +59,10 @@
                                     <td width="30%">{{Branch.eventTime_end}}</td>
                                 </tr>
                                 <tr>
+                                    <th scope="row">活動地點</th>
+                                    <td colspan="3">{{Branch.eventPlace}}</td>
+                                </tr>
+                                <tr>
                                     <th scope="row">人數上限</th>
                                     <td colspan="3">{{Branch.maxNum}}</td>
                                 </tr>
@@ -135,22 +139,25 @@ export default {
             });
         },
         delbranch_schedule:function(bs_id) {
-            const self = this;
-            const data = {
-                bs_id:bs_id
-            }
-            this.$http.post(`${this.$GLOBAL.path}/api/deleteBranchSchedule`,data,
-                {
-                    headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }
+            if (confirm("刪除計畫?")) {
+                const self = this;
+                const data = {
+                    bs_id:bs_id
                 }
-            )
-            .then(function(response) {
-                alert(response.data)
-                self.getsignup();
-            })
-            .catch(function(error) {
-                alert(error.response.data);
-            });
+                this.$http.post(`${this.$GLOBAL.path}/api/deleteBranchSchedule`,data,
+                    {
+                        headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }
+                    }
+                )
+                .then(function(response) {
+                    alert(response.data)
+                    self.getsignup();
+                })
+                .catch(function(error) {
+                    alert(error.response.data);
+                });
+            }
+            
         }
     },
 }

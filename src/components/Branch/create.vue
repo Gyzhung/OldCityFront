@@ -52,7 +52,7 @@
                             <date-picker v-model="signUpTime_end" :config="date_config"></date-picker>
                         </div>
                     </div>
-                     <div class="form-group row">
+                    <div class="form-group row">
                         <label for="account" class="col-md-2 col-form-label text-md-right">活動起始日期:</label>
                         <div class="col-md-3">
                             <date-picker v-model="eventTime_start" :config="date_config"></date-picker>
@@ -60,6 +60,12 @@
                         <label for="account" class="col-md-2 col-form-label text-md-right">活動結束日期:</label>
                         <div class="col-md-3">
                             <date-picker v-model="eventTime_end" :config="date_config"></date-picker>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="account" class="col-md-2 col-form-label text-md-right">活動地點:</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" v-model="eventPlace" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -137,6 +143,7 @@ export default {
             signUpTime_end:'',
             eventTime_start:'',
             eventTime_end:'',
+            eventPlace:'',
             branchSchedule:[{period:'',event:''}],
             date_config:{
                 format:'YYYY-MM-DD HH:mm:ss',
@@ -155,6 +162,7 @@ export default {
                 signUpTime_end:this.signUpTime_end,
                 eventTime_start:this.eventTime_start,
                 eventTime_end:this.eventTime_end,
+                eventPlace:this.eventPlace,
                 branchSchedule: this.branchSchedule.map(a=>JSON.stringify(a)),
             }
             this.$http.post(`${this.$GLOBAL.path}/api/addBranch`,data,{ headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` } })

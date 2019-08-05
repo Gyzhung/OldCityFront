@@ -62,6 +62,12 @@
                             <date-picker v-model="editbranch.eventTime_end" :config="date_config"></date-picker>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="account" class="col-md-2 col-form-label text-md-right">活動地點:</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" v-model="editbranch.eventPlace" />
+                        </div>
+                    </div>
                     <!-- <div class="form-group row">
                         <label for="account" class="col-md-2 col-form-label text-md-right">場次流程:</label>
                         
@@ -138,6 +144,7 @@ export default {
                 signUpTime_end:'',
                 eventTime_start:'',
                 eventTime_end:'',                   
+                eventPlace:""
             },
          
             // branchSchedule:[{period:'',event:''}],
@@ -155,14 +162,7 @@ export default {
                 }}
             )
             .then(function(response) {
-                console.log(response.data)
-                self.editbranch.title = response.data[0].title;
-                self.editbranch.content = response.data[0].content;
-                self.editbranch.maxNum = response.data[0].maxNum;
-                self.editbranch.signUpTime_start = response.data[0].signUpTime_start;
-                self.editbranch.signUpTime_end = response.data[0].signUpTime_end;
-                self.editbranch.eventTime_start = response.data[0].eventTime_start;
-                self.editbranch.eventTime_end = response.data[0].eventTime_end;
+                self.editbranch = response.data[0];
             })
             .catch(function(error) {
             });
@@ -179,6 +179,7 @@ export default {
                 signUpTime_end:this.editbranch.signUpTime_end,
                 eventTime_start:this.editbranch.eventTime_start,
                 eventTime_end:this.editbranch.eventTime_end,
+                eventPlace:this.editbranch.eventPlace
                 // branchSchedule: this.branchSchedule.map(a=>JSON.stringify(a)),
             }
             this.$http.post(`${this.$GLOBAL.path}/api/editBranch`,data,{ headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` } })

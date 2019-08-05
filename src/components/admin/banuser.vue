@@ -57,6 +57,7 @@
                 <tr>
                   <th>用戶名稱</th>
                   <th>帳號</th>
+                  <th>原因</th>
                   <th></th>
                 </tr>
             </thead>
@@ -64,6 +65,7 @@
                 <tr v-for="banuser in banusers" :key="banuser.su_id">
                   <td>{{banuser.name}}</td>
                   <td>{{banuser.account}}</td>
+                  <td>{{banuser.banRemark}}</td>
                   <td><button button class="btn btn-primary" @click="ban_user(banuser.account,banuser.is_ban)">解除</button></td>
                 </tr>
             </tbody>
