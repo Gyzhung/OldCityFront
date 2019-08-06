@@ -67,9 +67,12 @@
           <div v-if="Branches[0] != undefined">{{Branches?Branches[0].session_name:""}}</div>
           <div v-else>尚未建立任何場次</div>
         </div>
-        <div class="col-lg-9 col-md-9 col-sm-10 col-12 mb-2" style="margin: 0 auto;" v-if="user.status ==4">
-          <div style="float:left;">
+        <div class="col-lg-9 col-md-9 col-sm-10 col-12 mb-2" style="margin: 0 auto;" >
+          <div style="float:left;" v-if="user.status ==4">
             <router-link :to="{name:'createBranch',params:{s_id:$route.params.s_id}}"  class="btn btn-success" style="color:white;">新增</router-link>
+          </div>
+          <div style="float:right;"> 
+            <router-link :to="{name:'Session',params:{c_id:(Branches?Branches[0].c_id:0)}}"  class="btn btn-warning" style="color:white;">返回</router-link>
           </div>
         </div>
         <table class="table col-lg-9 col-md-9 col-sm-10 col-12">
@@ -105,6 +108,7 @@
                           <router-link  class="dropdown-item" :to="{name:'checkSignUp',params:{b_id:Branch.b_id}}" >審核</router-link>
                           <router-link  class="dropdown-item" :to="{name:'completed',params:{b_id:Branch.b_id}}" >點名</router-link>
                           <router-link  class="dropdown-item" :to="{name:'Branch_photo',params:{b_id:Branch.b_id}}" >花絮</router-link>
+                          <button class="dropdown-item" @click="sendMail(Branch.b_id)">發送行前信</button>
                           <!-- <a class="dropdown-item" href="#">修改</a> -->
                           <button class="dropdown-item" @click="delbranch(Branch.b_id)">刪除</button>
                         </div>
@@ -188,11 +192,11 @@ export default {
       }
       
     },
-    signUpTime:function (Branche) {
-      return `${Branche.signUpTime_start.substr(5,5)}~<br/>${Branche.signUpTime_end.substr(5,5)}`
+    signUpTime:function (Branch) {
+      return `${Branch.signUpTime_start.substr(5,5)}~<br/>${Branch.signUpTime_end.substr(5,5)}`
     },
-    eventTime:function (Branche) {
-      return `${Branche.eventTime_start.substr(5,5)}~<br/>${Branche.eventTime_end.substr(5,5)}`
+    eventTime:function (Branch) {
+      return `${Branch.eventTime_start.substr(5,5)}~<br/>${Branch.eventTime_end.substr(5,5)}`
     },
     delbranch:function(b_id) {
       const self = this;
@@ -209,7 +213,18 @@ export default {
           alert(error.response)
         });
       }
-    }
+    },
+    sendMail:function (b_id) {
+      if(confirm("確認發送行前信?"))
+      {
+        this.$http.get(`${this.$GLOBAL.path}/api/sendEventTips`,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },params:{b_id:b_id}})
+        .then(function(response) {
+          alert(response.data)
+        }).catch(function(error) {
+          alert(error.response)
+        });
+      }
+    },
   },
 }
 </script>

@@ -34,7 +34,10 @@
                 <div class="container-fluid">
                     <div class="row justify-content-center mb-3">
                         <div class="col-lg-9 col-md-9 col-sm-6 col-10 ">
-                        <router-link tag="button"  class="btn btn-primary" :to="{name:'editbranch',params:{b_id:this.b_id}}">修改</router-link>
+                            <router-link tag="button"  class="btn btn-primary" :to="{name:'editbranch',params:{b_id:b_id}}">修改</router-link>
+                            <div style="float:right;" v-if="Branch != ''">
+                                <router-link tag="button"  class="btn btn-warning" :to="{name:'Branch',params:{s_id:Branch.s_id}}">返回</router-link>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -63,8 +66,10 @@
                                     <td colspan="3">{{Branch.eventPlace}}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">人數上限</th>
-                                    <td colspan="3">{{Branch.maxNum}}</td>
+                                    <th width="20%" scope="row">人數上限</th>
+                                    <td width="30%">{{Branch.maxNum}}</td>
+                                    <th width="20%" scope="row">已報名人數</th>
+                                    <td width="30%">{{SignUpCount}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">場次簡介</th>
@@ -74,7 +79,16 @@
                                     <th scope="row">課程流程</th>
                                     <td colspan="3">
                                         <div v-for="schedule in Branch.branch_schedule" :key="schedule.bs_id">
-                                            {{schedule.period}}-{{schedule.event}}
+                                            <span v-if="editschedule.filter(a=>a.bs_id == schedule.bs_id)[0].value == false">
+                                                {{schedule.period}}-{{schedule.event}}
+                                                <button @click="openeditbranch_schedule(schedule.bs_id)" v-if="user.status == 4" class="btn btn-warning mb-2">修改</button>
+                                            </span>
+                                            <span v-else>
+                                                <input type="text" v-model="schedule.period"><input v-model="schedule.event" type="text">
+                                                <button @click="savebranch_schedule(schedule.bs_id)" v-if="user.status == 4" class="btn btn-primary mb-2">儲存</button>
+                                            </span>
+
+                                            
                                             <button @click="delbranch_schedule(schedule.bs_id)" v-if="user.status == 4" class="btn btn-danger mb-2">刪除</button>
                                         </div>
                                     </td>
@@ -99,8 +113,10 @@ export default {
     props:["user"],
     data() {
         return {
-            Branch:[],
-            b_id:this.$route.params.b_id
+            Branch:'',
+            b_id:this.$route.params.b_id,
+            SignUpCount:0,
+            editschedule:[]
         }
         
     },
@@ -117,9 +133,24 @@ export default {
             )
             .then(function(response) {
                 self.Branch = response.data[0];
+                self.Branch.branch_schedule.forEach(element => {
+                    self.editschedule.push({bs_id:element.bs_id,value:false})
+                });
+                console.log(self.editschedule)
             })
             .catch(function(error) {
             });
+            this.$http.get(`${this.$GLOBAL.path}/api/getSignUpCountByb_id`,{
+                params:{
+                    b_id:this.$route.params.b_id
+                }}
+            )
+            .then(function(response) {
+                self.SignUpCount = response.data;
+            })
+            .catch(function(error) {
+            });
+            
         },
         addSignUp:function() {
             const data = {
@@ -158,7 +189,24 @@ export default {
                 });
             }
             
-        }
+        },
+        openeditbranch_schedule:function(bs_id) {
+            const index = this.editschedule.map(a=>a.bs_id).indexOf(bs_id);
+            this.editschedule[index].value = true
+        },
+        savebranch_schedule:function(bs_id) {
+            //加入 修改api
+
+
+
+
+
+
+
+            const index = this.editschedule.map(a=>a.bs_id).indexOf(bs_id);
+            this.editschedule[index].value = false
+        },
+        //新增
     },
 }
 </script>

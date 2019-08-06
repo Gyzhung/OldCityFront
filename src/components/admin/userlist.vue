@@ -48,6 +48,9 @@
           <div>查詢用戶</div>
         </div>
         <div class="col-lg-10 col-md-9 col-sm-6 col-10 mb-2" style="margin: 0 auto;" v-if="user.status ==4">
+          <div style="float:left;">
+            註冊人數 : {{usercount}}
+          </div>
           <div style="float:right;">
             <input type="text" v-model="keyword">
             <button class="btn btn-success" style="color:white;" @click="search">搜尋</button>
@@ -141,6 +144,11 @@ export default {
               alert(error.response.data[0])
           });
         }
+    },
+    computed: {
+      usercount:function() {
+        return this.users.length
+      }
     },
 }
 </script>
