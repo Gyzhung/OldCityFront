@@ -44,8 +44,8 @@ import createAnnounce from '@/components/Announce/create'
 import Announce from '@/components/Announce/announce'
 import editAnnounce from '@/components/Announce/edit'
 
-
-
+// 景點簡介
+import attraction from '@/components/attraction/index'
 
 // use
 Vue.use(Router)
@@ -185,12 +185,15 @@ export default new Router({
                     path: '/userdetail/:account',
                     name: 'userdetail',
                     component: userdetail
+                }, {
+                    path: '/attraction',
+                    name: 'attraction',
+                    component: attraction
+                }, {
+                    path: '/wizardreview/:s_id',
+                    name: 'wizardreview',
+                    component: wizardreview
                 }
-                // }, {
-                //     path: '/wizardreview/:s_id',
-                //     name: 'wizardreview',
-                //     component: wizardreview
-                // }
 
 
             ]

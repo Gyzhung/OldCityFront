@@ -177,14 +177,8 @@
                 <li class="nav-item" @click="close_nav">
                     <router-link to="/news" class="menu-link">最新消息</router-link>
                 </li>
-                <li class="nav-item dropdown" >
-                    <a class="menu-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">景點簡介</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown05" @click="close_nav();notOpen()">
-                        <a class="dropdown-item" href="#">第二市場</a>
-                        <a class="dropdown-item" href="#">第三市場</a>
-                        <a class="dropdown-item" href="#">第五市場</a>
-                    </div>
+                <li class="nav-item" @click="close_nav">
+                   <router-link to="/attraction" class="menu-link">景點簡介</router-link>
                 </li>
                 <li class="nav-item" @click="close_nav">
                     <router-link to="/photo" class="menu-link">活動花絮</router-link>

@@ -1,97 +1,99 @@
 <style scoped>
-.search {
-    margin: auto auto;
-    width: 60%;
+.content {
+  background-color: #d6cab7;
+  height: 100%;
+  padding-bottom: 2rem;
 }
-table{
-    border: solid;
-    padding: 15px;
-    border-width: 5px;
+.table {
+  margin: 0 auto;
 }
-.bar {
+.table td{
+  vertical-align: middle;
+}
+.table th{
+  vertical-align: middle;
+}
+.table-header {
+  margin: 0 auto;
+  padding: 1rem;
   text-align: center;
-  margin: 5% auto 5%;
+  color: #784a45;
+  font-size: 28px;
+  font-weight: 700;
 }
-.search th {
-  background-color: gray;
-  color: white;
+.btn-lightbrown{
+ margin-top: 2rem;
+ font-weight: 600;
+ letter-spacing: 2px;
 }
-.search tr {
-  border: solid;
-  border-width: 3px;
+.btn-enter{
+  float: right;
+  background-color: #784a45;
+  color: #ffffff;
 }
-td {
-  border-right: solid;
-  border-width: 1px;
-  padding: 10px;
+.btn-enter:hover{
+  background-color: rgb(126, 98, 71);
+  color: #ffffff;
 }
-h1 {
-  margin: auto 5%;
-  margin-top: 5%;
-  margin-bottom: 2%;
+.session{
+  margin: 0 auto;
+  width: 70%;
+  min-height: 70vh;
 }
-@media (max-width: 1250px) {
-    table.search {
-        width: 90%;
-    }
+.btn-blue{
+  background-color: #60ABCB;
+  color:#ffffff;
+  font-weight: 700;
 }
-
+.btn-blue:hover{
+  background-color: #4A869F;
+  color: #ffffff;
+}
 
 </style>
 <template>
     <div class="content">
-        <div style="min-height: 80vh;margin-top:50px;">
-            <!--eslint-disable-next-line-->
-            <!-- <h1 width="100%">{{sessions?sessions[0].c_name:""}}</h1> -->
-            <div class="search">
-                <!-- <div class="text-right mb-2 mr-2">
-                    <button class="btn btn-success" @click="Completed_all">
-                        全部儲存
-                    </button>
-                </div> -->
-                <table >
+        <div class="row justify-content-center" v-if="su_users.length!=0">
+            <div class="table-header col-lg-6">點名系統 - {{su_users[0].title}}</div>
+        </div>
+        <div class="row justify-content-center mb-3" v-if="su_users.length!=0">
+            <div class="col-lg-9 col-md-10 col-sm-10 col-12">
+            <router-link tag="button" class="btn btn-warning" :to="{name:'Branch',params:{s_id:su_users[0].s_id}}">返回</router-link>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <table class="table table-bordered col-lg-9 col-md-10 col-sm-10 col-12">
+                <tbody>
                     <tr>
-                        <th width="15%">帳號</th>
-                        <th width="10%">姓名</th>
-                        <th>場次</th>
-                        <th></th>
+                        <th scope="row">#</th>
+                        <th scope="row">姓名</th>
+                        <th scope="row">帳號</th>
+                        <th scope="row" width="25%">出席狀態</th>
+                        <th width="10%">儲存</th>
                     </tr>
                     <tr :key="su_user.su_id" v-for="su_user in su_users">
-                        <td>{{su_user.account}}</td>
+                        <td>1</td>
                         <td>{{su_user.name}}</td>
-                        <td>{{su_user.title}}</td>
-                        <td v-if="user.status == 4">
-                            <div class="form-inline">
-                                <div class="form-group">
-                                    <div v-if="completed_isopen[su_user.su_id] == true">
-                                        <select class="form-control mr-2" v-model="completed_list_input[su_user.su_id]" @change="select_change(su_user)">
-                                            <option VALUE="-1" selected disabled>請選擇</option>
-                                            <option value="0">未出席</option>
-                                            <option value="2">有出席</option>
-                                            <option value="1">有出席但未通過</option>
-                                            <option value="3">有出席且有通過</option>
-                                        </select>
-                                        <button v-if="completed_list[su_user.su_id] != -1" class="btn btn-success mr-2" @click="Completed(su_user)">
-                                            儲存
-                                        </button>
-                                    </div>
-                                    <div v-else>
-                                        <button v-if="su_user.completed.length != 1" class="btn btn-primary" @click="Completed_open(su_user.su_id)">
-                                            點名
-                                        </button>
-                                        <div v-else>
-                                            已點名-{{completeExtent_tostring(su_user.completed[0].completeExtent)}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            
+                        <td>{{su_user.account}}</td>
+                        <td>
+                            <select class="form-control" v-model="completed_list_input[su_user.su_id]">
+                                <option VALUE="-1" selected disabled>請選擇</option>
+                                <option value="0">未出席</option>
+                                <option value="2">有出席</option>
+                                <option value="1">有出席但未通過</option>
+                                <option value="3">有出席且有通過</option>
+                            </select>
                         </td>
-                        
+                        <td> 
+                            <button type="button" class="btn btn-blue" @click="Completed(su_user)">
+                                儲存
+                            </button>
+                        </td>
                     </tr>
-                </table>
-            </div>
+
+
+                </tbody>
+            </table>
         </div>
     </div>
 </template>
@@ -102,7 +104,6 @@ export default {
         return {
             su_users:[],
             completed_isopen:{},
-            completed_list:{},
             completed_list_input:{}
         }
     },
@@ -119,30 +120,24 @@ export default {
         }
     },
     methods: {
-        select_change:function(su_user) {
-            this.$set(this.completed_list, su_user.su_id, this.completed_list_input[su_user.su_id])
-        },
         Completed_open:function(su_id) {
             this.completed_isopen[su_id] = true;
         },
         Completed:function(su_user) {
             const self = this;
-            if (su_user.completed.length == 0) {
-                if (this.completed_list[su_user.su_id] != -1) {
-                const data ={
-                    completedDate : this.$GLOBAL.formatDate(new Date()),
-                    su_id : su_user.su_id,
-                    completeExtent : parseInt(this.completed_list[su_user.su_id])
-                }
-                this.$http.post(`${this.$GLOBAL.path}/api/updateCompleted`,data,{ headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
-                .then(function(response) {
-                    self.getSu_usersData();
-                    alert(response.data);
-                })
-                .catch(function(error) {
-                });
-                }
+            const data ={
+                completedDate : this.$GLOBAL.formatDate(new Date()),
+                su_id : su_user.su_id,
+                completeExtent : parseInt(this.completed_list_input[su_user.su_id])
             }
+            this.$http.post(`${this.$GLOBAL.path}/api/updateCompleted`,data,{ headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+            .then(function(response) {
+                self.getSu_usersData();
+                alert(response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response)
+            });
         },
         completeExtent_tostring:function(completeExtent) {
             let str =''
@@ -178,13 +173,10 @@ export default {
                     if (user.completed.length ==0) {
                         self.completed_list_input[user.su_id] = -1;
                         self.$set(self.completed_isopen, user.su_id, false);
-                        self.$set(self.completed_list, user.su_id, -1)
                     }else{
-                        self.completed_list_input[user.su_id] = -1;
+                        self.completed_list_input[user.su_id] = user.completed[0].completeExtent;
                         self.$set(self.completed_isopen, user.su_id, false);
-                        self.$set(self.completed_list, user.su_id, -1)
                     }
-                    
                 });
             })
             .catch(function(error) {
