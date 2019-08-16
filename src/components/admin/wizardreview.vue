@@ -64,9 +64,10 @@
               </button>
             </div>
             <div class="modal-body">
-              <div v-for="Completed in CompletedList" :key="Completed.cc_id">
-                課程名稱{{Completed.b_id}}<br/>
-                點名狀態{{Completed.completeExtent}}
+              <div v-for="(Completed,index) in CompletedList" :key="index">
+                課程名稱:{{Completed.title}}<br/>
+                點名狀態:{{completeExtent_tostring(Completed.completeExtent)}}
+                <hr/>
               </div>
             </div>
             <div class="modal-footer">
@@ -83,11 +84,15 @@
                     <th scope="row">#</th>
                     <th scope="row">姓名</th>
                     <th scope="row">帳號</th>
+                    <th scope="row">審核</th>
                 </tr>
                 <tr v-for="(Completeduser,index) in Completedusers" :key="index" @click="getUserData(Completeduser.account)">
                     <td>{{index+1}}</td>
                     <td>{{Completeduser.name}}</td>
                     <td>{{Completeduser.account}}</td>
+                    <td>
+                      <button class="btn btn-primary" @click.stop="addDegree(Completeduser.account)">審核</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -153,17 +158,55 @@ export default {
         close_modal:function() {
             self.showUserCompleted = [];
         },
+        completeExtent_tostring:function(completeExtent) {
+          let str =''
+          switch (completeExtent) {
+              case 0:
+                  str ='未出席'
+                  break;
+              case 1:
+                  str ='有出席但未通過'
+                  break;
+              case 2:
+                  str ='有出席'
+                  break;
+              case 3:
+                  str ='有出席且有通過'
+                  break;
+              default:
+                  break;
+          }
+          return str;
+        },
+        addDegree:function(account) {
+          const data = {
+            s_id:parseInt(this.$route.params.s_id),
+            su_account:account
+          }
+          this.$http.post(`${this.$GLOBAL.path}/api/addDegree`,data,{
+          headers:{ 
+              authorization: `Bearer ${this.$GLOBAL.login_token}`
+          }}
+          ).then(function(response) {
+            alert(response.data)
+            console.log(response)
+          })
+          .catch(function(error) {
+            alert(error.response.data)
+            console.log(error.response)
+          });
+        }
         
     },
     computed: {
         CompletedList:function() {
             if (this.showUserCompleted.length!=0) {
-              return Array.prototype.concat.apply([],this.showUserCompleted.map(a=>{
-                this.$set(a.completed[0], 'b_id', a.b_id);
-                return a.completed
+              return Array.prototype.concat.apply([],this.showUserCompleted.filter(a=>a.completed.length != 0).map(a=>{
+                  console.log(a.completed[a.completed.length - 1])
+                  this.$set(a.completed[a.completed.length - 1], 'title', a.title);
+                  return a.completed[a.completed.length - 1]      
               }))
             }
-            
         }
     },
 }

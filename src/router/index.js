@@ -7,7 +7,14 @@ import login from '@/components/login'
 import Home from '@/components/home'
 import Index from '@/components/index'
 import news from '@/components/news'
-import wizard_introduction from '@/components/page/wizard_introduction'
+
+
+
+//Wizard
+import wizard_introduction from '@/components/Wizard/wizard_introduction'
+import wizard_list from '@/components/Wizard/wizard_list'
+import pilot_info from '@/components/Wizard/pilot_info'
+
 
 //課程場次
 import createCourse from '@/components/course/create'
@@ -177,6 +184,14 @@ export default new Router({
                     path: '/wizard_introduction',
                     name: 'wizard_introduction',
                     component: wizard_introduction
+                }, {
+                    path: '/wizard_list',
+                    name: 'wizard_list',
+                    component: wizard_list
+                }, {
+                    path: '/pilot_info/:id',
+                    name: 'pilot_info',
+                    component: pilot_info
                 }, {
                     path: '/passwordchange',
                     name: 'passwordchange',
