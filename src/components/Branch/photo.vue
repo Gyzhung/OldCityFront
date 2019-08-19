@@ -50,19 +50,20 @@ export default {
     },
     methods:{
         del_photo:function (bp_id) {
-            const self = this;
-            const data = {
-                bp_id:bp_id
+            if(confirm("確定刪除花絮照片?")){
+                const self = this;
+                const data = {
+                    bp_id:bp_id
+                }
+                this.$http.post(`${this.$GLOBAL.path}/api/delete_b_pic`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+                .then(function(response) {
+                    alert(response.data)
+                    self.get_PicList();
+                })
+                .catch(function(error) {
+                    alert(error);
+                });
             }
-            this.$http.post(`${this.$GLOBAL.path}/api/delete_b_pic`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
-            .then(function(response) {
-                alert(response.data)
-                self.get_PicList();
-            })
-            .catch(function(error) {
-                alert(error);
-            });
-            
         },
         get_PicList:async function(){
             let res = await this.$http.get(`${this.$GLOBAL.path}/api/getPicListByb_id`,{

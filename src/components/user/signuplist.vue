@@ -92,7 +92,7 @@ export default {
                 self.mysignup = response.data;
             
             }).catch(function(error) {
-                console.log(error.response)
+                //console.log(error.response)
             });
         }
     },
@@ -104,7 +104,7 @@ export default {
                 self.mysignup = response.data;
             
             }).catch(function(error) {
-                console.log(error.response)
+               // console.log(error.response)
             });
         }
     },

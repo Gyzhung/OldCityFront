@@ -103,7 +103,7 @@ export default {
         .then(function(response) {
           self.getbanuser()
         }).catch(function(error) {
-          console.log(error.response)
+          alert(error.response)
         });
       },
       getbanuser:function() {
@@ -112,7 +112,6 @@ export default {
         .then(function(response) {
             self.banusers = response.data
         }).catch(function(error) {
-            console.log(error.response)
         });
       }
     },

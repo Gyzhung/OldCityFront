@@ -136,7 +136,8 @@ export default {
                 self.$emit("update_userdata");
             
             }).catch(function(error) {
-                console.log(error)
+                alert(error.response)
+                //console.log(error)
             });
         },
         serveTostring:function(serve) {

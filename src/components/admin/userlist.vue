@@ -70,7 +70,7 @@
                   <td>{{user.name}}</td>
                   <td>
                     <router-link tag="button"  class="btn btn-primary" :to="`userdetail/${user.account}`">查看</router-link>
-                    <button v-if="user.is_ban == 1" class="btn btn-warning" @click="ban_user(user.account,user.is_ban)">解除</button>
+                    <button v-if="user.is_ban == 1" class="btn btn-warning" disabled>已限制</button>
                     <button v-else class="btn btn-danger" @click="ban_user(user.account,user.is_ban)">限制</button>
                   </td>
                 </tr>
@@ -115,7 +115,8 @@ export default {
           .then( response => {
             this.getuserlist();
           }).catch(function(error) {
-              console.log(error.response)
+            alert(error.response)
+              //console.log(error.response)
           });
         },
         getuserlist:function () {

@@ -189,7 +189,6 @@ export default {
         }
     },
     mounted() {
-      console.log(this.$route.meta.s_id)
         const self = this;
         if (this.$GLOBAL.login_token !='') {
           this.$http.get(`${this.$GLOBAL.path}/api/getSignUpListByb_id`,
@@ -256,7 +255,6 @@ export default {
             self.show_user_data = response.data;
         })
         .catch(function(error) {
-            console.log(error.response)
         });
         $("#exampleModal").modal('show');
       },

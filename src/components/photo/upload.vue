@@ -9,7 +9,8 @@
         <div class="upload_page">
             <div class="row">
                 <div class="offset-3 col-6">
-                    <input class="form-control-file" type="file" id="files" ref="files" multiple v-on:change="handleFilesUpload()"/>
+                    <input class="form-control-file" type="file" id="files" ref="files" accept=".jpg,.jpeg,.png,.bmp" multiple v-on:change="handleFilesUpload()"/>
+                    請上傳jpg , jpeg, png, bmp檔案
                 </div>
             </div>
             
@@ -68,7 +69,7 @@ export default {
                     }
                 })
                 .catch(function(error) {
-                    console.log(error.response)
+                    //console.log(error.response)
                 });
             });
         },

@@ -63,16 +63,16 @@
     <div class="content">
     <div class="form session">
       <div class="row">
-        <div class="table-header col-lg-6" v-if="!!Branches">
-          <div v-if="Branches[0] != undefined">{{Branches?Branches[0].session_name:""}}</div>
+        <div class="table-header col-lg-6" >
+          <div v-if="Branches.length != 0">{{Branches[0].session_name}}</div>
           <div v-else>尚未建立任何場次</div>
         </div>
         <div class="col-lg-9 col-md-9 col-sm-10 col-12 mb-2" style="margin: 0 auto;" >
-          <div style="float:left;" v-if="user.status ==4">
+          <div style="float:left;" v-if="user.status == 4">
             <router-link :to="{name:'createBranch',params:{s_id:$route.params.s_id}}"  class="btn btn-success" style="color:white;">新增</router-link>
           </div>
-          <div style="float:right;"> 
-            <router-link :to="{name:'Session',params:{c_id:(Branches?Branches[0].c_id:0)}}"  class="btn btn-warning" style="color:white;">返回</router-link>
+          <div style="float:right;" v-if="Branches.length != 0"> 
+            <router-link :to="{name:'Session',params:{c_id:Branches[0].c_id}}"  class="btn btn-warning" style="color:white;">返回</router-link>
           </div>
         </div>
         <table class="table col-lg-9 col-md-9 col-sm-10 col-12">
@@ -86,7 +86,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(Branch,index) in Branches" :key="Branch.b_id">
+                <tr v-for="(Branch,index) in time_filter_Branch" :key="Branch.b_id">
                   <td>{{index+1}}</td>
                   <td>{{Branch.title}}</td>
                   <td v-html="eventTime(Branch)"></td>
@@ -127,7 +127,7 @@ export default {
   props:['user'],
   data() {
     return {
-      Branches:null
+      Branches:[]
     }
   },
   watch: {
@@ -175,6 +175,7 @@ export default {
     getBranchesData:function(user){
       const self = this;
       if (this.user == '') {
+        
         this.$http.get(`${this.$GLOBAL.path}/api/getBranchListBys_id`,{params:{ s_id:this.$route.params.s_id}})
         .then(function(response) {
           self.Branches = response.data;
@@ -200,15 +201,15 @@ export default {
     },
     delbranch:function(b_id) {
       const self = this;
-       if(confirm("刪除流程?"))
+      if(confirm("刪除流程?"))
       {
         const data ={
           b_id:b_id
         }
         this.$http.post(`${this.$GLOBAL.path}/api/deleteBranch`,data,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
         .then(function(response) {
-          alert(response.data)
           self.getBranchesData(self.user);
+          alert(response.data)
         }).catch(function(error) {
           alert(error.response)
         });
@@ -225,6 +226,13 @@ export default {
         });
       }
     },
+  },computed: {
+    time_filter_Branch:function() {
+      if (this.Branches.length != 0) {
+        return this.Branches.filter(a=>new Date(Date.parse(a.eventTime_end.replace(/-/g,"/"))) >= new Date());
+      }
+      
+    }
   },
 }
 </script>

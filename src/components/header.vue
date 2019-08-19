@@ -157,7 +157,7 @@
               <router-link to="/signuplist" ><button class="dropdown-item" type="button">我的報名</button></router-link>
               <router-link to="/userlist"  v-if="user.status ==4"><button class="dropdown-item" type="button">查詢用戶</button></router-link>
               <router-link to="/banuser"  v-if="user.status ==4"><button class="dropdown-item" type="button">限制用戶</button></router-link>
-                <button class="dropdown-item" type="button">會員專區</button> 
+                
                 <div class="dropdown-divider"></div>
                 <div @click="logout"  class="dropdown-item" style="cursor: pointer;">登出</div>
               </div>

@@ -87,7 +87,7 @@ export default {
                 self.user = response.data;
             })
             .catch(function(error) {
-                console.log(error.response)
+                //console.log(error.response)
             });
         },
         genderTostring:function(gender){

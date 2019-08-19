@@ -134,7 +134,8 @@ export default {
                 self.Completedusers = response.data;
             })
             .catch(function(error) {
-                console.log(error.response)
+
+              // console.log(error.response)
             });
         },
         getUserData:function(account){
@@ -151,7 +152,7 @@ export default {
                 self.showUserCompleted = response.data;
             })
             .catch(function(error) {
-                console.log(error.response)
+                //console.log(error.response)
             });
             $("#exampleModal").modal("show");
         },
@@ -189,11 +190,11 @@ export default {
           }}
           ).then(function(response) {
             alert(response.data)
-            console.log(response)
+            //console.log(response)
           })
           .catch(function(error) {
             alert(error.response.data)
-            console.log(error.response)
+            //console.log(error.response)
           });
         }
         
@@ -202,7 +203,6 @@ export default {
         CompletedList:function() {
             if (this.showUserCompleted.length!=0) {
               return Array.prototype.concat.apply([],this.showUserCompleted.filter(a=>a.completed.length != 0).map(a=>{
-                  console.log(a.completed[a.completed.length - 1])
                   this.$set(a.completed[a.completed.length - 1], 'title', a.title);
                   return a.completed[a.completed.length - 1]      
               }))

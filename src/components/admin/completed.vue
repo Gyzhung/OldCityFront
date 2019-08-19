@@ -124,20 +124,24 @@ export default {
             this.completed_isopen[su_id] = true;
         },
         Completed:function(su_user) {
-            const self = this;
-            const data ={
-                completedDate : this.$GLOBAL.formatDate(new Date()),
-                su_id : su_user.su_id,
-                completeExtent : parseInt(this.completed_list_input[su_user.su_id])
-            }
-            this.$http.post(`${this.$GLOBAL.path}/api/updateCompleted`,data,{ headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
-            .then(function(response) {
-                self.getSu_usersData();
-                alert(response.data);
-            })
-            .catch(function(error) {
-                console.log(error.response)
-            });
+            if (this.completed_list_input[su_user.su_id] != -1) {
+                const self = this;
+                const data ={
+                    completedDate : this.$GLOBAL.formatDate(new Date()),
+                    su_id : su_user.su_id,
+                    completeExtent : parseInt(this.completed_list_input[su_user.su_id])
+                }
+                this.$http.post(`${this.$GLOBAL.path}/api/updateCompleted`,data,{ headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+                .then(function(response) {
+                    self.getSu_usersData();
+                    alert(response.data);
+                })
+                .catch(function(error) {
+                    alert(error.response);
+                });
+            }else{
+                alert("未選擇點名狀態")
+            }      
         },
         completeExtent_tostring:function(completeExtent) {
             let str =''

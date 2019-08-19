@@ -34,7 +34,7 @@
                 <div class="container-fluid">
                     <div class="row justify-content-center mb-3">
                         <div class="col-lg-9 col-md-9 col-sm-6 col-10 ">
-                            <router-link tag="button"  class="btn btn-primary" :to="{name:'editbranch',params:{b_id:b_id}}">修改</router-link>
+                            <router-link tag="button"  v-if="user.status == 4" class="btn btn-primary" :to="{name:'editbranch',params:{b_id:b_id}}">修改</router-link>
                             <div style="float:right;" v-if="Branch != ''">
                                 <router-link tag="button"  class="btn btn-warning" :to="{name:'Branch',params:{s_id:Branch.s_id}}">返回</router-link>
                             </div>
@@ -136,7 +136,6 @@ export default {
                 self.Branch.branch_schedule.forEach(element => {
                     self.editschedule.push({bs_id:element.bs_id,value:false})
                 });
-                console.log(self.editschedule)
             })
             .catch(function(error) {
             });
