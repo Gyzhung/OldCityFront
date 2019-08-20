@@ -160,8 +160,8 @@ p{
           </div>
         </div>     
         <br><br>
+         <p>蒐集個人資料告知事項:</p>
         <div class="row justify-content-center">
-          <p>蒐集個人資料告知事項:</p>
           <textarea class="col-10 form-control" name="" id="" rows="10" disabled>
             本網站為遵守個人資料保護法規定，在您提供個人資料予本司前，依法 告知下列事項：
 一、本網站因協助台中學習型城市計畫等目的而獲取您下列 個人資料類別：姓名、出生年月日、國民身分證統一編號、性別、職業、 教育、連絡方式(包括但不限於電話號碼、E-MAIL、居住或工作地址)等， 或其他得以直接或間接識別您個人之資料。 
@@ -178,9 +178,9 @@ p{
 二、本人同意貴網站蒐集、處理、利用本人之個人資料，以及其他公務機關請求 行政協助目的之提供。
           </textarea>
           <br>
-          <input v-model="check" type="checkbox" value="1">同意
-        </div>
-        <br><br>
+        </div> <br/>
+        <input v-model="check" type="checkbox" value="1">同意
+       <br><br>
         <button type="button" @click="register" class="btn btn-primary">確認註冊</button>
         
         </div>
