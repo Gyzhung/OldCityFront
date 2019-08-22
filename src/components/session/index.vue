@@ -67,8 +67,8 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr v-for="session in sessions" :key="session.s_id">
-                      <th scope="row">{{session.s_id}}</th>
+                  <tr v-for="(session,index) in sessions" :key="session.s_id">
+                      <th scope="row">{{index + 1 }}</th>
                       <td>{{session.session_name}}</td>
                       <td>
                         <div  class="form-inline">

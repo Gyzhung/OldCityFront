@@ -12,6 +12,9 @@
                 <div class="col-2">
                     <router-link class="btn btn-primary" style="color:white;" v-if="user.status == 4" :to="{name:'upload',params:{b_id:$route.params.b_id}}">新增</router-link>
                 </div>
+                <div class="col-10 text-right">
+                    <router-link class="btn btn-warning " style="color:white;" to="/photo">返回</router-link>
+                </div>
             </div>
             <div class="row mt-2" v-viewer>
                 <div class="col-md-4 col-12 mb-2" v-for="photo in photos" :key="photo.bp_id" >

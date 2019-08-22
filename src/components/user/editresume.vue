@@ -15,7 +15,7 @@
         <div class="container-fluid" >
             <div class="row justify-content-center mt-2">
                 <div class="col-md-2 col-sm-4 col-4">
-                    最高學歷 
+                    <span style="color:red">*</span>最高學歷 
                 </div>
                 <div class="col-md-4 col-sm-8 col-8">
                     <input v-model="education" type="text" class="form-control">
@@ -23,7 +23,7 @@
             </div>
             <div class="row justify-content-center mt-2">
                 <div class="col-md-2 col-sm-4 col-4">
-                    通訊地址 
+                    <span style="color:red">*</span>通訊地址 
                 </div>
                 <div class="col-md-4 col-sm-8 col-8">
                     <input v-model="currentAddress" type="text" class="form-control">
@@ -31,7 +31,7 @@
             </div>
             <div class="row justify-content-center mt-2">
                 <div class="col-md-2 col-sm-4 col-4">
-                    戶籍地址 
+                    <span style="color:red">*</span>戶籍地址 
                 </div>
                 <div class="col-md-4 col-sm-8 col-8">
                     <input v-model="residenceAddress" type="text" class="form-control">
@@ -39,7 +39,7 @@
             </div>
             <div class="row justify-content-center mt-2">
                 <div class="col-md-2 col-sm-4 col-4">
-                    緊急聯絡人 
+                    <span style="color:red">*</span>緊急聯絡人 
                 </div>
                 <div class="col-md-4 col-sm-8 col-8">
                     <input v-model="emergencyContactName" type="text" class="form-control">
@@ -47,7 +47,7 @@
             </div>
             <div class="row justify-content-center mt-2">
                 <div class="col-md-2 col-sm-4 col-4">
-                    緊急聯絡人電話
+                    <span style="color:red">*</span>緊急聯絡人電話
                 </div>
                 <div class="col-md-4 col-sm-8 col-8">
                     <input v-model="emergencyContactCel" type="text" class="form-control">
@@ -55,7 +55,7 @@
             </div>
             <div class="row justify-content-center mt-2">
                 <div class="col-md-2 col-sm-4 col-4">
-                    緊急聯絡人關係 
+                    <span style="color:red">*</span>緊急聯絡人關係 
                 </div>
                 <div class="col-md-4 col-sm-8 col-8">
                     <input v-model="emergencyContactRelation" type="text" class="form-control">
@@ -63,7 +63,7 @@
             </div>
             <div class="row justify-content-center mt-2">
                 <div class="col-md-2 col-sm-4 col-4">
-                    服務 
+                    <span style="color:red">*</span>服務 
                 </div>
                 <div class="col-md-4 col-sm-8 col-8">
                     <select v-model="serve" class="form-control" placeholder="級數">
@@ -138,7 +138,7 @@
             </div>
             <div class="row justify-content-center mt-2" v-for="(language,index) in user_languages" :key="index">
                 <div class="col-md-2 col-sm-4 col-4">
-                    <span  v-show="index==0">語言 </span>
+                    <span  v-show="index==0"><span style="color:red">*</span>語言 </span>
                 </div>
                 
                 <div class="col-md-2 col-sm-4 col-4">

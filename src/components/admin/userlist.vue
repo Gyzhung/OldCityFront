@@ -59,15 +59,17 @@
         <table class="table col-lg-10 col-md-9 col-sm-6 col-10">
             <thead>
                 <tr>
-                  <th>用戶名稱</th>
                   <th>帳號</th>
-                  <th width="25%"></th>
+                  <th>用戶名稱</th>
+                  <th></th>
+                  <th width="25%"></th>                  
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="user in users" :key="user.u_id">
                   <td>{{user.account}}</td>
                   <td>{{user.name}}</td>
+                  <td>{{statusToString(user.status)}}</td>
                   <td>
                     <router-link tag="button"  class="btn btn-primary" :to="`userdetail/${user.account}`">查看</router-link>
                     <button v-if="user.is_ban == 1" class="btn btn-warning" disabled>已限制</button>
@@ -86,7 +88,8 @@ export default {
     data() {
         return {
             users:[],
-            keyword:''
+            keyword:'',
+            usercount:0
         }
     },
     watch: {
@@ -123,6 +126,7 @@ export default {
           this.$http.get(`${this.$GLOBAL.path}/api/getAllUser`,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
           .then(response => {
               this.users = response.data
+              this.usercount = this.users.length
           }).catch(function(error) {
               alert(error.response.data[0])
           });
@@ -144,12 +148,28 @@ export default {
           }).catch(function(error) {
               alert(error.response.data[0])
           });
+        },
+        statusToString:function (status) {
+          switch (status) {
+            case 0:
+              return "未驗證"
+              break;
+            case 1:
+              return "會員(學員)"
+              break;
+            case 2:
+              return "導覽員"
+              break;
+            case 3:
+              return "工讀生"
+              break;
+            case 4:
+              return "系統管理員"
+              break;
+            default:
+              break;
+          }
         }
-    },
-    computed: {
-      usercount:function() {
-        return this.users.length
-      }
     },
 }
 </script>

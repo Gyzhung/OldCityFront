@@ -71,7 +71,7 @@ p{
         <br>
         <div class="row">
           <div class="text-md-right offset-1 col-2">
-            <label class="col-form-label" for="account">會員帳號: </label>
+            <label class="col-form-label" for="account"><span style="color:red">*</span>會員帳號: </label>
           </div>
           <div class="col-8 col-md-4">
             <input id="account" class="form-control" v-model="users.account"  type="text">
@@ -80,7 +80,7 @@ p{
 
         <div class="row">
           <div class="text-md-right offset-1 col-2">
-            <label class="col-form-label" for="password">會員密碼: </label>
+            <label class="col-form-label" for="password"><span style="color:red">*</span>會員密碼: </label>
           </div>
           <div class="col-8 col-md-4">
             <input id="password" class="form-control" v-model="users.password" type="password">
@@ -89,7 +89,7 @@ p{
 
         <div class="row">
           <div class="text-md-right offset-1 col-2">
-            <label class="col-form-label" for="name">使用者名稱: </label>
+            <label class="col-form-label" for="name"><span style="color:red">*</span>使用者名稱: </label>
           </div>
           <div class="col-8 col-md-4">
             <input id="name" class="form-control"  v-model="users.name" type="text">
@@ -98,7 +98,7 @@ p{
 
         <div class="row">
           <div class="text-md-right offset-1 col-2">
-            <label class="col-form-label" for="identity_num">身分證號碼: </label>
+            <label class="col-form-label" for="identity_num"><span style="color:red">*</span>身分證號碼: </label>
           </div>
           <div class="col-8 col-md-4">
             <input id="identity_num" class="form-control" v-model="users.identity_num" type="text">
@@ -107,7 +107,7 @@ p{
 
         <div class="row">
           <div class="text-md-right offset-1 col-2">
-            <label class="col-form-label" for="account">性別: </label>
+            <label class="col-form-label" for="account"><span style="color:red">*</span>性別: </label>
           </div>
           <div class="col-8 col-md-4">
             <select id="select_option" class="form-control" name="select_option" v-model="users.gender">
@@ -117,19 +117,9 @@ p{
             </select>
           </div>
         </div>
-
         <div class="row">
           <div class="text-md-right offset-1 col-2">
-            <label class="col-form-label" for="address">通訊地址: </label>
-          </div>
-          <div class="col-8 col-md-4">
-            <input id="address" class="form-control" v-model="users.address" type="text">
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="text-md-right offset-1 col-2">
-            <label class="col-form-label" for="address">家用電話: </label>
+            <label class="col-form-label" for="address"><span style="color:red">*</span>家用電話: </label>
           </div>
           <div class="col-8 col-md-4">
             <input id="tel" class="form-control" v-model="users.tel" type="tel">
@@ -137,7 +127,7 @@ p{
         </div>
         <div class="row">
           <div class="text-md-right offset-1 col-2">
-            <label class="col-form-label" for="cel">行動電話: </label>
+            <label class="col-form-label" for="cel"><span style="color:red">*</span>行動電話: </label>
           </div>
           <div class="col-8 col-md-4">
             <input id="cel" class="form-control" v-model="users.cel" type="cel">
@@ -145,7 +135,7 @@ p{
         </div>
         <div class="row">
           <div class="text-md-right offset-1 col-2">
-            <label class="col-form-label" for="email">Email: </label>
+            <label class="col-form-label" for="email"><span style="color:red">*</span>Email: </label>
           </div>
           <div class="col-8 col-md-4">
             <input id="email" class="form-control" v-model="users.email" type="email">
@@ -153,7 +143,7 @@ p{
         </div>
         <div class="row">
           <div class="text-md-right offset-1 col-2">
-            <label class="col-form-label" for="birthday">生日: </label>
+            <label class="col-form-label" for="birthday"><span style="color:red">*</span>生日: </label>
           </div>
           <div class="col-8 col-md-4">
             <input id="birthday" class="form-control" v-model="users.birthday" type="date">

@@ -79,7 +79,6 @@ export default {
           .then(function(response) {
             if (status == 200) {
               self.$GLOBAL.status = response.data.status;
-              alert("已登入");
               self.$emit("login",response.data);//使用外層方法
               self.$router.push({ path: `/index` });
             }
