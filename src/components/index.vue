@@ -1,4 +1,5 @@
 <style scoped>
+
 .announce {
   background-color: #dacfb8;
   padding: 1rem;

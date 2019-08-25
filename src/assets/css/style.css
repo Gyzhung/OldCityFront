@@ -1,0 +1,35 @@
+.content{
+    min-height: 60vh;
+}
+.btn-lightbrown {
+    background-color: #ab8a6b;
+    color: #ffffff;
+}
+.btn-lightbrown:hover {
+    background-color: #784a45;
+    color: #ffffff;
+}
+.btn-light {
+    border-color: #784a45;
+}
+.btn-light:hover{
+    background-color:rgba(171, 138, 107, .6)
+}
+a:hover, a:visited, a:link, a:active {
+    text-decoration: none  !important;
+    color: black ;
+}
+p{
+    word-wrap:break-word;
+}
+.image img{
+    width: 100%;
+}
+.image-style-align-left img{
+    float: left;
+    width: 50%;
+}
+.image-style-align-right img{
+    float: right;
+    width: 50%;
+}

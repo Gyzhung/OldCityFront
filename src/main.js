@@ -6,7 +6,7 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import global_ from './components/Global/global'
-import Header from '@/components/header'
+import Header from '@/components/layout/header'
 import Footer from '@/components/footer'
 import Index from '@/components/index'
 
@@ -42,7 +42,6 @@ import VTooltip from 'v-tooltip'
 Vue.use(VTooltip)
 
 Vue.use(VueQuillEditor)
-
 
 
 

@@ -107,10 +107,10 @@ p{
 
         <div class="row">
           <div class="text-md-right offset-1 col-2">
-            <label class="col-form-label" for="account"><span style="color:red">*</span>性別: </label>
+            <label class="col-form-label" for="gender"><span style="color:red">*</span>性別: </label>
           </div>
           <div class="col-8 col-md-4">
-            <select id="select_option" class="form-control" name="select_option" v-model="users.gender">
+            <select id="gender" class="form-control" name="gender" v-model="users.gender">
               <option value="0">女</option>
               <option value="1">男</option>
               <option value="2">其他</option>
@@ -119,10 +119,10 @@ p{
         </div>
         <div class="row">
           <div class="text-md-right offset-1 col-2">
-            <label class="col-form-label" for="address"><span style="color:red">*</span>家用電話: </label>
+            <label class="col-form-label" for="tel"><span style="color:red">*</span>家用電話: </label>
           </div>
           <div class="col-8 col-md-4">
-            <input id="tel" class="form-control" v-model="users.tel" type="tel">
+            <input id="tel" class="form-control" v-model="users.tel" type="text">
           </div>
         </div>
         <div class="row">
@@ -130,7 +130,7 @@ p{
             <label class="col-form-label" for="cel"><span style="color:red">*</span>行動電話: </label>
           </div>
           <div class="col-8 col-md-4">
-            <input id="cel" class="form-control" v-model="users.cel" type="cel">
+            <input id="cel" class="form-control" v-model="users.cel" type="text">
           </div>
         </div>
         <div class="row">
@@ -149,6 +149,28 @@ p{
             <input id="birthday" class="form-control" v-model="users.birthday" type="date">
           </div>
         </div>     
+        <div class="row">
+          <div class="text-md-right offset-1 col-2">
+            <label class="col-form-label" for="gender"><span style="color:red">*</span>問題(忘記密碼): </label>
+          </div>
+          <div class="col-8 col-md-4">
+            <select id="forget_question" class="form-control" name="forget_question" v-model="users.forget_question">
+              <option value="0" disabled>未設定</option>
+              <option value="1">我最愛的顏色</option>
+              <option value="2">我的出生地</option>
+              <option value="3">我最喜歡的遊戲</option>
+              <option value="4">我最喜歡的人</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="text-md-right offset-1 col-2">
+            <label class="col-form-label" for="forget_answer"><span style="color:red">*</span>問題答案: </label>
+          </div>
+          <div class="col-8 col-md-4">
+            <input id="forget_answer" class="form-control" v-model="users.forget_answer" type="text">
+          </div>
+        </div>
         <br><br>
          <p>蒐集個人資料告知事項:</p>
         <div class="row justify-content-center">
@@ -174,45 +196,14 @@ p{
         <button type="button" @click="register" class="btn btn-primary">確認註冊</button>
         
         </div>
-      </div><!-- 8 -->
+      </div>
     </div>
-    <div style="clear:both;"></div><!--這是用來清除上方的浮動效果-->
-
- 
-      <!-- <td>
-        <p>簡單自介:</p>
-        <textarea type="text" :status="users.selfIntroduction" v-model="users.selfIntroduction"></textarea>
-      </td> -->
-    <!-- <tr>
-      <td>
-        <h2>有無以下志工經驗?</h2>
-        <br>第二市場
-        <input
-          type="checkbox"
-          :is_secondMarket="users.is_secondMarket"
-          v-model="users.is_secondMarket"
-          value="true"
-        >
-        <br>台灣文學館
-        <input
-          type="checkbox"
-          :is_NMoTL="users.is_NMoTL"
-          v-model="users.is_NMoTL"
-          value="true"
-        >
-        <br>文資園區
-        <input type="checkbox" :is_MoC="users.is_MoC" v-model="users.is_MoC" value="true">
-        <br>
-        <br>
-      </td>
-    </tr> -->
+    <div style="clear:both;"></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "HelloWorld",
-
   data() {
     return {
       check:0,
@@ -221,28 +212,23 @@ export default {
         password: "",
         identity_num: "",
         name: "",
-        address: "",
         gender: "",
         tel: "",
         cel:"",
         email: "",
-        // profile_pic:"",
         birthday: "",
-        tokenStr: "",
-        status: "",
-        selfIntroduction: "",
-        is_secondMarket: false,
-        is_NMoTL: false,
-        is_MoC: false
-        // other:""
+        forget_question:0,
+        forget_answer:""
       }
     };
   },
   methods: {
     register() {
+      //註冊 優先判斷告知事項
       if (this.check == 1) {
-        const self = this;
-        this.$http.post(`${this.$GLOBAL.path}/api/register`, {
+        //必須選擇問題
+        if (this.forget_question != 0) {
+          const data = {
             account: this.users.account,
             password: this.users.password,
             identity_num: this.users.identity_num,
@@ -252,18 +238,26 @@ export default {
             cel:this.users.cel,
             email: this.users.email,
             birthday: this.users.birthday,
-            status: this.users.status,
-    
+            forget_question:this.users.forget_question,
+            forget_answer:this.users.forget_answer,
+          }
+          this.$http.post(`${this.$GLOBAL.path}/api/register`, data)
+          .then(response => {
+            //註冊成功 導向首頁
+            alert("成功註冊");
+            this.$router.push({ path: `/index` });
           })
-          .then(function(response) {
-            if ((status = 200)) {
-              alert("成功註冊");
-              self.$router.push({ path: `/index` });
+          .catch(error => {
+            if (error.response.data[0] == "輸入答案問題") {
+              alert("請輸入問題答案")
+            }else{
+              alert(error.response.data[0])
             }
-          })
-          .catch(function(error) {
-            alert(error.response.data[0])
-        });
+          });
+        }else{
+          alert("請選擇忘記密碼問題")
+        }
+        
       }else{
         alert("請先同意蒐集個人資料告知事項")
       }
@@ -271,5 +265,3 @@ export default {
   }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->

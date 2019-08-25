@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
-import register from '@/components/register'
-import login from '@/components/login'
-import Home from '@/components/home'
+import register from '@/components/user/register'
+import login from '@/components/user/login'
+import Home from '@/components/layout/home'
 import Index from '@/components/index'
 import news from '@/components/news'
 
@@ -43,6 +43,7 @@ import editprofile from '@/components/user/editprofile'
 import editresume from '@/components/user/editresume'
 import signuplist from '@/components/user/signuplist'
 import passwordchange from '@/components/user/passwordChange'
+import ForgetPassword from '@/components/user/ForgetPassword'
 
 
 
@@ -208,6 +209,11 @@ export default new Router({
                     path: '/wizardreview/:s_id',
                     name: 'wizardreview',
                     component: wizardreview
+                },
+                {
+                    path: '/ForgetPassword',
+                    name: 'ForgetPassword',
+                    component: ForgetPassword
                 }
 
 

@@ -1,3 +1,6 @@
+<style>
+@import './assets/css/style.css';
+</style>
 <template>
   <div id="app">
    

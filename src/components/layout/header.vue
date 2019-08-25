@@ -2,7 +2,7 @@
 .header_top{
   height: 80px;
   width: 100%;
-  background-image: url("../assets/header_bg.png");
+  background-image: url("../../assets/header_bg.png");
   background-repeat: no-repeat; 
   background-size: Cover ;
 }
@@ -23,7 +23,7 @@
 }
 
 .nav-item {
-  background-image: url("../assets/menu-item_bg.png");
+  background-image: url("../../assets/menu-item_bg.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   width: 150px;
@@ -39,6 +39,7 @@
   letter-spacing: 10px;
   text-decoration: none;
   white-space:nowrap;
+  cursor: pointer;
 }
 .navbar-collapse {
   z-index:5;
@@ -148,7 +149,7 @@
                 <div v-if="user.profile_pic != null"  class="message_img" style="width: 32px; height: 32px;">
                   <img :src="`${this.$GLOBAL.path}/images/ThumbnailImage/${user.profile_pic}`" alt="" class="img" width="32" height="32" style="vertical-align:baseline;">
                 </div>
-                <img v-else src="../assets/user.png" width="32px"><span class="profile-name">{{user.name}}</span>
+                <img v-else src="../../assets/user.png" width="32px"><span class="profile-name">{{user.name}}</span>
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
               <router-link to="/createannounce" v-if="user.status ==4"><button class="dropdown-item" type="button">新增公告</button></router-link>
@@ -175,53 +176,35 @@
         <div class="collapse navbar-collapse" id="navbarsExample05">
             <ul class="navbar-nav">
                 <li class="nav-item" @click="close_nav">
-                    <router-link to="/news" class="menu-link">最新消息</router-link>
+                    <router-link tag="div" to="/news" class="menu-link">最新消息</router-link>
                 </li>
                 <li class="nav-item" @click="close_nav">
-                   <router-link to="/attraction" class="menu-link">景點簡介</router-link>
+                   <router-link  tag="div" to="/attraction" class="menu-link">景點簡介</router-link>
                 </li>
                 <li class="nav-item" @click="close_nav">
-                    <router-link to="/photo" class="menu-link">活動花絮</router-link>
+                    <router-link tag="div" to="/photo" class="menu-link">活動花絮</router-link>
                 </li>
                 <li class="nav-item" @click="close_nav()">
-                    <router-link to="/wizard_introduction" class="menu-link">嚮導簡介</router-link>
+                    <router-link tag="div" to="/wizard_introduction" class="menu-link">嚮導簡介</router-link>
                 </li>
                 <li class="nav-item" @click="close_nav">
-                    <router-link to="/Course" class="menu-link">嚮導課程</router-link>
+                    <router-link  tag="div" to="/Course" class="menu-link">嚮導課程</router-link>
                 </li>
                 <li class="nav-item" @click="close_nav();notOpen()">
-                    <a class="menu-link" href="#">導覽媒合</a>
+                    <div class="menu-link" >導覽媒合</div>
                 </li>
             </ul>
         </div>
       </nav>
-      
-        <!-- <div class="nav-item">
-          <router-link to="/news" class="menu-link text-center">最新消息</router-link>
-        </div>
-        <div class="nav-item">
-          <router-link to="/news" class="menu-link text-center">最新消息</router-link>
-        </div>
-        <div class="nav-item">
-          <router-link to="/news" class="menu-link text-center">最新消息</router-link>
-        </div>
-        <div class="nav-item">
-          <router-link to="/news" class="menu-link text-center">最新消息</router-link>
-        </div>
-        <div class="nav-item">
-          <router-link to="/news" class="menu-link text-center">最新消息</router-link>
-        </div> -->
     </div>
     <div class="logo">
-      <router-link to="/index" style="cursor: pointer;"><img src="../assets/logo.png"  /></router-link>
+      <router-link to="/index" style="cursor: pointer;"><img src="../../assets/logo.png"  /></router-link>
     </div>
   </div>
 </template>
 <script>
-import axios from "axios";
-import router from "@/router";
 export default {
-  props: ["user"], //從home傳進來
+  props: ["user"],
   data() {
     return {
       screenWidth:document.body.clientWidth,
@@ -230,6 +213,7 @@ export default {
   },
   watch: {
     screenWidth:function(n,o) {
+      //判斷當前螢幕大小 
       if (n <= 989 && o > 989) {
         this.is_small = true;
       }else if(n > 989 && o <= 989){
@@ -238,14 +222,13 @@ export default {
     },
   },
   mounted() {
-    const self = this;
     window.onresize = () => {
       return (() => {
         window.screenWidth = document.body.clientWidth
-        self.screenWidth = window.screenWidth
+        this.screenWidth = window.screenWidth
       })()
     }
-    if (this.screenWidth >989) {
+    if (this.screenWidth > 989) {
       this.is_small = false;
     }else{
       this.is_small = true;
@@ -253,37 +236,30 @@ export default {
   },
   methods: {
     logout() {
-      const self = this;
-      axios
-        .post(
-          `${this.$GLOBAL.path}/api/logout`,
-          '',
-          {
-            headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }
-          }
-        )
-        .then(function(response) {
-          if ((status = 200)) {
-            self.$emit('logout');
-            alert("已登出");
-            self.$router.push('/index');
-          }
-        })
-        .catch(function(error) {
-        });
+      //登出
+      this.$http.post(`${this.$GLOBAL.path}/api/logout`,'',{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }})
+      .then(response=> {
+        if ((status = 200)) {
+          //呼叫上層組件登出方法
+          this.$emit('logout');
+          alert("已登出");
+          //導向首頁
+          this.$router.push('/index');
+        }
+      })
+      .catch(error=> {
+        console.log(error.response)
+      });
     },
     close_nav:function() {
+      //在點擊案鈕時 關閉下拉選單
       if (this.is_small) {
         this.$refs.navbar_toggler.click()
       }
     },
     notOpen:function() {
+      //未開放
       alert("尚未開放")
-    }
-  },
-  computed: {
-    islogin:function() {
-      return this.user != '';
     }
   },
 };

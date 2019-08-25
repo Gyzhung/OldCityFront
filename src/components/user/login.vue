@@ -45,6 +45,7 @@
             <div class="col-md-6 offset-md-4">                            
                 <button type="button" @click="login" class="btn btn-lightbrown">登入</button>
                 <router-link to="/register" class="route_link" style="cursor: pointer;"><button type="button" class="btn btn-light">註冊會員</button></router-link>
+                <router-link tag="span" to="/ForgetPassword" style="cursor:pointer;">&nbsp;忘記密碼</router-link>
             </div>
         </div>               
       </div>
@@ -62,32 +63,25 @@ export default {
       }
     };
   },
-  computed: {},
   methods: {
     login() {
-      const self = this;
+      //登入
       const data = {
         account: this.users.account,
         password: this.users.password
       }
       this.$http.post(`${this.$GLOBAL.path}/api/login`,data)
-      .then(function(response) {
+      .then(response=> {
         if ((status = 200)) {
-          self.$GLOBAL.setCookie('login_token',response.data,1);
-          self.$GLOBAL.login_token = response.data;
-          self.$http.get(`${self.$GLOBAL.path}/api/getMyData`,{ headers: { authorization: `Bearer ${self.$GLOBAL.login_token}`} })
-          .then(function(response) {
-            if (status == 200) {
-              self.$GLOBAL.status = response.data.status;
-              self.$emit("login",response.data);//使用外層方法
-              self.$router.push({ path: `/index` });
-            }
-          })
-          .catch(function(error) {
-          });
+          //儲存cookie 並提示上層更新使用者資料
+          this.$GLOBAL.setCookie('login_token',response.data,1);
+          this.$GLOBAL.login_token = response.data;
+          this.$emit("login");
+          //導向首頁
+          this.$router.push({ path: `/index` });
         }
       })
-      .catch(function(error) {
+      .catch(error=>{
         alert(error.response.data[0])
       });
     }

@@ -173,24 +173,30 @@ export default {
       }
     },
     getBranchesData:function(user){
-      const self = this;
+      let header;
       if (this.user == '') {
-        
-        this.$http.get(`${this.$GLOBAL.path}/api/getBranchListBys_id`,{params:{ s_id:this.$route.params.s_id}})
-        .then(function(response) {
-          self.Branches = response.data;
-        })
-        .catch(function(error) {
-        });
+        header = {
+          params:{ 
+            s_id:this.$route.params.s_id
+          }
+        }
       }else{
-        this.$http.get(`${this.$GLOBAL.path}/api/get_L_BranchListBys_id`,
-        {headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },params:{s_id:this.$route.params.s_id},})
-        .then(function(response) {
-          self.Branches = response.data;
-          
-        }).catch(function(error) {
-        });
+        header = {
+          headers: { 
+            authorization: `Bearer ${this.$GLOBAL.login_token}` 
+          },
+          params:{ 
+            s_id:this.$route.params.s_id
+          }
+        }
       }
+      this.$http.get(`${this.$GLOBAL.path}/api/getBranchListBys_id`,header)
+      .then(response => {
+        this.Branches = response.data;
+      })
+      .catch(error => {
+        console.log(error.response)
+      });
       
     },
     signUpTime:function (Branch) {
