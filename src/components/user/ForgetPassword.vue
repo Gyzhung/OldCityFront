@@ -79,11 +79,9 @@ export default {
             }
             this.$http.get(`${this.$GLOBAL.path}/api/forgetPassword`, {params:data})
             .then(response => {
-                console.log(response.data)
                 alert(response.data)
             })
             .catch(error => {
-                console.log(error.response)
                 alert(error.response.data)
             });
         }
