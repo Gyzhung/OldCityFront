@@ -60,6 +60,10 @@ export default {
         .then(response=> {
           if (response.status == 200) {
             this.user = response.data;
+            if (this.user.forget_question == 0) {
+              alert("請修改個人資料 填入完整忘記密碼問題 避免無法找回帳號")
+              this.$router.push("/editprofile");
+            }
             if(this.user.status == 4) console.log("是管理員")
           }
         })

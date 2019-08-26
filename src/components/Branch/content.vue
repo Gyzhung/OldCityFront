@@ -84,7 +84,7 @@
                                                 <button @click="openeditbranch_schedule(schedule.bs_id)" v-if="user.status == 4" class="btn btn-warning mb-2">修改</button>
                                             </span>
                                             <span v-else>
-                                                <input type="text" v-model="schedule.period"><input v-model="schedule.event" type="text">
+                                                <input type="text" v-model="schedule.period_start">-<input type="text" v-model="schedule.period_end"><input v-model="schedule.event" type="text">
                                                 <button @click="savebranch_schedule(schedule.bs_id)" v-if="user.status == 4" class="btn btn-primary mb-2">儲存</button>
                                             </span>
 
@@ -116,7 +116,9 @@ export default {
             Branch:'',
             b_id:this.$route.params.b_id,
             SignUpCount:0,
-            editschedule:[]
+            editschedule:[],
+            period_start:"",
+            period_end:""
         }
         
     },
@@ -131,10 +133,12 @@ export default {
                     b_id:this.$route.params.b_id
                 }}
             )
-            .then(function(response) {
-                self.Branch = response.data[0];
-                self.Branch.branch_schedule.forEach(element => {
-                    self.editschedule.push({bs_id:element.bs_id,value:false})
+            .then(response => {
+                this.Branch = response.data[0];
+                this.Branch.branch_schedule.forEach(element => {
+                    this.editschedule.push({bs_id:element.bs_id,value:false})
+                    this.$set(element, 'period_start', element.period.split("-")[0]);
+                    this.$set(element, 'period_end', element.period.split("-")[1]);
                 });
             })
             .catch(function(error) {
@@ -195,15 +199,26 @@ export default {
         },
         savebranch_schedule:function(bs_id) {
             //加入 修改api
-
-
-
-
-
-
-
-            const index = this.editschedule.map(a=>a.bs_id).indexOf(bs_id);
-            this.editschedule[index].value = false
+            const schedule = this.Branch.branch_schedule.filter(a => a.bs_id == bs_id)[0];
+            const data ={
+                bs_id:bs_id,
+                event:schedule.event,
+                period:`${schedule.period_start}-${schedule.period_end}`
+            }
+            this.$http.post(`${this.$GLOBAL.path}/api/editBranchSchedule`,data,
+                {
+                    headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` }
+                }
+            )
+            .then( response =>  {
+                alert(response.data)
+                this.getsignup();
+                const index = this.editschedule.map(a=>a.bs_id).indexOf(bs_id);
+                this.editschedule[index].value = false
+            })
+            .catch( error => {
+                alert(error.response.data);
+            });
         },
         //新增
     },
