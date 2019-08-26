@@ -71,17 +71,19 @@
                     <div class="form-group row">
                         <label for="account" class="col-md-2 col-form-label text-md-right">場次流程:</label>
                         
-                        <div class="col-md-6 mb-1" :class="{'offset-2' : index != 0}" v-for="(Schedule,index) in branchSchedule" :key="index">
-                            <div style="width:40%;float:left">
-                                <input type="text"  class="form-control" v-model="branchSchedule[index].period" placeholder="時程">
+                        <div class="col-md-8 mb-1" :class="{'offset-md-2' : index != 0}" v-for="(Schedule,index) in branchSchedule" :key="index">
+                            <div style="width:25%;float:left">
+                                <input type="text"  class="form-control" v-model="branchSchedule[index].period_start" placeholder="時程(起)">
                             </div>
-                            <div style="width:20%;float:right"><button class="btn btn-warning" @click="delete_Schedule(index)" >刪除</button></div>
-                            <div style="width:40%;float:right">
+                            <div style="width:25%;float:left">
+                                <input type="text"  class="form-control" v-model="branchSchedule[index].period_end" placeholder="時程(迄)">
+                            </div>
+                            <div style="width:25%;float:right"><button class="btn btn-warning" @click="delete_Schedule(index)" >刪除</button></div>
+                            <div style="width:25%;float:right">
                                 <input type="text"  class="form-control" v-model="branchSchedule[index].event" placeholder="說明">
                             </div>
-                            
                         </div>
-                        <div class="offset-2 col-md-10"><button class="btn btn-primary" @click="save">增加</button></div>
+                        <div class="offset-md-2 col-md-10"><button class="btn btn-primary" @click="save">增加</button></div>
                     </div>
                     <div class="form-group row">
                         <label for="account" class="col-md-2 col-form-label text-md-right">場次簡介:</label>
@@ -144,7 +146,7 @@ export default {
             eventTime_start:'',
             eventTime_end:'',
             eventPlace:'',
-            branchSchedule:[{period:'',event:''}],
+            branchSchedule:[{period:"", period_start:'',period_end:'',event:''}],
             date_config:{
                 format:'YYYY-MM-DD HH:mm:ss',
             }
@@ -152,6 +154,7 @@ export default {
     },
     methods: {
         create:function() {
+            this.branchSchedule.map(a=> a.period = `${a.period_start}-${a.period_end}`)
             const self = this;
             const data ={
                 s_id:this.s_id,
@@ -165,6 +168,7 @@ export default {
                 eventPlace:this.eventPlace,
                 branchSchedule: this.branchSchedule.map(a=>JSON.stringify(a)),
             }
+            console.log(data)
             this.$http.post(`${this.$GLOBAL.path}/api/addBranch`,data,{ headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` } })
             .then(function(response) {
             if ((status = 200)) {
