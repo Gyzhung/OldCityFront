@@ -75,6 +75,7 @@
             <router-link :to="{name:'Session',params:{c_id:Branches[0].c_id}}"  class="btn btn-warning" style="color:white;">返回</router-link>
           </div>
         </div>
+        <a ref="download" :href="`${$GLOBAL.path}/excel/${download_filename}.xls`" :download="`${download_filename}.xls`" class="d-none"></a>
         <table class="table col-lg-9 col-md-9 col-sm-10 col-12">
             <thead>
                 <tr>
@@ -108,6 +109,8 @@
                           <router-link  class="dropdown-item" :to="{name:'checkSignUp',params:{b_id:Branch.b_id}}" >審核</router-link>
                           <router-link  class="dropdown-item" :to="{name:'completed',params:{b_id:Branch.b_id}}" >點名</router-link>
                           <router-link  class="dropdown-item" :to="{name:'Branch_photo',params:{b_id:Branch.b_id}}" >花絮</router-link>
+                          
+                          <button class="dropdown-item" @click="UserReport(Branch.b_id)">報表</button>
                           <button class="dropdown-item" @click="sendMail(Branch.b_id)">發送行前信</button>
                           <!-- <a class="dropdown-item" href="#">修改</a> -->
                           <button class="dropdown-item" @click="delbranch(Branch.b_id)">刪除</button>
@@ -127,7 +130,8 @@ export default {
   props:['user'],
   data() {
     return {
-      Branches:[]
+      Branches:[],
+      download_filename:""
     }
   },
   watch: {
@@ -232,10 +236,29 @@ export default {
         });
       }
     },
+    UserReport:function (b_id) {
+      this.$http.get(`${this.$GLOBAL.path}/api/createBranchUserReport`,{headers: { authorization: `Bearer ${this.$GLOBAL.login_token}` },params:{b_id:b_id}})
+      .then(response => {
+        this.download_filename = response.data
+        setTimeout(()=>{
+            this.$refs.download.click()
+        },1000);
+
+        
+        //console.log(this.$refs.download)
+      }).catch(function(error) {
+        alert(error)
+      });
+    },
   },computed: {
     time_filter_Branch:function() {
+      
       if (this.Branches.length != 0) {
-        return this.Branches.filter(a=>new Date(Date.parse(a.eventTime_end.replace(/-/g,"/"))) >= new Date());
+        if (this.user.status == 4 ) {
+          return this.Branches
+        }else{
+          return this.Branches.filter(a=>new Date(Date.parse(a.eventTime_end.replace(/-/g,"/"))) >= new Date());
+        }
       }
       
     }
