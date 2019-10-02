@@ -181,7 +181,7 @@ export default {
                         self.completed_list_input[user.su_id] = -1;
                         self.$set(self.completed_isopen, user.su_id, false);
                     }else{
-                        self.completed_list_input[user.su_id] = user.completed[completed.length-1].completeExtent;
+                        self.completed_list_input[user.su_id] = user.completed[user.completed.length-1].completeExtent;
                         self.$set(self.completed_isopen, user.su_id, false);
                     }
                 });
