@@ -117,7 +117,9 @@ export default {
     mounted() {
         if (this.$GLOBAL.login_token !='') {
           this.getSu_usersData();
+         
         }
+        
     },
     methods: {
         Completed_open:function(su_id) {
@@ -135,6 +137,7 @@ export default {
                 .then(function(response) {
                     self.getSu_usersData();
                     alert(response.data);
+                    
                 })
                 .catch(function(error) {
                     alert(error.response);
@@ -178,7 +181,7 @@ export default {
                         self.completed_list_input[user.su_id] = -1;
                         self.$set(self.completed_isopen, user.su_id, false);
                     }else{
-                        self.completed_list_input[user.su_id] = user.completed[0].completeExtent;
+                        self.completed_list_input[user.su_id] = user.completed[completed.length-1].completeExtent;
                         self.$set(self.completed_isopen, user.su_id, false);
                     }
                 });
