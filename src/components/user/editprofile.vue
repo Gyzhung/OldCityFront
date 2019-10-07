@@ -57,6 +57,22 @@
                     </select>
                 </div>
             </div>
+            <div class="row justify-content-center mt-2">
+                <div class="col-md-2 col-sm-4 col-4">
+                    生日 
+                </div>
+                <div class="col-md-4 col-sm-8 col-8">
+                    <input v-model="birthday" type="date" class="form-control">
+                </div>
+            </div>
+            <div class="row justify-content-center mt-2">
+                <div class="col-md-2 col-sm-4 col-4">
+                    身分證字號
+                </div>
+                <div class="col-md-4 col-sm-8 col-8">
+                    <input v-model="identity_num" type="text" class="form-control">
+                </div>
+            </div>
              <div class="row justify-content-center mt-2">
                 <div class="col-md-2 col-sm-4 col-4">
                     忘記密碼問題 
@@ -98,6 +114,8 @@ export default {
             tel:this.user.tel,
             cel:this.user.cel,
             gender:this.user.gender,
+            birthday:this.user.birthday,
+            identity_num:this.user.identity_num,
             forget_question:this.user.forget_question,
             forget_answer:this.user.forget_answer,
         }
@@ -109,6 +127,8 @@ export default {
             this.tel=this.user.tel
             this.cel=this.user.cel
             this.gender=this.user.gender
+            this.birthday=this.user.birthday
+            this.identity_num=this.user.identity_num
             this.forget_question=this.user.forget_question
             this.forget_answer=this.user.forget_answer
         }
@@ -126,6 +146,8 @@ export default {
                     tel:this.tel,
                     cel:this.cel,
                     gender:this.gender,
+                    birthday:this.birthday,
+                    identity_num:this.identity_num,
                     forget_question:this.forget_question,
                     forget_answer:this.forget_answer,
                 }
