@@ -212,6 +212,9 @@ export default {
             });
         }
     },
+    created() {
+        this.add_language();
+    },
     mounted() {
         const self = this;
         if (this.user.user_languages != undefined) {
