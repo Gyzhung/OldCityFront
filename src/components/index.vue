@@ -1,5 +1,4 @@
 <style scoped>
-
 .announce {
   background-color: #dacfb8;
   padding: 1rem;
@@ -25,8 +24,8 @@
   font-weight: 700;
   letter-spacing: 7px;
 }
-.landscpe-img{
-    width: 250px;
+.landscpe-img {
+  width: 250px;
 }
 .guide-list {
   background-color: #dacfb8;
@@ -37,88 +36,102 @@
   width: 200px;
 }
 @media (max-width: 1024px) {
-  .guide-list img {    
+  .guide-list img {
     width: 150px;
   }
 }
-
 </style>
 
 <template>
   <div class="content">
     <div class="row no-gutters mb-4">
-        <!--輪播-->
-        <div id="carouselExampleCaptions" class="carousel slide col-lg-8" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleCaptions" data-slide-to="0" class=""></li>
-                <li data-target="#carouselExampleCaptions" data-slide-to="1" class="active"></li>
-                <li data-target="#carouselExampleCaptions" data-slide-to="2" class=""></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="../assets/IMG_5603.jpg" data-holder-rendered="true">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>第二市場</h5>
-                        <p></p>
-                    </div>
-                </div>
-                <div class="carousel-item active">
-                    <img class="d-block w-100" src="../assets/IMG_5575.jpg" data-holder-rendered="true">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>第三市場</h5>
-                        <p></p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="../assets/IMG_5541.jpg" data-holder-rendered="true">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>第五市場</h5>
-                        <p></p>
-                    </div>
-                </div>
+      <!--輪播-->
+      <div id="carouselExampleCaptions" class="carousel slide col-lg-8" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleCaptions" data-slide-to="0" class></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="1" class="active"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="2" class></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item">
+            <img class="d-block w-100" src="../assets/IMG_5603.jpg" data-holder-rendered="true" />
+            <div class="carousel-caption d-none d-md-block">
+              <h5>第二市場</h5>
+              <p></p>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-        <!--公告欄-->
-        <div class="announce col-lg-4">
-            <div class="announce-header text-center">最新公告</div>
-            <div class=" announce-list container-fluid" v-for="Announce in Announces" :key="Announce.ann_id">
-              <router-link class="row" :to="{name:'Announce',params:{announce_id:Announce.ann_id}}">
-                <div class="col-lg-10 announce-text text-truncate">{{Announce.title}}</div>
-                <div class="col-lg-10 announce-text announce-date font-italic">{{Announce.created_at}}</div>
-              </router-link>
+          </div>
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="../assets/IMG_5575.jpg" data-holder-rendered="true" />
+            <div class="carousel-caption d-none d-md-block">
+              <h5>第三市場</h5>
+              <p></p>
             </div>
-            <div class="announce-more text-monospace font-italic">more▼</div>
-
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="../assets/IMG_5541.jpg" data-holder-rendered="true" />
+            <div class="carousel-caption d-none d-md-block">
+              <h5>第五市場</h5>
+              <p></p>
+            </div>
+          </div>
         </div>
+        <a
+          class="carousel-control-prev"
+          href="#carouselExampleCaptions"
+          role="button"
+          data-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a
+          class="carousel-control-next"
+          href="#carouselExampleCaptions"
+          role="button"
+          data-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+      <!--公告欄-->
+      <div class="announce col-lg-4">
+        <div class="announce-header text-center">最新公告</div>
+        <div
+          class="announce-list container-fluid"
+          v-for="Announce in Announces"
+          :key="Announce.ann_id"
+        >
+          <router-link class="row" :to="{name:'Announce',params:{announce_id:Announce.ann_id}}">
+            <div class="col-lg-10 announce-text text-truncate">{{Announce.title}}</div>
+            <div class="col-lg-10 announce-text announce-date font-italic">{{Announce.created_at}}</div>
+          </router-link>
+        </div>
+        <div class="announce-more text-monospace font-italic">
+          <router-link to="/news" class="menu-link">more▼</router-link>
+        </div>
+      </div>
     </div>
     <!--遊程介紹-->
     <div class="container-fluid">
       <div class="row border-top mb-4">
         <div class="mt-3 text-center col-lg-3 col-md-6 col-sm-12">
-            <img src="../assets/picS.png" class="landscpe-img">
+          <img src="../assets/picS.png" class="landscpe-img" />
         </div>
         <div class="border-right mt-3 col-lg-3 col-md-6 col-sm-12">
-            <p class="l-header">遊程介紹</p>
-            <p>這是一個景點簡介，說明旅程內容活動內容等等等等等</p>
+          <p class="l-header">遊程介紹</p>
+          <p>這是一個景點簡介，說明旅程內容活動內容等等等等等</p>
         </div>
         <div class="mt-3 text-center col-lg-3 col-md-6 col-sm-12">
-            <img src="../assets/picS2.png" class="landscpe-img">
+          <img src="../assets/picS2.png" class="landscpe-img" />
         </div>
         <div class="mt-3 col-lg-3 col-md-6 col-sm-12">
-            <p class="l-header">遊程介紹</p>
-            <p>這是一個景點簡介，說明旅程內容活動內容等等等等等</p>
+          <p class="l-header">遊程介紹</p>
+          <p>這是一個景點簡介，說明旅程內容活動內容等等等等等</p>
         </div>
       </div>
     </div>
-    
+
     <!--響導人員-->
     <div class="container-fluid">
       <div class="row border-top pt-3 pl-5">
@@ -137,11 +150,11 @@
         </div>
         <div class="guide-list col-lg-2 col-md-3 col-sm-4 col-6">
             <img src="../assets/boy.png">
-        </div> -->
+        </div>-->
         尚無嚮導人員
       </div>
     </div>
-</div>
+  </div>
 </template>
 <script>
 export default {
@@ -150,17 +163,16 @@ export default {
       keystr: {
         keyword: "all:"
       },
-      Announces:''
-
-     
+      Announces: ""
     };
   },
-  mounted(){
+  mounted() {
     const self = this;
-    this.$http.post(`${this.$GLOBAL.path}/api/searchAnnounce`,
-      {
+    this.$http
+      .post(`${this.$GLOBAL.path}/api/searchAnnounce`, {
         keyword: `${this.keystr.keyword}`
-      }).then(function(response) {
+      })
+      .then(function(response) {
         if ((status = 200)) {
           self.Announces = response.data;
         }
@@ -169,9 +181,6 @@ export default {
         alert(response);
       });
   },
-  methods: {
-    
-    
-  }
+  methods: {}
 };
 </script>
