@@ -23,7 +23,7 @@
     "bootstrap-vue": "^2.0.0-rc.21",
     "element-ui": "^2.10.0",
     "jquery": "^3.4.1",
-    "mavon-editor": "^2.7.4",
+    "mavon-editor": "^2.8.2",
     "moment": "^2.24.0",
     "popper.js": "^1.15.0",
     "quill-image-drop-module": "^1.0.3",
