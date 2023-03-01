@@ -1,29 +1,3 @@
-# y
-
-> y
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-#   f a c e b o o a p i  
- #   O l d C i t y F r o n t  
- #   O l d C i t y F r o n t  
-
-
-#�ݭ�
-#���ҵn�J�A�P�_�O�_���޲z��
-#�H����y�{���� online editor�Ȯɤ���
+畢業專題
+臺中市文化部文化資產園區 產學合作計畫 : 為台中舊城區注入新活力，內容為介紹台中舊城區的介紹，與人文活動媒合課程報名系統。
+https://tclearncity.nutc.edu.tw/(憑證已失效，計畫後網頁關閉)
